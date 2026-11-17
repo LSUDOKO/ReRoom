@@ -211,18 +211,18 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
     if (mode === "top") {
       // splat rooms have ceilings: look straight down from just under it with a wide lens
       c.setOptions({ useOrbit: true });
-      const p = e.camera.position;
+      const o = c.getState().orbitCenter; // look down on what the camera was looking at
       e.camera.fov = 100;
       e.camera.updateProjectionMatrix();
-      e.lookFrom([p.x, 2.2, p.z + 0.01], [p.x, 0, p.z]);
+      e.lookFrom([o.x, 2.2, o.z + 0.01], [o.x, 0, o.z]);
       return () => {
         e.camera.fov = 60;
         e.camera.updateProjectionMatrix();
       };
     } else {
       c.setOptions({ useOrbit: true, moveSpeed: 1.4 });
-      const cam = room?.camera;
-      if (cam) e.lookFrom(cam.position, cam.target);
+      const cam = room?.camera ?? { position: [0, 1.6, 3.2] as [number, number, number], target: [0, 0.7, 0] as [number, number, number] };
+      e.lookFrom(cam.position, cam.target);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, mode]);

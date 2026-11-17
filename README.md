@@ -51,12 +51,12 @@ Honest state of the hackathon build (18 Nov 2026):
 | ✅ | Aholo Viewer renders splat rooms and Lux3D GLBs in one depth buffer | Furniture is correctly occluded by the splat floor |
 | ✅ | SpatialGen dream rooms | 3 rooms generated and shipped as samples (about 10 min each) |
 | ✅ | Text → 3D, photo → 3D | Live runs through `/api/lux3d`, loaded in the studio via the proxy |
-| ✅ | Articulation | 7 seed pieces plus a live-generated cabinet, opened and closed in the studio |
-| ✅ | Material transfer restyle | 30 pre-baked variants, live restyle path, material from a photo |
-| ✅ | Multi-format export | USDZ and STL returned for a library model |
+| ✅ | Articulation | All 7 seed pieces (wardrobe, drawers, sideboard, nightstand, fridge, laptop, box) plus a live-generated cabinet, opened in one scene |
+| ✅ | Material transfer restyle | Pre-baked variants for 3 styles, a live restyle from the style bar, material from a photo (API) |
+| ✅ | Multi-format export, AR page | USDZ and STL returned for a library model; `/ar` renders at the studio size (checked on desktop, not yet on a phone) |
 | ✅ | Editor: drag, rotate, duplicate, delete, undo, double-click open, walk, top, before/after, calibrate, roulette, share → `/view` | Driven with real pointer and keyboard events in Playwright |
 | ✅ | Production build, typecheck, lint, `pnpm test` | Pass |
-| ⚠️ | Reality reconstruction from a phone video | Wired end to end (upload → `reconstructions.create` → status). A synthetic test video returned `FAILED`; a real phone walkthrough is still needed. |
+| ⚠️ | Reality reconstruction from a phone video | Wired end to end through `/scan` (upload → `reconstructions.create` → status). A 24 s synthetic test video was accepted, then marked `FAILED` after about 9 s. A real 30–60 s phone walkthrough is still needed. |
 | ⚠️ | Scan upload size | Uploads go through our server, so on Vercel-style serverless hosts the request-body limit (a few MB) applies. Run locally or self-host for real videos. |
 | ⚠️ | Live results | Aholo result URLs expire after about 2 h. Generated pieces in a saved design or share link stop loading after that; the seed library is stored in the repo. |
 | ⏳ | Part split editing UI | API route only |
