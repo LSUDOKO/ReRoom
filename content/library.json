@@ -1,0 +1,273 @@
+[
+  {
+    "id": "L_ARMCHAIR",
+    "name": "Reading armchair",
+    "category": "seating",
+    "dims": {
+      "w": 0.8,
+      "d": 0.85,
+      "h": 0.95
+    },
+    "prompt": "a mid-century reading armchair with mustard velvet upholstery and tapered walnut wooden legs"
+  },
+  {
+    "id": "L_SOFA_3",
+    "name": "3-seat sofa",
+    "category": "seating",
+    "dims": {
+      "w": 2.1,
+      "d": 0.9,
+      "h": 0.85
+    },
+    "prompt": "a modern three-seat sofa with soft oatmeal linen cushions and low wooden base"
+  },
+  {
+    "id": "L_DINING_CHAIR",
+    "name": "Dining chair",
+    "category": "seating",
+    "dims": {
+      "w": 0.45,
+      "d": 0.5,
+      "h": 0.85
+    },
+    "prompt": "a minimal light oak dining chair with a curved backrest"
+  },
+  {
+    "id": "L_WARDROBE",
+    "name": "Two-door wardrobe",
+    "category": "storage",
+    "dims": {
+      "w": 1.2,
+      "d": 0.6,
+      "h": 2.0
+    },
+    "articulate": "the two front doors swing open on vertical hinges",
+    "prompt": "a two-door wooden wardrobe with simple handles, doors closed, light oak wood, modern minimal design"
+  },
+  {
+    "id": "L_DRAWERS",
+    "name": "Chest of drawers",
+    "category": "storage",
+    "dims": {
+      "w": 0.9,
+      "d": 0.45,
+      "h": 0.9
+    },
+    "articulate": "the drawers slide straight out forward",
+    "prompt": "a wooden chest of four drawers with round knobs, drawers closed, walnut wood, mid-century design"
+  },
+  {
+    "id": "L_SIDEBOARD",
+    "name": "Sideboard",
+    "category": "storage",
+    "dims": {
+      "w": 1.6,
+      "d": 0.45,
+      "h": 0.8
+    },
+    "articulate": "the front doors swing open on vertical hinges",
+    "prompt": "a low wooden sideboard cabinet with two front doors, doors closed, oak wood, slim metal legs"
+  },
+  {
+    "id": "L_NIGHTSTAND",
+    "name": "Nightstand",
+    "category": "storage",
+    "dims": {
+      "w": 0.45,
+      "d": 0.4,
+      "h": 0.55
+    },
+    "articulate": "the drawer slides straight out forward",
+    "prompt": "a small wooden nightstand with one drawer, drawer closed, light ash wood"
+  },
+  {
+    "id": "L_FRIDGE",
+    "name": "Retro fridge",
+    "category": "appliance",
+    "dims": {
+      "w": 0.6,
+      "d": 0.65,
+      "h": 1.5
+    },
+    "articulate": "the front door swings open on a side hinge",
+    "prompt": "a retro pastel mint refrigerator with rounded corners and chrome handle, door closed"
+  },
+  {
+    "id": "L_LAPTOP",
+    "name": "Laptop",
+    "category": "decor",
+    "dims": {
+      "w": 0.33,
+      "d": 0.23,
+      "h": 0.02
+    },
+    "articulate": "the lid rotates open on the back hinge",
+    "prompt": "a thin silver laptop computer, lid closed, no logo"
+  },
+  {
+    "id": "L_BOX",
+    "name": "Storage box",
+    "category": "storage",
+    "dims": {
+      "w": 0.5,
+      "d": 0.35,
+      "h": 0.3
+    },
+    "articulate": "the lid rotates open on the back hinge",
+    "prompt": "a woven rattan storage box with a hinged lid, lid closed"
+  },
+  {
+    "id": "L_BED_DOUBLE",
+    "name": "Double bed",
+    "category": "bed",
+    "dims": {
+      "w": 1.6,
+      "d": 2.05,
+      "h": 1.0
+    },
+    "prompt": "a double bed with an upholstered headboard, white linen bedding and two pillows, oak frame"
+  },
+  {
+    "id": "L_COFFEE",
+    "name": "Coffee table",
+    "category": "table",
+    "dims": {
+      "w": 1.1,
+      "d": 0.6,
+      "h": 0.42
+    },
+    "prompt": "a rectangular low coffee table with a solid oak top and rounded edges"
+  },
+  {
+    "id": "L_DINING",
+    "name": "Dining table",
+    "category": "table",
+    "dims": {
+      "w": 1.6,
+      "d": 0.9,
+      "h": 0.75
+    },
+    "prompt": "a rectangular solid wood dining table with four straight legs"
+  },
+  {
+    "id": "L_DESK",
+    "name": "Writing desk",
+    "category": "table",
+    "dims": {
+      "w": 1.2,
+      "d": 0.6,
+      "h": 0.75
+    },
+    "prompt": "a minimal wooden writing desk with slim legs"
+  },
+  {
+    "id": "L_BOOKSHELF",
+    "name": "Bookshelf",
+    "category": "storage",
+    "dims": {
+      "w": 0.9,
+      "d": 0.35,
+      "h": 1.9
+    },
+    "prompt": "a tall open wooden bookshelf with five shelves holding a few books"
+  },
+  {
+    "id": "L_FLOOR_LAMP",
+    "name": "Floor lamp",
+    "category": "lighting",
+    "dims": {
+      "w": 0.4,
+      "d": 0.4,
+      "h": 1.6
+    },
+    "prompt": "a modern floor lamp with a white fabric drum shade and a slim black metal stand"
+  },
+  {
+    "id": "L_TABLE_LAMP",
+    "name": "Table lamp",
+    "category": "lighting",
+    "dims": {
+      "w": 0.3,
+      "d": 0.3,
+      "h": 0.5
+    },
+    "prompt": "a ceramic table lamp with a round linen shade"
+  },
+  {
+    "id": "L_PLANT_BIG",
+    "name": "Monstera",
+    "category": "plant",
+    "dims": {
+      "w": 0.7,
+      "d": 0.7,
+      "h": 1.3
+    },
+    "prompt": "a monstera plant with large green leaves in a white ceramic pot"
+  },
+  {
+    "id": "L_PLANT_SMALL",
+    "name": "Snake plant",
+    "category": "plant",
+    "dims": {
+      "w": 0.3,
+      "d": 0.3,
+      "h": 0.7
+    },
+    "prompt": "a snake plant in a terracotta pot"
+  },
+  {
+    "id": "L_RUG_ROUND",
+    "name": "Round rug",
+    "category": "textile",
+    "dims": {
+      "w": 1.6,
+      "d": 1.6,
+      "h": 0.02
+    },
+    "prompt": "a thin flat circular area rug made of natural woven jute, lying flat, seen from above, 2 centimeters thick, top-down flat textile"
+  },
+  {
+    "id": "L_MIRROR",
+    "name": "Floor mirror",
+    "category": "decor",
+    "dims": {
+      "w": 0.6,
+      "d": 0.05,
+      "h": 1.7
+    },
+    "prompt": "a tall arched floor mirror with a thin brass frame"
+  },
+  {
+    "id": "L_VASE",
+    "name": "Ceramic vase",
+    "category": "decor",
+    "dims": {
+      "w": 0.25,
+      "d": 0.25,
+      "h": 0.4
+    },
+    "prompt": "a matte white ceramic vase with dried pampas grass"
+  },
+  {
+    "id": "L_STOOL",
+    "name": "Bar stool",
+    "category": "seating",
+    "dims": {
+      "w": 0.4,
+      "d": 0.4,
+      "h": 0.75
+    },
+    "prompt": "a round wooden bar stool with a black metal footrest"
+  },
+  {
+    "id": "L_SIDE",
+    "name": "Side table",
+    "category": "table",
+    "dims": {
+      "w": 0.45,
+      "d": 0.45,
+      "h": 0.55
+    },
+    "prompt": "a small round side table with a marble top and brass legs"
+  }
+]

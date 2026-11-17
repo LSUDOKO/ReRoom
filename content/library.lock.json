@@ -1,0 +1,127 @@
+{
+  "L_WARDROBE": {
+    "textTask": 8254900,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/ba345b46625f4231a999e13523be3467/results/tex_mesh/attempt-1/tex_mesh.glb"
+  },
+  "L_ARMCHAIR": {
+    "textTask": 8255169,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/6b45a7353dbf48c0a7fb5bba203999e6/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794943958720
+  },
+  "L_SOFA_3": {
+    "textTask": 8255170,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/3f2bcd850c594d839fd8295803a2c101/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794943957277
+  },
+  "L_DINING_CHAIR": {
+    "textTask": 8255236,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/305f3dfc7db84d34b59613561f5c8d5f/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944087765
+  },
+  "L_DRAWERS": {
+    "textTask": 8255235,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/7d4a195c48634766a6e360590c1b5453/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944086094,
+    "articulateTask": 8255335
+  },
+  "L_SIDEBOARD": {
+    "textTask": 8255334,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/c4b6bdce24364ae1ad10ad0260e106c7/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944207475,
+    "articulateTask": 8255422
+  },
+  "L_NIGHTSTAND": {
+    "textTask": 8255462,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/4cd03559d1964d3fb063858ae8e90f46/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944399602,
+    "articulateTask": 8255528
+  },
+  "L_FRIDGE": {
+    "textTask": 8255495,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/8ebb3fe7a5214395a1606287e32f6d9c/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944462716,
+    "articulateTask": 8255541
+  },
+  "L_LAPTOP": {
+    "textTask": 8255574,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/60e909b94b4346029b8e0e47ae5dc7d6/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944614690,
+    "articulateTask": 8255609
+  },
+  "L_BOX": {
+    "textTask": 8255604,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/de3cfee99b5e46528f0fc1edae275005/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944734132,
+    "articulateTask": 8255664
+  },
+  "L_BED_DOUBLE": {
+    "textTask": 8255710,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/fe40987008d544c2b682520e3e7a3589/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794944926480
+  },
+  "L_COFFEE": {
+    "textTask": 8255766,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/a517135309304310ab36d963b051c9a7/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945008032
+  },
+  "L_DINING": {
+    "textTask": 8255777,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/5430d160b94c4d89a7f9d851fba8f9bb/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945031528
+  },
+  "L_DESK": {
+    "textTask": 8255810,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/597a06653aa0493797d8303cec841828/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945099083
+  },
+  "L_BOOKSHELF": {
+    "textTask": 8255818,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/2c6291e3064c441bb40582a7c672d8e5/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945129942
+  },
+  "L_FLOOR_LAMP": {
+    "textTask": 8255859,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/8ce050e9dda448d796f913a896d8fa47/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945205470
+  },
+  "L_TABLE_LAMP": {
+    "textTask": 8255868,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/357462ba9ba54da9a7f0ce568b39f371/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945227642
+  },
+  "L_PLANT_BIG": {
+    "textTask": 8255897,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/43f008012be740ae8e67ed3a0c770f77/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945358204
+  },
+  "L_PLANT_SMALL": {
+    "textTask": 8255913,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/7acb233c55e14552ba24a8ce6b5105dc/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945355423
+  },
+  "L_RUG_ROUND": {
+    "textTask": 8256236,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/734ced81b77a42f59dfaddd1caf46070/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945875668
+  },
+  "L_MIRROR": {
+    "textTask": 8255955,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/e5021323007f40579f984f444878428f/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945455224
+  },
+  "L_VASE": {
+    "textTask": 8255991,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/bb8d6451ff7f458ebfbf1bed9a36b6a5/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945585063
+  },
+  "L_STOOL": {
+    "textTask": 8256044,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/bc5ac4e809d74e43a1157e0fcfe7fb4b/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945616594
+  },
+  "L_SIDE": {
+    "textTask": 8256092,
+    "glbUrl": "https://qhsmodel.kujiale.com/genesis3d/inference/20261117/65ac5d7fc52b4cce87fe3660bc1d335f/results/tex_mesh/attempt-1/tex_mesh.glb",
+    "at": 1794945687606
+  }
+}

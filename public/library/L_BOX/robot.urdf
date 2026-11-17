@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="robot">
+  <link name="basket_body">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/basket_body.glb" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+  </link>
+  <link name="basket_lid">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/basket_lid.glb" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+  </link>
+  <joint name="basket_lid_joint" type="revolute">
+    <parent link="basket_body" />
+    <child link="basket_lid" />
+    <origin rpy="0 0 0" xyz="-0.14774700 0.19265851 -0.14738300" />
+    <axis xyz="-0.99994500 -0.01051200 -0.00017700" />
+    <limit lower="0.000000" upper="2.094000" effort="10" velocity="1" />
+  </joint>
+</robot>
