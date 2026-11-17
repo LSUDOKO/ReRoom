@@ -30,3 +30,5 @@ luxury_wood.jpg: ambientCG WoodFloor007 (CC0)
 luxury_fabric.jpg: ambientCG Fabric048 (CC0)
 luxury_metal.jpg: ambientCG Metal050A (CC0)
 luxury_stone.jpg: ambientCG Marble012 (CC0)
+
+Re-tinted to style palettes by scripts/tint-swatches.py (derived from the CC0 assets above).

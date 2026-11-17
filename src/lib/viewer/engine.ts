@@ -513,7 +513,7 @@ export class Engine {
     const quad = (x0: number, z0: number, x1: number, z1: number) => {
       const i = pos.length / 3;
       pos.push(x0, 0.001, z0, x1, 0.001, z0, x1, 0.001, z1, x0, 0.001, z1);
-      idx.push(i, i + 1, i + 2, i, i + 2, i + 3);
+      idx.push(i, i + 2, i + 1, i, i + 3, i + 2); // counter-clockwise seen from above
     };
     for (let s = -size / 2; s <= size / 2 + 1e-6; s += step) {
       quad(s - t, -size / 2, s + t, size / 2);
@@ -521,7 +521,7 @@ export class Engine {
     }
     const g = new BufferGeometry();
     g.setAttribute("position", new BufferAttribute(new Float32Array(pos), 3));
-    g.setIndex(new BufferAttribute(new Uint32Array(idx), 1));
+    g.setIndex(new BufferAttribute(new Uint16Array(idx), 1));
     const mat = new MeshBasicMaterial({ color: 0x8fb3ff, transparent: true, opacity: 0.35 });
     return new Mesh(g, mat);
   }
