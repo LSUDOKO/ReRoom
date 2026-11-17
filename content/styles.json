@@ -1,0 +1,18 @@
+[
+  { "id": "japandi", "name": "Japandi", "mood": "Calm, natural, low", "swatch": ["#d8cbb5", "#8a7a63", "#2b2b2b"],
+    "slots": { "wood": "light ash wood", "fabric": "oatmeal linen", "metal": "matte black steel", "stone": "washi paper and rattan" } },
+  { "id": "scandi", "name": "Scandinavian", "mood": "Bright, airy", "swatch": ["#f1ede6", "#c9b79c", "#9aa3a8"],
+    "slots": { "wood": "white oak", "fabric": "light grey wool", "metal": "brushed white metal", "stone": "white ceramic" } },
+  { "id": "industrial", "name": "Industrial", "mood": "Urban loft", "swatch": ["#4a3a2e", "#8c5a3c", "#2f3133"],
+    "slots": { "wood": "dark reclaimed wood", "fabric": "cognac leather", "metal": "raw black iron", "stone": "polished concrete" } },
+  { "id": "midcentury", "name": "Mid-century", "mood": "Retro, warm", "swatch": ["#6b4226", "#d9a441", "#b08d57"],
+    "slots": { "wood": "walnut", "fabric": "mustard velvet", "metal": "brass", "stone": "terrazzo" } },
+  { "id": "boho", "name": "Boho", "mood": "Layered, plants", "swatch": ["#c9a06a", "#a8553a", "#7a8450"],
+    "slots": { "wood": "rattan and cane", "fabric": "patterned kilim", "metal": "antique brass", "stone": "terracotta" } },
+  { "id": "cyberpunk", "name": "Cyberpunk", "mood": "Night, neon", "swatch": ["#14141f", "#ff2e88", "#19e3ff"],
+    "slots": { "wood": "black gloss lacquer", "fabric": "neon-trim vinyl", "metal": "chrome", "stone": "glowing acrylic" } },
+  { "id": "coastal", "name": "Coastal", "mood": "Breezy", "swatch": ["#eef1ee", "#7fa6c4", "#d8c7a6"],
+    "slots": { "wood": "whitewashed wood", "fabric": "blue striped cotton", "metal": "brushed nickel", "stone": "sand and jute" } },
+  { "id": "luxury", "name": "Luxury", "mood": "Rich, glamorous", "swatch": ["#1f1a17", "#1f5c4a", "#c9a24a"],
+    "slots": { "wood": "dark ebony", "fabric": "emerald velvet", "metal": "polished gold", "stone": "white marble" } }
+]

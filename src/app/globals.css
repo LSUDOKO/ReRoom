@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #121417;
+  --color-slate: #5b6270;
+  --color-mist: #9aa1ad;
+  --color-line: #e3e6eb;
+  --color-paper: #f5f6f8;
+  --color-blue: #2f6bff;
+  --color-blue-deep: #1f4fd1;
+  --color-amber: #ffb020;
+  --color-amber-soft: #fff4dc;
+  --color-danger: #d93a2b;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --radius-panel: 12px;
+  --radius-btn: 8px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  color-scheme: light;
+}
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* generating shimmer for ghost rows */
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgb(255 176 32 / 0.25), transparent) 0 0 / 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 220ms var(--ease-out) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* thin scrollbars inside panels */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: #d4d8de transparent; }
+
+input[type="range"] { accent-color: var(--color-blue); }

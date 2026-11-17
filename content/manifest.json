@@ -1,0 +1,71 @@
+{
+  "glb": [
+    "L_ARMCHAIR",
+    "L_BED_DOUBLE",
+    "L_BOOKSHELF",
+    "L_BOX",
+    "L_COFFEE",
+    "L_DESK",
+    "L_DINING",
+    "L_DINING_CHAIR",
+    "L_DRAWERS",
+    "L_FLOOR_LAMP",
+    "L_FRIDGE",
+    "L_LAPTOP",
+    "L_MIRROR",
+    "L_NIGHTSTAND",
+    "L_PLANT_BIG",
+    "L_PLANT_SMALL",
+    "L_RUG_ROUND",
+    "L_SIDE",
+    "L_SIDEBOARD",
+    "L_SOFA_3",
+    "L_STOOL",
+    "L_TABLE_LAMP",
+    "L_VASE",
+    "L_WARDROBE"
+  ],
+  "urdf": [
+    "L_BOX",
+    "L_DRAWERS",
+    "L_FRIDGE",
+    "L_LAPTOP",
+    "L_NIGHTSTAND",
+    "L_SIDEBOARD",
+    "L_WARDROBE"
+  ],
+  "thumbs": [
+    "L_ARMCHAIR",
+    "L_BED_DOUBLE",
+    "L_BOOKSHELF",
+    "L_BOX",
+    "L_COFFEE",
+    "L_DESK",
+    "L_DINING",
+    "L_DINING_CHAIR",
+    "L_DRAWERS",
+    "L_FLOOR_LAMP",
+    "L_FRIDGE",
+    "L_LAPTOP",
+    "L_MIRROR",
+    "L_NIGHTSTAND",
+    "L_PLANT_BIG",
+    "L_PLANT_SMALL",
+    "L_SIDEBOARD",
+    "L_SOFA_3",
+    "L_STOOL",
+    "L_TABLE_LAMP",
+    "L_VASE",
+    "L_WARDROBE"
+  ],
+  "variants": {
+    "L_ARMCHAIR": {
+      "cyberpunk": "/library/variants/L_ARMCHAIR.cyberpunk.glb",
+      "industrial": "/library/variants/L_ARMCHAIR.industrial.glb",
+      "japandi": "/library/variants/L_ARMCHAIR.japandi.glb"
+    },
+    "L_SOFA_3": {
+      "industrial": "/library/variants/L_SOFA_3.industrial.glb"
+    }
+  }
+}
