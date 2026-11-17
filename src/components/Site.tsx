@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./ui";
 
-export const GITHUB_URL = "https://github.com/LSUDOKO/reroom";
+export const GITHUB_URL = "https://github.com/LSUDOKO/ReRoom";
 
 export function SiteHeader() {
   return (

@@ -136,7 +136,10 @@ const KEY = (roomId: string) => `reroom:design:${roomId}`;
 /** Only items whose assets survive a reload (local files) are persisted fully. */
 export function saveDesign(roomId: string, items: Item[], styleId: string | null) {
   try {
-    const keep = items.filter((i) => i.status === "ready");
+    // drop session-only state: in-flight jobs and blob: URLs from live articulation results
+    const keep = items
+      .filter((i) => i.status === "ready")
+      .map((i) => ({ ...i, progress: undefined, pendingStyle: undefined, urdf: i.urdf?.files ? undefined : i.urdf, open: false }));
     const data: SavedDesign = { v: 1, roomId, styleId, items: keep, savedAt: Date.now() };
     localStorage.setItem(KEY(roomId), JSON.stringify(data));
   } catch {}

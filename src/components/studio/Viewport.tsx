@@ -127,7 +127,7 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
           if (prevModel) e.removeItem(prevModel), (en.model = undefined);
           if (!en.ghost) {
             const d = CATEGORY_DIMS[it.category];
-            en.ghost = e.box(key === "failed" ? 0xd93a2b : 0xffb020, d.w, d.h, d.d);
+            en.ghost = e.box(key === "failed" ? 0xd93a2b : 0xffb020, d.w, d.h, d.d, 0.18);
             e.helpers.add(en.ghost);
           }
         } else {
@@ -144,7 +144,11 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
               if (entry.ghost) e.helpers.remove(entry.ghost), (entry.ghost = undefined);
               entry.model = m;
               e.addItem(m);
-              useStudio.getState().patch(it.uid, { natural: m.size });
+              // generated pieces keep Lux3D's AI-predicted real size the first time they load
+              const cur = useStudio.getState().items.find((i) => i.uid === it.uid);
+              const first = cur && cur.origin !== "library" && !cur.natural;
+              const size = it.category === "textile" ? Math.max(m.size.w, m.size.d) : m.size.h;
+              useStudio.getState().patch(it.uid, first ? { natural: m.size, height: size } : { natural: m.size });
               // re-run sync so transforms/openness apply to the fresh model
               useStudio.setState((s) => ({ items: [...s.items] }));
             })
@@ -193,7 +197,10 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
     if (mode === "walk") {
       c.setOptions({ useOrbit: false, moveSpeed: 1.4, lookSpeed: 0.003 });
       const p = e.camera.position;
-      e.lookFrom([p.x, 1.6, p.z], [p.x, 1.5, p.z - 1]);
+      const r = e.container.getBoundingClientRect();
+      const d = e.ray(r.left + r.width / 2, r.top + r.height / 2).direction;
+      const len = Math.hypot(d.x, d.z) || 1;
+      e.lookFrom([p.x, 1.6, p.z], [p.x + d.x / len, 1.5, p.z + d.z / len]); // keep heading, eye height 1.6 m
       return e.onFrame(() => {
         if (Math.abs(e.camera.position.y - 1.6) > 1e-3) {
           e.camera.position.y = 1.6;
@@ -202,8 +209,16 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
       });
     }
     if (mode === "top") {
+      // splat rooms have ceilings: look straight down from just under it with a wide lens
       c.setOptions({ useOrbit: true });
-      e.lookFrom([0, 9, 0.01], [0, 0, 0]);
+      const p = e.camera.position;
+      e.camera.fov = 100;
+      e.camera.updateProjectionMatrix();
+      e.lookFrom([p.x, 2.2, p.z + 0.01], [p.x, 0, p.z]);
+      return () => {
+        e.camera.fov = 60;
+        e.camera.updateProjectionMatrix();
+      };
     } else {
       c.setOptions({ useOrbit: true, moveSpeed: 1.4 });
       const cam = room?.camera;

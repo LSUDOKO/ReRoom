@@ -2,7 +2,7 @@
 import QRCode from "qrcode";
 import { useEffect, useState } from "react";
 import { proxied } from "@/lib/api";
-import type { Item } from "@/lib/store";
+import { scaleFor, type Item } from "@/lib/store";
 import { Button, Modal } from "../ui";
 
 export function arUrl(item: Item) {
@@ -10,7 +10,8 @@ export function arUrl(item: Item) {
   const u = new URL("/ar", location.origin);
   u.searchParams.set("src", src);
   u.searchParams.set("name", item.name);
-  u.searchParams.set("h", String(item.height));
+  // library GLBs keep Lux3D's natural size; AR must show the size chosen in the studio
+  if (item.natural) u.searchParams.set("scale", scaleFor(item.category, item.natural, item.height).toFixed(4));
   return u.toString();
 }
 

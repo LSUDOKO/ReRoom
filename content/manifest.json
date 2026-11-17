@@ -51,6 +51,7 @@
     "L_NIGHTSTAND",
     "L_PLANT_BIG",
     "L_PLANT_SMALL",
+    "L_RUG_ROUND",
     "L_SIDEBOARD",
     "L_SOFA_3",
     "L_STOOL",
@@ -64,8 +65,55 @@
       "industrial": "/library/variants/L_ARMCHAIR.industrial.glb",
       "japandi": "/library/variants/L_ARMCHAIR.japandi.glb"
     },
+    "L_BED_DOUBLE": {
+      "cyberpunk": "/library/variants/L_BED_DOUBLE.cyberpunk.glb",
+      "industrial": "/library/variants/L_BED_DOUBLE.industrial.glb",
+      "japandi": "/library/variants/L_BED_DOUBLE.japandi.glb"
+    },
+    "L_BOOKSHELF": {
+      "cyberpunk": "/library/variants/L_BOOKSHELF.cyberpunk.glb",
+      "industrial": "/library/variants/L_BOOKSHELF.industrial.glb",
+      "japandi": "/library/variants/L_BOOKSHELF.japandi.glb"
+    },
+    "L_COFFEE": {
+      "cyberpunk": "/library/variants/L_COFFEE.cyberpunk.glb",
+      "industrial": "/library/variants/L_COFFEE.industrial.glb",
+      "japandi": "/library/variants/L_COFFEE.japandi.glb"
+    },
+    "L_DINING": {
+      "cyberpunk": "/library/variants/L_DINING.cyberpunk.glb",
+      "industrial": "/library/variants/L_DINING.industrial.glb",
+      "japandi": "/library/variants/L_DINING.japandi.glb"
+    },
+    "L_DINING_CHAIR": {
+      "cyberpunk": "/library/variants/L_DINING_CHAIR.cyberpunk.glb",
+      "industrial": "/library/variants/L_DINING_CHAIR.industrial.glb",
+      "japandi": "/library/variants/L_DINING_CHAIR.japandi.glb"
+    },
+    "L_DRAWERS": {
+      "cyberpunk": "/library/variants/L_DRAWERS.cyberpunk.glb",
+      "industrial": "/library/variants/L_DRAWERS.industrial.glb",
+      "japandi": "/library/variants/L_DRAWERS.japandi.glb"
+    },
+    "L_FLOOR_LAMP": {
+      "cyberpunk": "/library/variants/L_FLOOR_LAMP.cyberpunk.glb",
+      "industrial": "/library/variants/L_FLOOR_LAMP.industrial.glb",
+      "japandi": "/library/variants/L_FLOOR_LAMP.japandi.glb"
+    },
+    "L_SIDE": {
+      "cyberpunk": "/library/variants/L_SIDE.cyberpunk.glb",
+      "industrial": "/library/variants/L_SIDE.industrial.glb",
+      "japandi": "/library/variants/L_SIDE.japandi.glb"
+    },
     "L_SOFA_3": {
-      "industrial": "/library/variants/L_SOFA_3.industrial.glb"
+      "cyberpunk": "/library/variants/L_SOFA_3.cyberpunk.glb",
+      "industrial": "/library/variants/L_SOFA_3.industrial.glb",
+      "japandi": "/library/variants/L_SOFA_3.japandi.glb"
+    },
+    "L_WARDROBE": {
+      "cyberpunk": "/library/variants/L_WARDROBE.cyberpunk.glb",
+      "industrial": "/library/variants/L_WARDROBE.industrial.glb",
+      "japandi": "/library/variants/L_WARDROBE.japandi.glb"
     }
   }
 }

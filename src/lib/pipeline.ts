@@ -13,6 +13,7 @@ import {
 } from "./catalog";
 import { createTask, loadArticulationZip, pick, waitTask } from "./api";
 import { uid, useStudio, type Item } from "./store";
+import { facingYaw } from "./viewer/instance";
 
 const PREBAKED = manifest.variants as Record<string, Record<string, string>>; // libId -> styleId -> glb
 
@@ -32,15 +33,17 @@ export function libraryItem(lib: LibraryItem, position: [number, number, number]
     meshRef: a.glb,
     variants: { ...(PREBAKED[lib.id] ?? {}) },
     position,
-    yaw: 0,
+    yaw: facingYaw(position),
     height: lib.category === "textile" ? Math.max(lib.dims.w, lib.dims.d) : lib.dims.h,
     open: false,
   };
 }
 
+/** "a small rattan cabinet with two doors, …" → "Small rattan cabinet" */
 const titleFrom = (prompt: string) => {
-  const t = prompt.replace(/^(a|an|the)\s+/i, "").split(/[,.]/)[0].trim();
-  return t.charAt(0).toUpperCase() + t.slice(1, 40);
+  let t = prompt.replace(/^(a|an|the)\s+/i, "").split(/[,.]|\s(with|on|in|and|that|for)\s/i)[0].trim();
+  if (t.length > 32) t = t.slice(0, 32).replace(/\s+\S*$/, "");
+  return t.charAt(0).toUpperCase() + t.slice(1);
 };
 
 /** Text or photo → Lux3D → (optional) articulation. Shows a ghost immediately. */
@@ -59,7 +62,7 @@ export async function generate(
     progress: 0.02,
     variants: {},
     position,
-    yaw: 0,
+    yaw: facingYaw(position),
     height: category === "textile" ? CATEGORY_DIMS[category].w : CATEGORY_DIMS[category].h,
     open: false,
   };

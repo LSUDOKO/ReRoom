@@ -9,6 +9,7 @@ export default async function Ar({ searchParams }: PageProps<"/ar">) {
   const q = await searchParams;
   const src = typeof q.src === "string" && /^(https?:\/\/|\/)/.test(q.src) ? q.src : "/library/L_ARMCHAIR.glb";
   const name = typeof q.name === "string" ? q.name.slice(0, 60) : "Furniture";
+  const k = Math.min(10, Math.max(0.01, Number(q.scale) || 1));
   return (
     <main className="flex min-h-dvh flex-col bg-paper">
       <Script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js" strategy="afterInteractive" />
@@ -22,6 +23,7 @@ export default async function Ar({ searchParams }: PageProps<"/ar">) {
         ar
         ar-modes="webxr scene-viewer quick-look"
         ar-scale="fixed"
+        scale={`${k} ${k} ${k}`}
         camera-controls
         shadow-intensity="1"
         environment-image="neutral"

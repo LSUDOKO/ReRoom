@@ -153,7 +153,9 @@ export class Engine {
     if (this.disposed) return;
     const dt = this.last ? Math.min((time - this.last) / 1000, 0.1) : 0;
     this.last = time;
-    let render = this.dirty || this.control.update(dt);
+    // always run controls: `dirty || update()` would skip input whenever a render is already pending
+    const moved = this.control.update(dt);
+    let render = this.dirty || moved;
     for (const f of this.frames) render = f(dt) || render;
     if (render) {
       this.dirty = false;
@@ -486,7 +488,7 @@ export class Engine {
   // ---------- helpers ----------
 
   /** Wireframe box used for ghosts, selection and the 1 m reference cube. */
-  box(color: number, w = 1, h = 1, d = 1) {
+  box(color: number, w = 1, h = 1, d = 1, opacity = 0.35) {
     const g = new BufferGeometry();
     const x = w / 2, z = d / 2;
     const v = [
@@ -497,7 +499,7 @@ export class Engine {
     const f = [0, 1, 2, 0, 2, 3, 4, 6, 5, 4, 7, 6, 0, 4, 5, 0, 5, 1, 1, 5, 6, 1, 6, 2, 2, 6, 7, 2, 7, 3, 3, 7, 4, 3, 4, 0];
     g.setAttribute("position", new BufferAttribute(new Float32Array(v.flat()), 3));
     g.setIndex(new BufferAttribute(new Uint16Array(f), 1));
-    const mat = new MeshBasicMaterial({ color, transparent: true, opacity: 0.35 });
+    const mat = new MeshBasicMaterial({ color, transparent: true, opacity });
     (mat as unknown as { depthWrite: boolean }).depthWrite = false;
     (mat as unknown as { side: number }).side = 2;
     return new Mesh(g, mat);

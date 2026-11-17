@@ -36,13 +36,13 @@ const STYLES = [
 const AHOLO = [
   ["World API · Reality", "Phone video or Insta360 capture becomes a 3D Gaussian splat room", "Scan"],
   ["World API · SpatialGen", "A sentence becomes a walkable dream room", "Dream rooms, sample rooms"],
-  ["Asset API", "Resumable upload of scans, photos and reference materials", "Scan, restyle"],
+  ["Asset API", "Uploads scans, photos and material references", "Scan, restyle"],
   ["Aholo Viewer", "Renders the splat room and every GLB in one depth buffer, so walls hide furniture correctly", "Studio, share pages"],
   ["Lux3D text-to-3D", "Describe a piece, get a PBR model with AI-predicted real size", "Describe"],
   ["Lux3D image-to-3D", "A product photo becomes a 3D model", "Photo"],
   ["Lux3D articulation", "Finds doors, drawers and lids; we drive the joints in the browser", "Open / close"],
   ["Lux3D material transfer", "Restyles each piece from a material reference, cached per style", "Styles, material from photo"],
-  ["Lux3D part split", "Splits a model into parts for per-part edits", "API ready"],
+  ["Lux3D part split", "Splits a model into parts for per-part edits", "Server API (studio UI next)"],
   ["Lux3D multi-format export", "USDZ for iPhone AR, STL and 3MF for 3D printing, OBJ and FBX for DCC tools", "Export"],
 ];
 
@@ -71,7 +71,7 @@ export default function Home() {
               <Link href="/scan" className="inline-flex h-12 items-center rounded-btn bg-blue px-6 text-[15px] font-medium text-white hover:bg-blue-deep">
                 Scan my room
               </Link>
-              <Link href="/studio?room=japandi-studio" className="inline-flex h-12 items-center rounded-btn border border-line px-6 text-[15px] font-medium hover:bg-paper">
+              <Link href="/studio?room=industrial-loft" className="inline-flex h-12 items-center rounded-btn border border-line px-6 text-[15px] font-medium hover:bg-paper">
                 Try a sample room
               </Link>
             </div>
@@ -130,7 +130,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5">
             <h2 className="max-w-2xl font-display text-4xl leading-tight">Built end to end on the Aholo stack.</h2>
             <p className="mt-4 max-w-2xl text-white/70">
-              Ten Aholo capabilities, each doing a job a person would notice. The API key stays on the server; every result is fetched through our API.
+              Ten Aholo capabilities, nine of them in the studio today. The API key stays on the server, and every result is fetched through our API.
             </p>
             <div className="mt-10 overflow-x-auto rounded-panel border border-white/10">
               <table className="w-full min-w-[640px] text-left text-sm">

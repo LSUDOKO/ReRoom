@@ -117,8 +117,8 @@ export default function Studio(props: StudioProps) {
 
   return (
     <div className="flex h-dvh flex-col bg-paper">
-      <header className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-white px-3">
-        <Link href="/" aria-label="ReRoom home"><Logo className="text-[19px]" /></Link>
+      <header className="flex h-14 shrink-0 items-center gap-2 overflow-hidden border-b border-line bg-white px-3 sm:gap-3">
+        <Link href="/" aria-label="ReRoom home" className="shrink-0"><Logo className="text-[19px] [&>svg]:size-6 max-sm:[font-size:0] max-sm:gap-0" /></Link>
         <span className="hidden truncate text-sm text-slate md:inline">/ {room?.name ?? "Loading…"}</span>
         {!live && <span className="hidden rounded-full bg-amber-soft px-2 py-0.5 text-xs font-medium text-ink sm:inline">Demo mode</span>}
         <div className="mx-auto">
@@ -133,9 +133,10 @@ export default function Studio(props: StudioProps) {
             ]}
           />
         </div>
-        <div className="flex items-center gap-0.5">
+        <div className="flex shrink-0 items-center gap-0.5">
           <IconButton label="Undo (Ctrl Z)" onClick={st.undo} disabled={!past}><Undo2 size={17} /></IconButton>
-          <IconButton label="Redo (Ctrl Shift Z)" onClick={st.redo} disabled={!future}><Redo2 size={17} /></IconButton>
+          <IconButton label="Redo (Ctrl Shift Z)" onClick={st.redo} disabled={!future} className="max-sm:hidden"><Redo2 size={17} /></IconButton>
+          <div className="hidden items-center gap-0.5 lg:flex">
           <span className="mx-1 h-6 w-px bg-line" />
           {(["day", "evening", "night"] as Mood[]).map((m) => (
             <IconButton key={m} label={`${m[0].toUpperCase()}${m.slice(1)} light`} active={mood === m} onClick={() => st.setMood(m)}>
@@ -144,14 +145,15 @@ export default function Studio(props: StudioProps) {
           ))}
           <span className="mx-1 h-6 w-px bg-line" />
           <IconButton label="Calibrate floor and scale" active={calibrate} onClick={() => setCalibrate((v) => !v)}><Ruler size={17} /></IconButton>
+          </div>
           <IconButton label="Before / after" active={compare} onClick={() => setCompare(true)}><Columns2 size={17} /></IconButton>
           <button onClick={() => setShare(true)} className="ml-1 inline-flex h-9 items-center gap-1.5 rounded-btn bg-blue px-3 text-[13px] font-medium text-white hover:bg-blue-deep">
-            <Share2 size={15} /> Share
+            <Share2 size={15} /> <span className="max-sm:hidden">Share</span>
           </button>
         </div>
       </header>
 
-      <div className="relative flex min-h-0 flex-1">
+      <div className="relative flex min-h-0 flex-1 overflow-hidden">
         <div className={clsx("absolute inset-y-0 left-0 z-20 w-72 border-r border-line transition-transform md:static md:translate-x-0", left ? "translate-x-0" : "-translate-x-full md:hidden")}>
           <AddPanel />
         </div>

@@ -9,7 +9,7 @@ export default function HeroCompare({ before, after, alt }: { before: string; af
     <div className="relative aspect-[4/3] w-full select-none overflow-hidden rounded-[20px] bg-ink shadow-[0_30px_80px_-20px_rgb(18_20_23/0.45)]">
       <Image src={after} alt={`${alt}, redesigned`} fill priority sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - x}% 0 0)` }}>
-        <Image src={before} alt={`${alt}, as scanned`} fill priority sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+        <Image src={before} alt={`${alt}, before`} fill priority sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
       </div>
       <div className="pointer-events-none absolute inset-y-0 w-[3px] -translate-x-1/2 bg-white" style={{ left: `${x}%` }}>
         <div className="absolute top-1/2 left-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg">
@@ -18,7 +18,7 @@ export default function HeroCompare({ before, after, alt }: { before: string; af
           </svg>
         </div>
       </div>
-      <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium">As scanned</span>
+      <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium">Before</span>
       <span className="absolute bottom-4 right-4 rounded-full bg-amber px-3 py-1 text-xs font-medium">Remixed in ReRoom</span>
       <input
         type="range"

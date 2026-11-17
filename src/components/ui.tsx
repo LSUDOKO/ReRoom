@@ -78,7 +78,7 @@ export function Segmented<T extends string>({
           )}
         >
           {o.icon}
-          {o.label}
+          <span className="max-sm:hidden">{o.label}</span>
         </button>
       ))}
     </div>

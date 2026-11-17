@@ -1,5 +1,67 @@
 [
   {
+    "id": "industrial-loft",
+    "name": "Industrial loft",
+    "blurb": "Brick walls, tall steel windows and evening light. Generated with Aholo SpatialGen.",
+    "url": "/rooms/industrial-loft.spz",
+    "thumb": "/rooms/industrial-loft.jpg",
+    "calibration": {
+      "up": "+z",
+      "scale": 1,
+      "yaw": 0,
+      "offset": [
+        0,
+        1.25,
+        0
+      ]
+    },
+    "camera": {
+      "position": [
+        0.1,
+        1.6,
+        -0.75
+      ],
+      "target": [
+        0.5,
+        0.6,
+        3
+      ]
+    },
+    "source": "spatialgen",
+    "worldId": "3FO4K4V9EJHU"
+  },
+  {
+    "id": "coastal-bedroom",
+    "name": "Coastal bedroom",
+    "blurb": "White walls and a sea view. Generated with Aholo SpatialGen.",
+    "url": "/rooms/coastal-bedroom.spz",
+    "thumb": "/rooms/coastal-bedroom.jpg",
+    "calibration": {
+      "up": "+z",
+      "scale": 1,
+      "yaw": 0,
+      "offset": [
+        0,
+        1.25,
+        0
+      ]
+    },
+    "camera": {
+      "position": [
+        0.9,
+        1.45,
+        0.2
+      ],
+      "target": [
+        -2,
+        0.9,
+        0
+      ]
+    },
+    "source": "spatialgen",
+    "worldId": "3FO4K4V9EMTV"
+  },
+  {
     "id": "japandi-studio",
     "name": "Japandi studio",
     "blurb": "A warm, wood-floored studio apartment generated with Aholo SpatialGen.",
@@ -29,68 +91,6 @@
     },
     "source": "spatialgen",
     "worldId": "3FO4K4V9EQ6W"
-  },
-  {
-    "id": "industrial-loft",
-    "name": "Industrial loft",
-    "blurb": "Brick walls, tall steel windows and evening light. Generated with Aholo SpatialGen.",
-    "url": "/rooms/industrial-loft.spz",
-    "thumb": "/rooms/industrial-loft.jpg",
-    "calibration": {
-      "up": "+z",
-      "scale": 1,
-      "yaw": 0,
-      "offset": [
-        0,
-        1.25,
-        0
-      ]
-    },
-    "camera": {
-      "position": [
-        0,
-        1.45,
-        1.6
-      ],
-      "target": [
-        0,
-        0.8,
-        -2
-      ]
-    },
-    "source": "spatialgen",
-    "worldId": "3FO4K4V9EJHU"
-  },
-  {
-    "id": "coastal-bedroom",
-    "name": "Coastal bedroom",
-    "blurb": "White walls and a sea view. Generated with Aholo SpatialGen.",
-    "url": "/rooms/coastal-bedroom.spz",
-    "thumb": "/rooms/coastal-bedroom.jpg",
-    "calibration": {
-      "up": "+z",
-      "scale": 1,
-      "yaw": 0,
-      "offset": [
-        0,
-        1.25,
-        0
-      ]
-    },
-    "camera": {
-      "position": [
-        0,
-        1.45,
-        1.6
-      ],
-      "target": [
-        0,
-        0.8,
-        -2
-      ]
-    },
-    "source": "spatialgen",
-    "worldId": "3FO4K4V9EMTV"
   },
   {
     "id": "blank",
