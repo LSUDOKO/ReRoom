@@ -21,7 +21,7 @@ export default function Toast() {
       aria-live="polite"
       className={clsx(
         "rise absolute left-1/2 top-16 z-30 flex max-w-md -translate-x-1/2 items-center gap-2 rounded-btn px-3.5 py-2 text-sm shadow-lg",
-        shown.tone === "error" && "bg-danger text-white",
+        shown.tone === "error" && "bg-danger text-on",
         shown.tone === "magic" && "bg-amber text-ink",
         (!shown.tone || shown.tone === "info") && "bg-ink text-white",
       )}

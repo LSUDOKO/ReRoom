@@ -147,7 +147,7 @@ export default function Studio(props: StudioProps) {
           <IconButton label="Calibrate floor and scale" active={calibrate} onClick={() => setCalibrate((v) => !v)}><Ruler size={17} /></IconButton>
           </div>
           <IconButton label="Before / after" active={compare} onClick={() => setCompare(true)}><Columns2 size={17} /></IconButton>
-          <button onClick={() => setShare(true)} className="ml-1 inline-flex h-9 items-center gap-1.5 rounded-btn bg-blue px-3 text-[13px] font-medium text-white hover:bg-blue-deep">
+          <button onClick={() => setShare(true)} className="ml-1 inline-flex h-9 items-center gap-1.5 rounded-btn bg-blue px-3 text-[13px] font-medium text-on hover:bg-blue-deep">
             <Share2 size={15} /> <span className="max-sm:hidden">Share</span>
           </button>
         </div>

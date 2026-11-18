@@ -88,7 +88,7 @@ export default function BeforeAfter({ onClose }: { onClose: () => void }) {
           </div>
         </div>
       ) : (
-        <div className="flex h-full items-center justify-center text-sm text-white/70">Rendering before and after…</div>
+        <div className="flex h-full items-center justify-center text-sm text-on/70">Rendering before and after…</div>
       )}
     </div>
   );

@@ -19,10 +19,10 @@ export function Button({
         size === "sm" && "h-8 px-3 text-[13px]",
         size === "md" && "h-10 px-4 text-sm",
         size === "lg" && "h-12 px-6 text-[15px]",
-        variant === "primary" && "bg-blue text-white hover:bg-blue-deep",
+        variant === "primary" && "bg-blue text-on hover:bg-blue-deep",
         variant === "secondary" && "border border-line bg-white text-ink hover:bg-paper",
         variant === "ghost" && "text-slate hover:bg-paper hover:text-ink",
-        variant === "magic" && "bg-amber text-ink hover:brightness-95",
+        variant === "magic" && "bg-amber text-navy hover:brightness-105",
         variant === "danger" && "border border-line bg-white text-danger hover:bg-red-50",
         className,
       )}

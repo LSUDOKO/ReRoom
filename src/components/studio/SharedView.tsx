@@ -55,7 +55,7 @@ export default function SharedView() {
               { id: "walk", label: "Walk", icon: <Footprints size={14} /> },
             ]}
           />
-          <Link href="/studio" className="hidden h-9 items-center rounded-btn bg-blue px-3 text-[13px] font-medium text-white sm:inline-flex">
+          <Link href="/studio" className="hidden h-9 items-center rounded-btn bg-blue px-3 text-[13px] font-medium text-on sm:inline-flex">
             Design your own
           </Link>
         </div>

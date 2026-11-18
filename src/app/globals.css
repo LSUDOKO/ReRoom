@@ -18,6 +18,7 @@
   --color-amber: #aeb4ff;
   --color-amber-soft: #eceeff;
   --color-danger: #e5484d;
+  --color-on: #ffffff; /* text on blue and red, in every theme */
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
@@ -201,3 +202,22 @@ body {
 
 .scroll-thin { scrollbar-width: thin; scrollbar-color: #c9cdd8 transparent; }
 input[type="range"] { accent-color: var(--color-blue); }
+
+/* ---------------------------------------------------------------- dark studio
+   The studio and share view reuse the light components; these scoped tokens turn surfaces dark
+   and text light. Active chips (bg-ink + text-white) invert on their own. */
+.studio-dark {
+  --color-white: #0c1020;
+  --color-paper: #070a16;
+  --color-cream: #121729;
+  --color-cream-deep: #182038;
+  --color-ink: #eef0f8;
+  --color-slate: #a3a9c0;
+  --color-mist: #6c7390;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-blue-soft: rgb(27 104 252 / 0.18);
+  --color-amber-soft: rgb(174 180 255 / 0.14);
+  color-scheme: dark;
+  color: var(--color-ink);
+}
+.studio-dark ::selection { background: rgb(27 104 252 / 0.45); }
