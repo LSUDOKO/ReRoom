@@ -134,3 +134,13 @@ export function LogoMark({ className, fill = "currentColor" }: { className?: str
     </svg>
   );
 }
+
+/** Full-screen loading state: the RR mark breathing on ink, with a mono label. */
+export function BrandLoader({ label }: { label: string }) {
+  return (
+    <div className="flex h-dvh flex-col items-center justify-center gap-5 bg-ink text-paper">
+      <LogoIcon className="size-14 animate-pulse drop-shadow-[0_18px_40px_rgba(27,104,252,.55)]" />
+      <p className="mono-label text-mist">{label}…</p>
+    </div>
+  );
+}
