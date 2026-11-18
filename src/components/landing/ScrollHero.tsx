@@ -463,7 +463,6 @@ export default function ScrollHero() {
     })();
   }, []);
 
-  useEffect(() => () => ScrollTrigger.getAll().forEach((s) => s.kill()), []);
   useEffect(() => void gsap.ticker.lagSmoothing(0), []);
 
   if (!models) return null;
