@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import { BRAND_BLUE, BRAND_NAVY, MARK_PATH, MARK_TRANSFORM } from "./brand";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "ghost" | "magic" | "danger";
@@ -102,15 +103,34 @@ export function Modal({ open, onClose, title, children, wide }: { open: boolean;
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+/** The ReRoom app icon (blue rounded square, navy RR monogram) with the wordmark. */
+export function Logo({ className, mark = false }: { className?: string; mark?: boolean }) {
   return (
-    <span className={clsx("inline-flex items-center gap-2 font-display text-[22px] font-semibold tracking-tight", className)}>
-      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden>
-        <rect width="64" height="64" rx="14" fill="#4219FA" />
-        <path d="M16 46V24l16-10 16 10v22" fill="none" stroke="#fff" strokeWidth="5" strokeLinejoin="round" />
-        <path d="M26 46V34h12v12" fill="#FFC531" />
-      </svg>
-      ReRoom
+    <span className={clsx("inline-flex items-center gap-2 font-display text-[21px] font-semibold tracking-[-0.03em]", className)}>
+      <LogoIcon className="size-7 shrink-0" />
+      {!mark && "ReRoom"}
     </span>
+  );
+}
+
+export function LogoIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="69 76 1116 1101" className={className} aria-hidden>
+      <rect x="69" y="76" width="1116" height="1101" rx="215" fill={BRAND_BLUE} />
+      <g transform={MARK_TRANSFORM} fill={BRAND_NAVY}>
+        <path d={MARK_PATH} />
+      </g>
+    </svg>
+  );
+}
+
+/** Just the monogram, filled with currentColor (or a gradient via CSS). */
+export function LogoMark({ className, fill = "currentColor" }: { className?: string; fill?: string }) {
+  return (
+    <svg viewBox="150 300 960 665" className={className} aria-hidden>
+      <g transform={MARK_TRANSFORM} fill={fill}>
+        <path d={MARK_PATH} />
+      </g>
+    </svg>
   );
 }
