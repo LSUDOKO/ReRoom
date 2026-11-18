@@ -21,6 +21,7 @@ type Asset = {
   op?: "text" | "split" | "transfer" | "export" | "pending";
   prompt?: string;
   version?: "G1" | "G1-Turbo";
+  style?: "photorealistic" | "cartoon";
   faceCount?: number;
   input?: string;
   ref?: string;
@@ -114,7 +115,7 @@ async function run(a: Asset) {
   else if (a.op === "text")
     taskId = await lux3d().textTo3d.create({
       prompt: prompt!,
-      style: "photorealistic",
+      style: a.style ?? "photorealistic",
       version: a.version ?? "G1-Turbo",
       faceCount: a.faceCount ?? 40_000,
       outputFormat: ["glb"],
@@ -181,8 +182,10 @@ mkdirSync("public/site", { recursive: true });
 writeFileSync(
   "public/site/review.html",
   `<!doctype html><meta charset="utf-8"><title>ReRoom site assets review</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>self.ModelViewerElement = { meshoptDecoderLocation: "https://cdn.jsdelivr.net/npm/meshoptimizer@0.21.0/meshopt_decoder.js" };</script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
-<style>body{font:14px Inter,system-ui,sans-serif;background:#fef8e6;color:#14102e;margin:24px}main{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}figure{margin:0;background:#fff;border-radius:16px;padding:12px}model-viewer{width:100%;height:300px;background:#f6efd9;border-radius:12px}figcaption{padding-top:8px;line-height:1.4}</style>
+<style>body{font:300 15px Outfit,system-ui,sans-serif;background:#050712;color:#f1f2f6;margin:32px}h1{font-weight:600;letter-spacing:-.03em;font-size:40px;margin:0 0 4px}main{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:24px}figure{margin:0;border-radius:20px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}model-viewer{width:100%;height:300px;background:radial-gradient(closest-side,#1b2a5c,#050712);border-radius:14px}figcaption{padding-top:10px;line-height:1.45;color:#9aa0b4}figcaption b{font:500 12px "JetBrains Mono",monospace;letter-spacing:.06em;color:#fff}</style>
 <h1>Site assets review</h1><p>Every model below was generated with Aholo Lux3D for the ReRoom website.</p><main>${rows}</main>`,
 );
 console.log("Review page: /site/review.html");

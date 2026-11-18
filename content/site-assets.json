@@ -10,7 +10,10 @@
       "faceCount": 100000,
       "prompt": "a mid-century armchair in mustard yellow velvet with tapered walnut legs, rounded back, realistic furniture product model, real-world proportions, clean geometry, single object, centered, no background",
       "out": "site/hero/chair.glb",
-      "web": { "tris": 15000, "texture": 2048 }
+      "web": {
+        "tris": 15000,
+        "texture": 2048
+      }
     },
     {
       "id": "H_CHAIR_PARTS",
@@ -19,7 +22,10 @@
       "op": "split",
       "input": "H_CHAIR",
       "out": "site/hero/chair-parts.glb",
-      "web": { "tris": 15000, "texture": 2048 }
+      "web": {
+        "tris": 15000,
+        "texture": 2048
+      }
     },
     {
       "id": "H_CHAIR_LEATHER",
@@ -29,7 +35,10 @@
       "input": "H_CHAIR",
       "ref": "content/stock-refs/leather_cognac.jpg",
       "out": "site/hero/chair-leather.glb",
-      "web": { "tris": 15000, "texture": 2048 }
+      "web": {
+        "tris": 15000,
+        "texture": 2048
+      }
     },
     {
       "id": "H_CHAIR_LINEN",
@@ -39,7 +48,10 @@
       "input": "H_CHAIR",
       "ref": "content/stock-refs/linen_oatmeal.jpg",
       "out": "site/hero/chair-linen.glb",
-      "web": { "tris": 15000, "texture": 2048 }
+      "web": {
+        "tris": 15000,
+        "texture": 2048
+      }
     },
     {
       "id": "H_CHAIR_BOUCLE",
@@ -49,7 +61,10 @@
       "input": "H_CHAIR",
       "ref": "content/stock-refs/boucle_white.jpg",
       "out": "site/hero/chair-boucle.glb",
-      "web": { "tris": 15000, "texture": 2048 }
+      "web": {
+        "tris": 15000,
+        "texture": 2048
+      }
     },
     {
       "id": "H_CHAIR_USDZ",
@@ -60,24 +75,180 @@
       "format": "usdz",
       "out": "site/ar/chair.usdz"
     },
-
-    { "id": "S_ROOM", "group": "scan", "capability": "Aholo World reconstruction (Reality)", "op": "pending", "note": "Needs a real 30–60 s phone walkthrough of your room." },
-
-    { "id": "R_SOFA", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_SOFA_3.glb" },
-    { "id": "R_LAMP", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_FLOOR_LAMP.glb" },
-    { "id": "R_PLANT", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_PLANT_BIG.glb" },
-    { "id": "R_RUG", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_RUG_ROUND.glb" },
-    { "id": "R_SIDE", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_SIDE.glb" },
-
-    { "id": "A_WARDROBE", "group": "alive", "capability": "Lux3D text-to-3D + articulation (URDF)", "existing": "/library/L_WARDROBE/robot.urdf" },
-    { "id": "A_DRAWERS", "group": "alive", "capability": "Lux3D text-to-3D + articulation (URDF)", "existing": "/library/L_DRAWERS/robot.urdf" },
-
-    { "id": "ST_JAPANDI_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.japandi.glb" },
-    { "id": "ST_INDUSTRIAL_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.industrial.glb" },
-    { "id": "ST_CYBERPUNK_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.cyberpunk.glb" },
-
-    { "id": "D_INDUSTRIAL_LOFT", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/industrial-loft.spz" },
-    { "id": "D_COASTAL_BEDROOM", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/coastal-bedroom.spz" },
-    { "id": "D_JAPANDI_STUDIO", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/japandi-studio.spz" }
+    {
+      "id": "S_ROOM",
+      "group": "scan",
+      "capability": "Aholo World reconstruction (Reality)",
+      "op": "pending",
+      "note": "Needs a real 30–60 s phone walkthrough of your room."
+    },
+    {
+      "id": "R_SOFA",
+      "group": "remix",
+      "capability": "Lux3D text-to-3D",
+      "existing": "/library/L_SOFA_3.glb"
+    },
+    {
+      "id": "R_LAMP",
+      "group": "remix",
+      "capability": "Lux3D text-to-3D",
+      "existing": "/library/L_FLOOR_LAMP.glb"
+    },
+    {
+      "id": "R_PLANT",
+      "group": "remix",
+      "capability": "Lux3D text-to-3D",
+      "existing": "/library/L_PLANT_BIG.glb"
+    },
+    {
+      "id": "R_RUG",
+      "group": "remix",
+      "capability": "Lux3D text-to-3D",
+      "existing": "/library/L_RUG_ROUND.glb"
+    },
+    {
+      "id": "R_SIDE",
+      "group": "remix",
+      "capability": "Lux3D text-to-3D",
+      "existing": "/library/L_SIDE.glb"
+    },
+    {
+      "id": "A_WARDROBE",
+      "group": "alive",
+      "capability": "Lux3D text-to-3D + articulation (URDF)",
+      "existing": "/library/L_WARDROBE/robot.urdf"
+    },
+    {
+      "id": "A_DRAWERS",
+      "group": "alive",
+      "capability": "Lux3D text-to-3D + articulation (URDF)",
+      "existing": "/library/L_DRAWERS/robot.urdf"
+    },
+    {
+      "id": "ST_JAPANDI_ITEMS",
+      "group": "styles",
+      "capability": "Lux3D material transfer",
+      "existing": "/library/variants/*.japandi.glb"
+    },
+    {
+      "id": "ST_INDUSTRIAL_ITEMS",
+      "group": "styles",
+      "capability": "Lux3D material transfer",
+      "existing": "/library/variants/*.industrial.glb"
+    },
+    {
+      "id": "ST_CYBERPUNK_ITEMS",
+      "group": "styles",
+      "capability": "Lux3D material transfer",
+      "existing": "/library/variants/*.cyberpunk.glb"
+    },
+    {
+      "id": "D_INDUSTRIAL_LOFT",
+      "group": "dream",
+      "capability": "Aholo World generation (SpatialGen)",
+      "existing": "/rooms/industrial-loft.spz"
+    },
+    {
+      "id": "D_COASTAL_BEDROOM",
+      "group": "dream",
+      "capability": "Aholo World generation (SpatialGen)",
+      "existing": "/rooms/coastal-bedroom.spz"
+    },
+    {
+      "id": "D_JAPANDI_STUDIO",
+      "group": "dream",
+      "capability": "Aholo World generation (SpatialGen)",
+      "existing": "/rooms/japandi-studio.spz"
+    },
+    {
+      "id": "I_SCAN",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "a smartphone recording a video, with a small red record dot on the screen, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_scan.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    },
+    {
+      "id": "I_REMIX",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "a magic wand with a star tip and three small sparkles, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_remix.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    },
+    {
+      "id": "I_PRIVATE",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "an old-fashioned key, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_private.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    },
+    {
+      "id": "I_SIZE",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "a folding carpenter's measuring ruler, partly unfolded, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_size.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    },
+    {
+      "id": "I_STYLE",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "a fan of paint colour swatch cards in blue, white and lavender, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_style.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    },
+    {
+      "id": "I_EXPORT",
+      "group": "icons",
+      "capability": "Lux3D text-to-3D (G1-Turbo, cartoon)",
+      "op": "text",
+      "version": "G1-Turbo",
+      "style": "cartoon",
+      "faceCount": 20000,
+      "prompt": "a small desktop 3D printer printing a tiny armchair, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+      "out": "site/icons/i_export.glb",
+      "web": {
+        "tris": 8000,
+        "texture": 1024
+      }
+    }
   ]
 }
