@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./ui";
+import { Logo, LogoMark } from "./ui";
 
 export const GITHUB_URL = "https://github.com/LSUDOKO/ReRoom";
 
@@ -11,44 +11,53 @@ export function GithubIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-/** Cream pill bar on a blue band, as on the landing page. */
-export function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-40 bg-blue px-3 pt-3 pb-2 md:px-5">
-      <div className="mx-auto grid h-15 max-w-7xl grid-cols-[1fr_auto_1fr] items-center rounded-[18px] bg-cream px-3 shadow-[0_8px_24px_-16px_rgb(20_16_46/0.5)] md:px-4">
-        <nav className="flex items-center gap-5 text-sm font-medium text-slate">
-          <Link href="/#remix" className="hidden hover:text-ink md:inline">How it works</Link>
-          <Link href="/#styles" className="hidden hover:text-ink md:inline">Styles</Link>
-          <Link href="/#aholo" className="hidden hover:text-ink lg:inline">Built on Aholo</Link>
-          <Link href="/#pricing" className="hidden hover:text-ink lg:inline">Pricing</Link>
-          <Link href="/scan" className="hover:text-ink md:hidden">Scan</Link>
-        </nav>
-        <Link href="/" aria-label="ReRoom home" className="justify-self-center">
-          <Logo className="text-ink" />
-        </Link>
-        <div className="flex items-center justify-end gap-2">
-          <Link href="/studio" className="inline-flex h-10 items-center gap-1.5 rounded-btn bg-blue px-3.5 text-sm font-semibold text-white hover:bg-blue-deep md:px-4">
-            <span className="sm:hidden">Studio</span>
-            <span className="hidden sm:inline">Open the studio</span> <span aria-hidden>→</span>
+const NAV = [
+  ["/#scan", "Scan"],
+  ["/#remix", "Remix"],
+  ["/#styles", "Styles"],
+  ["/#assets", "Assets"],
+  ["/#aholo", "Aholo"],
+];
+
+/** Floating dark-glass pill. `overlay` floats it over the landing hero; elsewhere it sits on an ink strip. */
+export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
+  const bar = (
+    <div className="mx-auto flex w-[min(1180px,calc(100%-24px))] items-center gap-6 rounded-full bg-ink/80 py-1.5 pl-5 pr-1.5 text-paper shadow-[inset_0_1px_0_rgba(255,255,255,.14),inset_0_0_0_1px_rgba(255,255,255,.08),0_18px_40px_-20px_rgba(5,7,18,.8)] backdrop-blur-xl">
+      <Link href="/" aria-label="ReRoom home" className="shrink-0">
+        <Logo className="text-[18px] text-paper [&>svg]:size-6" />
+      </Link>
+      <nav data-nav aria-label="Sections" className="ml-auto hidden items-center gap-1 md:flex">
+        {NAV.map(([href, label]) => (
+          <Link
+            key={href}
+            href={href}
+            className="mono-label rounded-full px-3 py-2.5 text-mist transition-colors hover:bg-white/[.07] hover:text-white data-[active]:text-white"
+          >
+            {label}
           </Link>
-          <a href={GITHUB_URL} aria-label="Source on GitHub" className="hidden size-10 items-center justify-center rounded-btn bg-amber text-ink hover:brightness-95 sm:flex">
-            <GithubIcon />
-          </a>
-        </div>
-      </div>
-    </header>
+        ))}
+      </nav>
+      <a href={GITHUB_URL} aria-label="Source on GitHub" className="ml-auto hidden size-10 items-center justify-center rounded-full text-mist transition-colors hover:bg-white/[.07] hover:text-white sm:flex md:ml-0">
+        <GithubIcon />
+      </a>
+      <Link href="/studio" className="glass glass--blue glass--sm !min-h-10 !px-5 !font-sans !text-sm !tracking-normal" data-magnetic>
+        Open the studio
+      </Link>
+    </div>
   );
+  if (overlay) return <header className="fixed inset-x-0 top-3 z-50">{bar}</header>;
+  return <header className="sticky top-0 z-50 bg-ink py-3">{bar}</header>;
 }
 
 export function SiteFooter() {
   return (
-    <footer className="bg-cream">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 text-sm text-slate md:flex-row md:items-center">
-        <div>
-          <Logo className="text-ink" />
-          <p className="mt-2 max-w-xs">Scan it. Remix it. Live in it. Built for the Manycore Aholo Global 3D AI Hackathon.</p>
-        </div>
-        <nav className="flex flex-wrap gap-2 md:mx-auto">
+    <footer className="band overflow-hidden pb-12">
+      <div className="hatch dash-x relative flex items-center justify-center gap-4 py-14 md:py-20">
+        <LogoMark className="h-[clamp(3rem,9vw,7rem)] w-auto text-[#cfd3e0]" />
+        <span className="chrome display text-[clamp(3.2rem,11vw,9rem)]">ReRoom</span>
+      </div>
+      <div className="mx-auto mt-10 flex max-w-6xl flex-col items-center gap-6 px-5 text-center text-sm text-mist">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
           {[
             ["/scan", "Scan a room"],
             ["/studio", "Studio"],
@@ -56,13 +65,19 @@ export function SiteFooter() {
             ["/privacy", "Privacy"],
             ["/terms", "Terms"],
           ].map(([href, label]) => (
-            <Link key={href} href={href} className="rounded-full bg-amber px-3 py-1.5 text-[13px] font-semibold text-ink hover:brightness-95">
+            <Link key={href} href={href} className="transition-colors hover:text-white">
               {label}
             </Link>
           ))}
-          <a href={GITHUB_URL} className="rounded-full bg-amber px-3 py-1.5 text-[13px] font-semibold text-ink hover:brightness-95">GitHub</a>
+          <a href={GITHUB_URL} className="transition-colors hover:text-white">GitHub</a>
         </nav>
-        <p className="text-xs md:text-right">© 2026 ReRoom<br />Every 3D object made with Aholo</p>
+        <p className="flex items-center gap-2">
+          Built on
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/aholo.svg" alt="Aholo" className="h-4 w-auto opacity-90" />
+          by Manycore · Manycore Aholo Global 3D AI Hackathon 2026
+        </p>
+        <p className="mono-label text-mist/70">Every 3D object on this site was generated with Aholo</p>
       </div>
     </footer>
   );
