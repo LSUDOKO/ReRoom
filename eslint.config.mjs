@@ -22,6 +22,8 @@ const eslintConfig = defineConfig([
     "refs/**",
     "tmp/**",
     "public/aholo/**",
+    ".open-next/**",
+    ".wrangler/**",
   ]),
 ]);
 
