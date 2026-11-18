@@ -98,7 +98,7 @@ function SurfacePoints({ source, count, mix }: { source: THREE.Object3D; count: 
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
     const rnd = new Float32Array(count);
-    const palette = [new THREE.Color("#4219fa"), new THREE.Color("#ffc531"), new THREE.Color("#210b7d")];
+    const palette = [new THREE.Color("#1b68fc"), new THREE.Color("#aeb4ff"), new THREE.Color("#1f2bff")];
     const p = new THREE.Vector3();
     let k = 0;
     list.forEach((m, i) => {
@@ -181,7 +181,7 @@ function WireRoom({ opacity }: { opacity: React.RefObject<number> }) {
     g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
     return g;
   }, []);
-  const mat = useMemo(() => new THREE.LineBasicMaterial({ color: "#4219fa", transparent: true, depthWrite: false }), []);
+  const mat = useMemo(() => new THREE.LineBasicMaterial({ color: "#5b8dff", transparent: true, depthWrite: false }), []);
   const ref = useRef<THREE.LineSegments>(null);
   useFrame(() => {
     const o = opacity.current ?? 0;
@@ -395,8 +395,8 @@ function BlobShadow({ opacity }: { opacity: React.RefObject<number> }) {
     c.width = c.height = 128;
     const g = c.getContext("2d")!;
     const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-    grad.addColorStop(0, "rgba(33,11,125,0.55)");
-    grad.addColorStop(0.55, "rgba(33,11,125,0.18)");
+    grad.addColorStop(0, "rgba(31,43,255,0.5)");
+    grad.addColorStop(0.55, "rgba(27,104,252,0.16)");
     grad.addColorStop(1, "rgba(33,11,125,0)");
     g.fillStyle = grad;
     g.fillRect(0, 0, 128, 128);
