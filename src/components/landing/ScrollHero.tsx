@@ -335,7 +335,7 @@ function Chair({ models, mobile, reduced }: { models: Models; mobile: boolean; r
     mix.current = reduced ? 0 : pose.particles;
     dust.current = reduced ? 0 : Math.max(0, 1 - pose.segment);
     wire.current = pose.wire;
-    room.current = Math.pow(pose.room, 5); // only in the last stretch before the closing section
+    room.current = THREE.MathUtils.smoothstep(pose.room, 0.9, 1); // only right before the closing section
     shadow.current = (1 - mix.current) * THREE.MathUtils.smoothstep(pose.scale, 0.45, 0.8) * (reduced ? reducedFade.current.t : 1);
     lamp.current = THREE.MathUtils.lerp(lamp.current, pose.lamp > 0.85 ? 1 : 0, 0.06);
 
@@ -378,7 +378,10 @@ function Chair({ models, mobile, reduced }: { models: Models; mobile: boolean; r
           <SurfacePoints source={variants[0]} count={mobile ? MOTION.particlesMobile : MOTION.particles} mix={mix} />
         </group>
         <WireRoom opacity={wire} />
-        <RoomCorner room={room} lamp={lamp} lampUrl={models.lamp} />
+        {/* the lamp is only needed in the closing scene, so it never holds up the chair */}
+        <Suspense fallback={null}>
+          <RoomCorner room={room} lamp={lamp} lampUrl={models.lamp} />
+        </Suspense>
         <BlobShadow opacity={shadow} />
       </group>
     </>
