@@ -47,3 +47,8 @@ refs/
 /tmp/
 /public/aholo/
 .playwright-mcp/
+
+# Cloudflare
+/.open-next/
+/.wrangler/
+.dev.vars*

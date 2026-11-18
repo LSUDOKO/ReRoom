@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Marketing images are pre-sized WebP; Workers has no Next image optimizer by default.
+  images: { unoptimized: true },
   turbopack: {
     rules: {
       "*.css": {

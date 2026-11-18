@@ -13,7 +13,10 @@
     "postinstall": "node scripts/patch-viewer.mjs",
     "predev": "node scripts/build-manifest.mjs",
     "prebuild": "node scripts/build-manifest.mjs",
-    "test": "tsx scripts/selfcheck.mts"
+    "test": "tsx scripts/selfcheck.mts",
+    "cf:build": "SITE_URL=https://reroom.adoranto737.workers.dev NEXT_PUBLIC_UPLOAD_MAX_MB=60 opennextjs-cloudflare build && node scripts/cf-strip-env.mjs",
+    "cf:preview": "pnpm cf:build && opennextjs-cloudflare preview",
+    "cf:deploy": "pnpm cf:build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@manycore/aholo-sdk-asset": "^1.4.0",
@@ -21,6 +24,7 @@
     "@manycore/aholo-sdk-lux3d": "^1.10.0",
     "@manycore/aholo-sdk-world": "^1.5.0",
     "@manycore/aholo-viewer": "^1.14.0",
+    "@opennextjs/cloudflare": "1.20.17",
     "clsx": "^2.1.1",
     "fflate": "^0.8.3",
     "lucide-react": "^1.73.0",
@@ -41,7 +45,8 @@
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.163.0"
   },
   "packageManager": "pnpm@11.11.0"
 }
