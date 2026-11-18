@@ -17,7 +17,15 @@ const HERO = [
   ["Bouclé", "/site/hero/chair-boucle.glb", "Lux3D material transfer"],
   ["Parts", "/site/hero/chair-parts.glb", "Lux3D part split"],
 ] as const;
-const TABS = ["Furniture", "Finishes", "Hero chair", "Rooms"] as const;
+const ICONS = [
+  ["i_scan", "Phone"],
+  ["i_remix", "Magic wand"],
+  ["i_private", "Key"],
+  ["i_size", "Folding ruler"],
+  ["i_style", "Swatch fan"],
+  ["i_export", "3D printer"],
+] as const;
+const TABS = ["Furniture", "Finishes", "Hero chair", "Icons", "Rooms"] as const;
 
 export function AssetGallery() {
   const [tab, setTab] = useState<(typeof TABS)[number]>("Furniture");
@@ -116,6 +124,23 @@ export function AssetGallery() {
                   <span className="block px-3 pb-3">
                     <span className="block text-sm font-medium">{name}</span>
                     <span className="mono-label text-[10px] text-mist">{note}</span>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {tab === "Icons" && (
+          <ul className="grid grid-cols-3 gap-3 md:grid-cols-6">
+            {ICONS.map(([id, name]) => (
+              <li key={id}>
+                <button className={`${card} w-full`} onClick={() => setOpen({ src: `/site/icons/${id}.glb`, name: `Icon · ${name}`, note: "Lux3D text-to-3D, G1-Turbo, cartoon style" })}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/site/icons/${id}.webp`} alt="" loading="lazy" className="aspect-square w-full bg-paper object-contain p-4 transition-transform duration-700 group-hover:scale-110" />
+                  <span className="block px-3 pb-3">
+                    <span className="block text-sm font-medium">{name}</span>
+                    <span className="mono-label text-[10px] text-mist">Lux3D · cartoon</span>
                   </span>
                 </button>
               </li>
