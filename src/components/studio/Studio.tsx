@@ -117,7 +117,7 @@ export default function Studio(props: StudioProps) {
 
   return (
     <div className="flex h-dvh flex-col bg-paper">
-      <header className="flex h-14 shrink-0 items-center gap-2 overflow-hidden border-b border-line bg-white px-3 sm:gap-3">
+      <header className="flex h-14 shrink-0 items-center gap-2 overflow-hidden border-b border-line bg-white/80 px-3 backdrop-blur-xl sm:gap-3">
         <Link href="/" aria-label="ReRoom home" className="shrink-0"><Logo className="text-[19px] [&>svg]:size-6 max-sm:[font-size:0] max-sm:gap-0" /></Link>
         <span className="hidden truncate text-sm text-slate md:inline">/ {room?.name ?? "Loading…"}</span>
         {!live && <span className="hidden rounded-full bg-amber-soft px-2 py-0.5 text-xs font-medium text-ink sm:inline">Demo mode</span>}
@@ -147,7 +147,7 @@ export default function Studio(props: StudioProps) {
           <IconButton label="Calibrate floor and scale" active={calibrate} onClick={() => setCalibrate((v) => !v)}><Ruler size={17} /></IconButton>
           </div>
           <IconButton label="Before / after" active={compare} onClick={() => setCompare(true)}><Columns2 size={17} /></IconButton>
-          <button onClick={() => setShare(true)} className="ml-1 inline-flex h-9 items-center gap-1.5 rounded-btn bg-blue px-3 text-[13px] font-medium text-on hover:bg-blue-deep">
+          <button onClick={() => setShare(true)} className="glass glass--blue ml-1 !min-h-9 !gap-1.5 !px-4 !text-[13px]">
             <Share2 size={15} /> <span className="max-sm:hidden">Share</span>
           </button>
         </div>

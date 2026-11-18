@@ -19,10 +19,10 @@ export function Button({
         size === "sm" && "h-8 px-3 text-[13px]",
         size === "md" && "h-10 px-4 text-sm",
         size === "lg" && "h-12 px-6 text-[15px]",
-        variant === "primary" && "bg-blue text-on hover:bg-blue-deep",
+        variant === "primary" && "bg-blue text-on shadow-[inset_0_1px_0_rgba(255,255,255,.35),0_10px_24px_-12px_rgba(27,104,252,.8)] hover:bg-blue-deep",
         variant === "secondary" && "border border-line bg-white text-ink hover:bg-paper",
         variant === "ghost" && "text-slate hover:bg-paper hover:text-ink",
-        variant === "magic" && "bg-amber text-navy hover:brightness-105",
+        variant === "magic" && "bg-gradient-to-b from-[#c7ccff] to-amber text-navy shadow-[inset_0_1px_0_rgba(255,255,255,.6),0_10px_24px_-12px_rgba(174,180,255,.7)] hover:brightness-105",
         variant === "danger" && "border border-line bg-white text-danger hover:bg-red-50",
         className,
       )}
