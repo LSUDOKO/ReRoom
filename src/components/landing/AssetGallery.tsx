@@ -32,6 +32,8 @@ export function AssetGallery() {
   const card = "group relative overflow-hidden rounded-[18px] bg-white text-left shadow-[inset_0_0_0_1px_rgba(5,7,18,.06)] transition-transform duration-500 hover:-translate-y-1";
   return (
     <div>
+      {/* the hero chair GLBs are meshopt-compressed */}
+      <Script id="mv-meshopt" strategy="lazyOnload">{`self.ModelViewerElement = Object.assign(self.ModelViewerElement || {}, { meshoptDecoderLocation: "https://cdn.jsdelivr.net/npm/meshoptimizer@0.21.0/meshopt_decoder.js" });`}</Script>
       <Script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js" strategy="lazyOnload" />
       <div role="tablist" aria-label="Asset type" className="flex flex-wrap gap-2">
         {TABS.map((t) => (
@@ -78,14 +80,16 @@ export function AssetGallery() {
                   <img src={`/library/thumbs/${id}.webp`} alt="" loading="lazy" className="size-16 rounded-xl object-cover" />
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-medium">{l?.name ?? id}</p>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
+                    <div className="mt-2 flex flex-wrap gap-2">
                       {Object.entries(styles).map(([style, src]) => (
                         <button
                           key={style}
                           onClick={() => setOpen({ src, name: `${l?.name} · ${style}`, note: "Lux3D material transfer from a style reference photo" })}
-                          className="mono-label rounded-full bg-paper px-2.5 py-1.5 text-[10px] text-slate transition-colors hover:bg-blue hover:text-white"
+                          className="group/v flex flex-col items-center gap-1 rounded-xl bg-paper p-1.5 transition-colors hover:bg-blue-soft"
                         >
-                          {style}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={`/library/variants/thumbs/${src.split("/").pop()!.replace(".glb", ".webp")}`} alt="" loading="lazy" className="size-14 object-contain transition-transform duration-500 group-hover/v:scale-110" />
+                          <span className="mono-label text-[9px] text-slate">{style}</span>
                         </button>
                       ))}
                     </div>
