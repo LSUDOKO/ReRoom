@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "refs/**",
+    "video/**",
     "tmp/**",
     "public/aholo/**",
     ".open-next/**",

@@ -41,6 +41,7 @@
     "node_modules",
     "refs",
     "tmp",
-    "reroom-docs"
+    "reroom-docs",
+    "video"
   ]
 }

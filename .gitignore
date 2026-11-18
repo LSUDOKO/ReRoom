@@ -53,3 +53,7 @@ refs/
 /.wrangler/
 .dev.vars*
 /assets-raw/
+
+# film project (render locally)
+video/node_modules/
+video/out/
