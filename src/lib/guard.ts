@@ -34,15 +34,33 @@ export function checkPrompt(raw: unknown): { ok: true; prompt: string; note?: st
   return { ok: true, prompt, note };
 }
 
-// ponytail: in-memory per-IP window; per-instance only. Move to Upstash/Redis when multi-instance.
+type Limiter = { limit(o: { key: string }): Promise<{ success: boolean }> };
+export type Bucket = "lux3d" | "worlds" | "upload";
+const LOCAL_LIMITS: Record<Bucket, number> = { lux3d: 12, worlds: 3, upload: 6 };
+
+// On Cloudflare, Workers rate-limit bindings (wrangler.jsonc: RL_<BUCKET> per IP, RL_GLOBAL for
+// the whole site) protect the Aholo credits. Locally (next dev) it falls back to an in-memory window.
 const hits = new Map<string, number[]>();
-export function rateLimit(req: Request, limit = 20, windowMs = 60_000) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+export async function rateLimit(req: Request, bucket: Bucket) {
+  const ip =
+    req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  try {
+    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
+    const env = getCloudflareContext().env as unknown as Record<string, Limiter | undefined>;
+    const own = env[`RL_${bucket.toUpperCase()}`];
+    if (own) {
+      const [a, b] = await Promise.all([own.limit({ key: ip }), env.RL_GLOBAL?.limit({ key: bucket })]);
+      return a.success && (b?.success ?? true);
+    }
+  } catch {
+    // not running on Workers
+  }
+  const key = `${bucket}:${ip}`;
   const now = Date.now();
-  const list = (hits.get(ip) ?? []).filter((t) => now - t < windowMs);
-  if (list.length >= limit) return false;
+  const list = (hits.get(key) ?? []).filter((t) => now - t < 60_000);
+  if (list.length >= LOCAL_LIMITS[bucket]) return false;
   list.push(now);
-  hits.set(ip, list);
+  hits.set(key, list);
   return true;
 }
 

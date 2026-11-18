@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SAMPLE_ROOMS, type SampleRoom } from "@/lib/catalog";
 import { createWorld, getWorld, uploadFile, type WorldStatus } from "@/lib/api";
+import { UPLOAD_MAX_MB } from "@/lib/limits";
 import { clearAllData } from "@/lib/store";
 import { Button } from "./ui";
 
@@ -97,6 +98,8 @@ function Capture({ live, onStarted }: { live: boolean | null; onStarted: (r: MyR
     if (!file) return;
     setError(null);
     try {
+      if (file.size > UPLOAD_MAX_MB * 1024 * 1024)
+        throw new Error(`This file is ${(file.size / 1e6).toFixed(0)} MB. Files must be under ${UPLOAD_MAX_MB} MB, so trim the clip or record at 1080p.`);
       setProgress(0);
       const url = await uploadFile(file, setProgress);
       const type = /\.insv$/i.test(file.name) ? "insv" : file.type.startsWith("image/") ? "image" : "video";
@@ -137,7 +140,7 @@ function Capture({ live, onStarted }: { live: boolean | null; onStarted: (r: MyR
         >
           <Upload size={22} />
           {file ? <span className="font-medium text-ink">{file.name} · {(file.size / 1e6).toFixed(1)} MB</span> : "Drop a video here, or click to record or choose one"}
-          <span className="text-xs">MP4, MOV or Insta360 INSV · up to 500 MB</span>
+          <span className="text-xs">MP4, MOV or Insta360 INSV · up to {UPLOAD_MAX_MB} MB</span>
         </button>
         <input
           ref={input}
