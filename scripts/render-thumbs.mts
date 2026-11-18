@@ -4,19 +4,25 @@
 //   public/library/thumbs/<ID>.webp        library models (used by the studio and the landing gallery)
 //   public/site/hero/thumbs/<name>.webp    the hero chair finishes and parts
 //   public/library/variants/thumbs/<file>.webp  restyled finishes
+//   public/site/icons/<id>.webp            the clay 3D icons
+// Pass "icons" (or "library", "hero", "variants") as a second argument to render one group.
 import { chromium } from "playwright";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
 const base = process.argv[2] ?? "http://localhost:3100";
 const library = JSON.parse(readFileSync("content/library.json", "utf8")) as { id: string; category: string }[];
 const manifest = JSON.parse(readFileSync("content/manifest.json", "utf8")) as { variants: Record<string, Record<string, string>> };
 
-const jobs: { src: string; out: string; orbit: string }[] = [
-  ...library.map((l) => ({ src: `/library/${l.id}.glb`, out: `public/library/thumbs/${l.id}.webp`, orbit: l.category === "textile" ? "30deg 25deg 105%" : "35deg 75deg 105%" })),
-  ...["chair", "chair-leather", "chair-linen", "chair-boucle", "chair-parts"].map((n) => ({ src: `/site/hero/${n}.glb`, out: `public/site/hero/thumbs/${n}.webp`, orbit: "-30deg 78deg 105%" })),
-  ...Object.values(manifest.variants).flatMap((v) => Object.values(v)).map((src) => ({ src, out: `public/library/variants/thumbs/${src.split("/").pop()!.replace(".glb", ".webp")}`, orbit: "35deg 75deg 105%" })),
+const only = process.argv[3];
+const icons = existsSync("public/site/icons") ? readdirSync("public/site/icons").filter((f) => f.endsWith(".glb")) : [];
+const all: { group: string; src: string; out: string; orbit: string }[] = [
+  ...library.map((l) => ({ group: "library", src: `/library/${l.id}.glb`, out: `public/library/thumbs/${l.id}.webp`, orbit: l.category === "textile" ? "30deg 25deg 105%" : "35deg 75deg 105%" })),
+  ...["chair", "chair-leather", "chair-linen", "chair-boucle", "chair-parts"].map((n) => ({ group: "hero", src: `/site/hero/${n}.glb`, out: `public/site/hero/thumbs/${n}.webp`, orbit: "-30deg 78deg 105%" })),
+  ...Object.values(manifest.variants).flatMap((v) => Object.values(v)).map((src) => ({ group: "variants", src, out: `public/library/variants/thumbs/${src.split("/").pop()!.replace(".glb", ".webp")}`, orbit: "35deg 75deg 105%" })),
+  ...icons.map((f) => ({ group: "icons", src: `/site/icons/${f}`, out: `public/site/icons/${f.replace(".glb", ".webp")}`, orbit: "25deg 70deg 105%" })),
 ];
+const jobs = all.filter((j) => !only || j.group === only);
 
 const browser = await chromium.launch({ args: ["--use-gl=angle", "--enable-gpu"] });
 const page = await browser.newPage({ viewport: { width: 512, height: 512 } });

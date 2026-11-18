@@ -54,15 +54,63 @@
     "at": "2026-11-18T06:12:17.761Z"
   },
   "I_REMIX": {
-    "status": "running",
+    "status": "done",
     "taskId": 8313447,
+    "raw": "assets-raw/I_REMIX.glb",
+    "out": "/site/icons/i_remix.glb",
     "prompt": "a magic wand with a star tip and three small sparkles, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
-    "at": "2026-11-18T12:07:01.667Z"
+    "tris": 7998,
+    "bytes": 180416,
+    "at": "2026-11-18T12:10:01.843Z"
   },
   "I_SCAN": {
-    "status": "running",
+    "status": "done",
     "taskId": 8313457,
+    "raw": "assets-raw/I_SCAN.glb",
+    "out": "/site/icons/i_scan.glb",
     "prompt": "a smartphone recording a video, with a small red record dot on the screen, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
-    "at": "2026-11-18T12:07:03.300Z"
+    "tris": 8000,
+    "bytes": 210784,
+    "at": "2026-11-18T12:09:27.843Z"
+  },
+  "I_PRIVATE": {
+    "status": "done",
+    "taskId": 8313709,
+    "raw": "assets-raw/I_PRIVATE.glb",
+    "out": "/site/icons/i_private.glb",
+    "prompt": "an old-fashioned key, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "tris": 8000,
+    "bytes": 196644,
+    "at": "2026-11-18T12:11:16.975Z"
+  },
+  "I_SIZE": {
+    "status": "done",
+    "taskId": 8313764,
+    "raw": "assets-raw/I_SIZE.glb",
+    "out": "/site/icons/i_size.glb",
+    "prompt": "a folding carpenter's measuring ruler, partly unfolded, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "tris": 8000,
+    "bytes": 301396,
+    "at": "2026-11-18T12:11:51.123Z"
+  },
+  "I_STYLE": {
+    "status": "done",
+    "taskId": 8313880,
+    "raw": "assets-raw/I_STYLE.glb",
+    "out": "/site/icons/i_style.glb",
+    "prompt": "a fan of paint colour swatch cards in blue, white and lavender, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "tris": 8000,
+    "bytes": 299948,
+    "at": "2026-11-18T12:13:17.884Z"
+  },
+  "I_EXPORT": {
+    "status": "done",
+    "taskId": 8313914,
+    "raw": "assets-raw/I_EXPORT.glb",
+    "out": "/site/icons/i_export.glb",
+    "prompt": "a small desktop 3D printer printing a tiny armchair, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "tris": 7998,
+    "bytes": 292856,
+    "at": "2026-11-18T12:14:14.216Z"
   }
 }
