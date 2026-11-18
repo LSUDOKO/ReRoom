@@ -73,8 +73,9 @@ export async function getTask(taskId: string | number) {
   const r = await lux3d().tasks.retrieve(taskId);
   const state: TaskState =
     r.status === 3 ? "done" : r.status === 4 || r.status === 6 ? "failed" : r.status === 1 ? "running" : "queued";
-  const urls = r.outputs
-    .map((o) => o.content ?? "")
+  // G1 tasks report null output slots while they are still running
+  const urls = (r.outputs ?? [])
+    .map((o) => o?.content ?? "")
     .filter((c) => c && c !== "NOT_REQUESTED" && c !== "null");
   return { taskId: r.taskId, state, urls };
 }

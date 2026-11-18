@@ -1,5 +1,6 @@
 "use client";
 import { unzipSync } from "fflate";
+import { useStudio } from "./store";
 
 export type TaskOp = "text" | "image" | "transfer" | "articulate" | "split" | "export";
 export type TaskResult = { taskId: number; state: "queued" | "running" | "done" | "failed"; urls: string[] };
@@ -15,6 +16,9 @@ async function post<T>(url: string, body: unknown): Promise<T> {
 
 /** Create a Lux3D task; retries while the account's concurrency slots are busy. */
 export async function createTask(op: TaskOp, body: Record<string, unknown>) {
+  // single choke point for spending credits: demo mode (or no key) never reaches Lux3D,
+  // even if a hidden file input or keyboard shortcut slips past a disabled button
+  if (!useStudio.getState().live) throw new Error("Live generation is off in demo mode.");
   for (let i = 0; ; i++) {
     try {
       return await post<{ taskId: number; note?: string }>("/api/lux3d", { op, ...body });

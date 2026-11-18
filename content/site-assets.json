@@ -1,0 +1,83 @@
+{
+  "$comment": "Every 3D object and image on the ReRoom website is made with Aholo. Run with: tsx --env-file=.env.local scripts/gen-site-assets.mts <group|id...>. Entries with `existing` reuse an asset already generated for the app instead of spending credits again.",
+  "assets": [
+    {
+      "id": "H_CHAIR",
+      "group": "hero",
+      "capability": "Lux3D text-to-3D (G1, PBR)",
+      "op": "text",
+      "version": "G1",
+      "faceCount": 100000,
+      "prompt": "a mid-century armchair in mustard yellow velvet with tapered walnut legs, rounded back, realistic furniture product model, real-world proportions, clean geometry, single object, centered, no background",
+      "out": "site/hero/chair.glb",
+      "web": { "tris": 15000, "texture": 2048 }
+    },
+    {
+      "id": "H_CHAIR_PARTS",
+      "group": "hero",
+      "capability": "Lux3D part split",
+      "op": "split",
+      "input": "H_CHAIR",
+      "out": "site/hero/chair-parts.glb",
+      "web": { "tris": 15000, "texture": 2048 }
+    },
+    {
+      "id": "H_CHAIR_LEATHER",
+      "group": "hero",
+      "capability": "Lux3D material transfer",
+      "op": "transfer",
+      "input": "H_CHAIR",
+      "ref": "content/stock-refs/leather_cognac.jpg",
+      "out": "site/hero/chair-leather.glb",
+      "web": { "tris": 15000, "texture": 2048 }
+    },
+    {
+      "id": "H_CHAIR_LINEN",
+      "group": "hero",
+      "capability": "Lux3D material transfer",
+      "op": "transfer",
+      "input": "H_CHAIR",
+      "ref": "content/stock-refs/linen_oatmeal.jpg",
+      "out": "site/hero/chair-linen.glb",
+      "web": { "tris": 15000, "texture": 2048 }
+    },
+    {
+      "id": "H_CHAIR_BOUCLE",
+      "group": "hero",
+      "capability": "Lux3D material transfer",
+      "op": "transfer",
+      "input": "H_CHAIR",
+      "ref": "content/stock-refs/boucle_white.jpg",
+      "out": "site/hero/chair-boucle.glb",
+      "web": { "tris": 15000, "texture": 2048 }
+    },
+    {
+      "id": "H_CHAIR_USDZ",
+      "group": "hero",
+      "capability": "Lux3D multi-format export",
+      "op": "export",
+      "input": "H_CHAIR",
+      "format": "usdz",
+      "out": "site/ar/chair.usdz"
+    },
+
+    { "id": "S_ROOM", "group": "scan", "capability": "Aholo World reconstruction (Reality)", "op": "pending", "note": "Needs a real 30–60 s phone walkthrough of your room." },
+
+    { "id": "R_SOFA", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_SOFA_3.glb" },
+    { "id": "R_LAMP", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_FLOOR_LAMP.glb" },
+    { "id": "R_PLANT", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_PLANT_BIG.glb" },
+    { "id": "R_RUG", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_RUG_ROUND.glb" },
+    { "id": "R_SIDE", "group": "remix", "capability": "Lux3D text-to-3D", "existing": "/library/L_SIDE.glb" },
+
+    { "id": "A_WARDROBE", "group": "alive", "capability": "Lux3D text-to-3D + articulation (URDF)", "existing": "/library/L_WARDROBE/robot.urdf" },
+    { "id": "A_DRAWERS", "group": "alive", "capability": "Lux3D text-to-3D + articulation (URDF)", "existing": "/library/L_DRAWERS/robot.urdf" },
+
+    { "id": "ST_JAPANDI_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.japandi.glb" },
+    { "id": "ST_INDUSTRIAL_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.industrial.glb" },
+    { "id": "ST_CYBERPUNK_ITEMS", "group": "styles", "capability": "Lux3D material transfer", "existing": "/library/variants/*.cyberpunk.glb" },
+
+    { "id": "D_INDUSTRIAL_LOFT", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/industrial-loft.spz" },
+    { "id": "D_COASTAL_BEDROOM", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/coastal-bedroom.spz" },
+    { "id": "D_JAPANDI_STUDIO", "group": "dream", "capability": "Aholo World generation (SpatialGen)", "existing": "/rooms/japandi-studio.spz" }
+  ]
+}

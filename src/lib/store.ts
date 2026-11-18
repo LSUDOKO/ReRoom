@@ -1,5 +1,6 @@
 "use client";
 import { create } from "zustand";
+import manifest from "../../content/manifest.json";
 import type { Category, Dims, SampleRoom } from "./catalog";
 
 /** Where an item's geometry comes from. Local paths are served from /public; remote from Aholo via /api/proxy. */
@@ -109,7 +110,8 @@ export const useStudio = create<State>((set, get) => ({
     set({ items: future[0], future: future.slice(1), past: [...past, items] });
   },
   notify: (text, tone = "info") => set({ toast: { id: Date.now(), text, tone } }),
-  load: (items, styleId) => set({ items, styleId, past: [], future: [], selected: null }),
+  // saved designs and share links only carry the variants that existed when they were made
+  load: (items, styleId) => set({ items: items.map(withPrebaked), styleId, past: [], future: [], selected: null }),
 }));
 
 export const uid = () => Math.random().toString(36).slice(2, 10);
@@ -144,6 +146,9 @@ export function saveDesign(roomId: string, items: Item[], styleId: string | null
     localStorage.setItem(KEY(roomId), JSON.stringify(data));
   } catch {}
 }
+
+const PREBAKED = manifest.variants as Record<string, Record<string, string>>;
+const withPrebaked = (i: Item): Item => (i.libId && PREBAKED[i.libId] ? { ...i, variants: { ...PREBAKED[i.libId], ...i.variants } } : i);
 
 export function loadDesign(roomId: string): SavedDesign | null {
   try {

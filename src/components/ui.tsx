@@ -106,9 +106,9 @@ export function Logo({ className }: { className?: string }) {
   return (
     <span className={clsx("inline-flex items-center gap-2 font-display text-[22px] font-semibold tracking-tight", className)}>
       <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden>
-        <rect width="64" height="64" rx="14" fill="#2F6BFF" />
+        <rect width="64" height="64" rx="14" fill="#4219FA" />
         <path d="M16 46V24l16-10 16 10v22" fill="none" stroke="#fff" strokeWidth="5" strokeLinejoin="round" />
-        <path d="M26 46V34h12v12" fill="#FFB020" />
+        <path d="M26 46V34h12v12" fill="#FFC531" />
       </svg>
       ReRoom
     </span>

@@ -1,20 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #121417;
-  --color-slate: #5b6270;
-  --color-mist: #9aa1ad;
-  --color-line: #e3e6eb;
-  --color-paper: #f5f6f8;
-  --color-blue: #2f6bff;
-  --color-blue-deep: #1f4fd1;
-  --color-amber: #ffb020;
-  --color-amber-soft: #fff4dc;
+  /* ReRoom brand: electric blue, warm cream, sunflower yellow, deep navy */
+  --color-ink: #14102e;
+  --color-navy: #210b7d;
+  --color-slate: #4e4a6b;
+  --color-mist: #9a95b5;
+  --color-line: #e8dfc6;
+  --color-paper: #fef8e6;
+  --color-cream: #fef8e6;
+  --color-cream-deep: #f6edd3;
+  --color-blue: #4219fa;
+  --color-blue-deep: #2f0fc9;
+  --color-blue-soft: #ece8ff;
+  --color-amber: #ffc531;
+  --color-amber-soft: #fff1c4;
   --color-danger: #d93a2b;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --radius-panel: 12px;
-  --radius-btn: 8px;
+  --font-display: var(--font-barlow), "Arial Narrow", ui-sans-serif, sans-serif;
+  --radius-panel: 16px;
+  --radius-btn: 12px;
+  --radius-card: 28px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -22,7 +28,7 @@ html {
   color-scheme: light;
 }
 body {
-  background: #fff;
+  background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -39,7 +45,7 @@ body {
   to { background-position: 200% 0; }
 }
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgb(255 176 32 / 0.25), transparent) 0 0 / 200% 100%;
+  background: linear-gradient(90deg, transparent, rgb(255 197 49 / 0.35), transparent) 0 0 / 200% 100%;
   animation: shimmer 1.6s linear infinite;
 }
 
@@ -57,3 +63,35 @@ body {
 .scroll-thin { scrollbar-width: thin; scrollbar-color: #d4d8de transparent; }
 
 input[type="range"] { accent-color: var(--color-blue); }
+
+/* Display type: condensed, tight, with an italic emphasis phrase carrying a hand-drawn yellow squiggle */
+.font-display { letter-spacing: -0.01em; }
+.squiggle {
+  font-style: italic;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%23ffc531' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 100% / 18px 7px;
+  padding-bottom: 0.12em;
+}
+
+/* Scalloped section edges (the cloud line between blue and cream bands) */
+.scallop-bottom, .scallop-top { position: relative; }
+.scallop-bottom::after, .scallop-top::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: radial-gradient(circle at 50% 0, var(--scallop, var(--color-blue)) 31px, transparent 32px) 0 0 / 88px 44px repeat-x;
+  pointer-events: none;
+  z-index: 1;
+}
+.scallop-bottom::after { top: 100%; }
+.scallop-top::before { bottom: 100%; transform: scaleY(-1); }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 38s linear infinite; }
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 22s linear infinite; }
+
+/* the static chair poster hands over to the live 3D chair */
+[data-hero="ready"] .hero-poster { opacity: 0; }

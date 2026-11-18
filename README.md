@@ -61,7 +61,8 @@ Honest state of the hackathon build (18 Nov 2026):
 | ✅ | Cloudflare deploy | Live on Workers (OpenNext). A live restyle, the proxy and a 55 MB upload were run against the deployed site |
 | ⚠️ | Scan upload size | Uploads are buffered by the Worker (128 MB memory), so the deployed site accepts videos up to 60 MB. Locally the cap is 500 MB. |
 | ⚠️ | Live results | Aholo result URLs expire after about 2 h. Generated pieces in a saved design or share link stop loading after that; the seed library is stored in the repo. |
-| ⏳ | Part split editing UI | API route only |
+| ✅ | Landing page 3D hero | R3F scroll-driven chair (Lux3D G1, 3 material-transfer finishes, 2-part split, USDZ) checked with Playwright at every section, desktop 1440 px and phone 390 px |
+| ⏳ | Part split editing UI | API route only (the landing page uses part split for its exploded chair) |
 
 ## Built on Aholo
 
@@ -82,6 +83,15 @@ Nine of these capabilities are in the studio today; part split is server-only fo
 | **Lux3D tasks** | `lux3d.tasks.retrieve` | Polled by the browser through `/api/lux3d/:taskId` |
 
 Verified method names, parameters, output formats and measured credit costs are in [`reroom-docs/api-notes.md`](reroom-docs/api-notes.md).
+
+## The website
+
+The landing page is a scroll story: one fixed, transparent React Three Fiber canvas sits behind the page text, and an armchair generated with Lux3D travels between sections on a Catmull-Rom curve, trailing the scroll with inertia. Each section has its own effect: dust in the hero, a surface-sampled particle dissolve for **Scan**, a wireframe room for **Remix**, the Lux3D part split flying apart for **Alive**, the generated velvet plus three Lux3D material-transfer finishes synced with the chips in **Styles**, a landing on the phone screen for **AR**, and a room corner with a lamp that switches on at the end.
+
+- Tune positions per section in [`src/landing/heroKeyframes.ts`](src/landing/heroKeyframes.ts). Values are viewport-relative, and phones get their own overrides.
+- The canvas loads after first paint, behind a static poster rendered from the same chair. Pixel ratio is capped at 1.75, rendering pauses while the tab is hidden, and `prefers-reduced-motion` switches to fades between still poses.
+- Every 3D object on the site is generated with Aholo by [`scripts/gen-site-assets.mts`](scripts/gen-site-assets.mts) from [`content/site-assets.json`](content/site-assets.json). The script is resumable, downloads results immediately, optimizes them (meshoptimizer simplify, WebP textures, meshopt) and writes `public/site/review.html`. [`/made-with-aholo`](src/app/made-with-aholo/page.tsx) lists every asset with its prompt and Aholo capability.
+- Stills are 4K masters (3840 px) rendered from the studio, served as responsive WebP sets.
 
 ## How it works
 
@@ -135,6 +145,7 @@ Credit protection on the deployed site: per-IP and site-wide Workers rate-limit 
 | `pnpm seed [ids…]` | Generates the furniture library with Lux3D (text-to-3D → optimize → articulation → URDF). Resumable. |
 | `tsx --env-file=.env.local scripts/bake-variants.mts japandi,industrial L_SOFA_3 …` | Pre-bakes style variants with material transfer |
 | `tsx --env-file=.env.local scripts/gen-world.mts "<prompt>"` | Starts a SpatialGen dream room |
+| `tsx --env-file=.env.local scripts/gen-site-assets.mts hero` | Generates the website's 3D assets with Aholo (`--reroll ID --prompt "…"` to redo one) |
 | `node scripts/build-manifest.mjs` | Indexes library models, URDFs, thumbnails and variants (runs before `dev` and `build`) |
 | `node scripts/fetch-materials.mjs` | Downloads the CC0 material swatches used as transfer references |
 | `pnpm test` | Runs the self-checks for the prompt guard, proxy allowlist, output picking, sizing and share links |
@@ -175,6 +186,7 @@ reroom-docs/           product brief, specs, UX, architecture, plan, submission 
 
 - [Aholo Spatial SDK](https://github.com/manycoretech/aholo-spatial-sdk) and [Aholo Viewer](https://github.com/manycoretech/aholo-viewer) (MIT). `src/lib/viewer/camera-control.ts` is adapted from the Aholo Viewer website.
 - Material reference swatches from [ambientCG](https://ambientcg.com) (CC0), listed in `public/materials/CREDITS.txt`.
+- Three material reference photos in `content/stock-refs/` are licensed from Adobe Stock. They are **not** covered by the MIT license (see `content/stock-refs/LICENSE.txt`), are not served by the site, and are used only as Lux3D inputs by the asset script.
 - AR via [`<model-viewer>`](https://modelviewer.dev) (Apache-2.0).
 - Every furniture model and room in this repo was generated with Aholo Lux3D and Aholo World.
 

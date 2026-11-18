@@ -29,7 +29,7 @@ export default async function Ar({ searchParams }: PageProps<"/ar">) {
         environment-image="neutral"
         style={{ flex: 1, width: "100%", minHeight: "60dvh", background: "transparent" }}
       >
-        <button slot="ar-button" className="absolute bottom-6 left-1/2 h-12 -translate-x-1/2 rounded-[8px] bg-[#2F6BFF] px-6 text-[15px] font-medium text-white shadow-lg">
+        <button slot="ar-button" className="absolute bottom-6 left-1/2 h-12 -translate-x-1/2 rounded-[8px] bg-[#4219FA] px-6 text-[15px] font-medium text-white shadow-lg">
           Place it in my room
         </button>
       </model-viewer>
