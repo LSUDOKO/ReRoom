@@ -41,12 +41,12 @@ export const HERO_KEYFRAMES: HeroKeyframe[] = [
   { ...base, section: "alive", x: 0.52, y: 0.12, rotY: 35, rotX: 12, scale: 1, explode: 1, mobile: { x: 0, y: 0.42, scale: 0.6 } },
   { ...base, section: "styles", x: -0.5, y: -0.02, rotY: 25, scale: 1.15, mobile: { x: 0, y: 0.36, scale: 0.75 } },
   // the chair swims off-screen past the gallery and plans, then comes back for AR
-  { ...base, section: "assets", x: 1.35, y: 0.25, rotY: -60, scale: 0.7, mobile: { x: 1.4, y: 0.3, scale: 0.5 } },
-  { ...base, section: "pricing", x: 1.35, y: -0.1, rotY: -80, scale: 0.7, mobile: { x: 1.4, y: 0, scale: 0.5 } },
+  { ...base, section: "assets", x: 1.55, y: 0.25, rotY: -60, scale: 0.7, mobile: { x: 2.1, y: 0.3, scale: 0.5 } },
+  { ...base, section: "pricing", x: 1.55, y: -0.1, rotY: -80, scale: 0.7, mobile: { x: 2.1, y: 0, scale: 0.5 } },
   { ...base, section: "ar", x: 0, y: 0, rotY: -20, scale: 0.27, anchor: "#ar-phone-screen", mobile: { scale: 0.24 } },
   // and again past the Aholo cards and the FAQ, re-entering for the closing room
-  { ...base, section: "aholo", x: -1.35, y: 0.1, rotY: 60, scale: 0.7, mobile: { x: -1.4, y: 0.2, scale: 0.5 } },
-  { ...base, section: "faq", x: -1.35, y: -0.1, rotY: 40, scale: 0.7, mobile: { x: -1.4, y: 0, scale: 0.5 } },
+  { ...base, section: "aholo", x: -1.55, y: 0.1, rotY: 60, scale: 0.7, mobile: { x: -2.1, y: 0.2, scale: 0.5 } },
+  { ...base, section: "faq", x: -1.55, y: -0.1, rotY: 40, scale: 0.7, mobile: { x: -2.1, y: 0, scale: 0.5 } },
   { ...base, section: "cta", x: 0.52, y: -0.18, rotY: -35, rotX: 10, scale: 0.9, room: 1, lamp: 1, mobile: { x: 0, y: 0.42, scale: 0.55 } },
 ];
 

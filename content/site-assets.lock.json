@@ -52,5 +52,17 @@
     "tris": 14998,
     "bytes": 326132,
     "at": "2026-11-18T06:12:17.761Z"
+  },
+  "I_REMIX": {
+    "status": "running",
+    "taskId": 8313447,
+    "prompt": "a magic wand with a star tip and three small sparkles, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "at": "2026-11-18T12:07:01.667Z"
+  },
+  "I_SCAN": {
+    "status": "running",
+    "taskId": 8313457,
+    "prompt": "a smartphone recording a video, with a small red record dot on the screen, a small glossy icon-like 3D object, soft clay style, rounded edges, matte pastel blue and white colours, single object, centered, no background, no text",
+    "at": "2026-11-18T12:07:03.300Z"
   }
 }
