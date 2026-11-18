@@ -28,13 +28,13 @@ export default function MadeWithAholo() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1 bg-cream">
-        <section className="scallop-bottom bg-blue pb-16 pt-10 text-white [--scallop:var(--color-blue)]">
-          <div className="mx-auto max-w-5xl px-5">
-            <h1 className="font-display text-[clamp(2.8rem,6vw,4.8rem)] font-bold leading-[0.95]">
-              How this page <span className="squiggle">was made.</span>
+      <main className="sheet flex-1">
+        <section className="band relative overflow-hidden pb-20 pt-14"><div aria-hidden className="field opacity-70" /><div aria-hidden className="grain" />
+          <div className="relative mx-auto max-w-5xl px-5">
+            <h1 className="display text-[clamp(2.8rem,6vw,4.8rem)]">
+              How this page <span className="chrome">was made.</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-white/80">
+            <p className="mt-4 max-w-2xl font-light text-white/80">
               Every 3D object and room on this site was generated with Aholo: Lux3D for furniture, finishes, parts and exports, and Aholo World for
               rooms. Nothing is a purchased model. The list below is generated from{" "}
               <code className="rounded bg-white/15 px-1.5 py-0.5 text-[13px]">content/site-assets.json</code>, the same file the generator script runs from.
@@ -44,10 +44,10 @@ export default function MadeWithAholo() {
         <div className="mx-auto max-w-5xl space-y-12 px-5 pb-24 pt-20">
           {groups.map((g) => (
             <section key={g}>
-              <h2 className="font-display text-3xl font-bold">{GROUPS[g] ?? g}</h2>
-              <div className="mt-4 overflow-hidden rounded-card bg-white">
+              <h2 className="text-3xl font-semibold tracking-tight">{GROUPS[g] ?? g}</h2>
+              <div className="mt-4 overflow-hidden paper-panel overflow-hidden">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-cream-deep text-slate">
+                  <thead className="mono-label bg-paper text-slate">
                     <tr>
                       <th className="px-5 py-3 font-semibold">Asset</th>
                       <th className="px-5 py-3 font-semibold">Aholo capability</th>
@@ -77,7 +77,7 @@ export default function MadeWithAholo() {
                               {l?.tris ? <span className="mt-1 block text-xs">{l.tris.toLocaleString()} triangles · {((l.bytes ?? 0) / 1e6).toFixed(2)} MB</span> : null}
                             </td>
                             <td className="px-5 py-3">
-                              <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${done ? "bg-amber text-ink" : "bg-cream-deep text-slate"}`}>
+                              <span className={`mono-label rounded-full px-2.5 py-1 text-[10px] ${done ? "bg-blue text-on" : "bg-paper text-slate"}`}>
                                 {done ? "Made with Aholo" : "Planned"}
                               </span>
                             </td>

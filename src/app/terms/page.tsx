@@ -6,8 +6,8 @@ export default function Terms() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-2xl flex-1 px-5 py-12 leading-relaxed">
-        <h1 className="font-display text-4xl">Terms</h1>
+      <main className="sheet flex-1"><div className="mx-auto max-w-2xl px-5 py-16 font-light leading-relaxed">
+        <h1 className="display text-5xl">Terms</h1>
         <p className="mt-2 text-sm text-slate">Last updated 18 November 2026.</p>
         <ul className="mt-6 list-disc space-y-3 pl-5">
           <li>Use ReRoom for spaces you own or have permission to capture.</li>
@@ -16,7 +16,7 @@ export default function Terms() {
           <li>Models and exports you create are yours to use. Seed library models were generated with Aholo Lux3D for this project.</li>
           <li>The service is provided as is during the beta.</li>
         </ul>
-      </main>
+      </div></main>
       <SiteFooter />
     </>
   );
