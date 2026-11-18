@@ -52,3 +52,9 @@ Notes:
 - `Raycaster` exists but doesn't hit splats. Picking uses floor-plane and AABB math.
 - Workers are spawned with `new URL('./x-worker.js', import.meta.url)`, which Next's bundlers break. `scripts/patch-viewer.mjs` (postinstall) serves them from `/aholo/`.
 - `preserveDrawingBuffer: true` enables before/after snapshots and the MediaRecorder tour.
+
+## Website assets (18 November 2026)
+
+- Lux3D text-to-3D with `style: "cartoon"`, G1-Turbo, `faceCount` 20k: 13 credits each, about 1–2 min. Used for the six clay icons.
+- `tasks.list` totals at the end of the build: 138 Lux3D tasks, 136 succeeded, 1,588 credits (includes API exploration).
+- model-viewer needs `self.ModelViewerElement.meshoptDecoderLocation` set before it loads to open meshopt-compressed GLBs.
