@@ -57,3 +57,4 @@ refs/
 # film project (render locally)
 video/node_modules/
 video/out/
+video/*.txt

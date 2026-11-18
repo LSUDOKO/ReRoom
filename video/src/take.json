@@ -1,13 +1,49 @@
 {
-  "start": 46.2,
-  "end": 204,
-  "steps": [
-    { "t": 46.7, "title": "Lay down a rug", "sub": "Pinch it on the tray. It lands on your floor at its true size." },
-    { "t": 64.4, "title": "Sofa against the wall", "sub": "Pinch and drag it across the floor, then turn it to face the TV." },
-    { "t": 93.7, "title": "Coffee table in front", "sub": "Centred on the rug, between the sofa and the screen." },
-    { "t": 122.9, "title": "An armchair by the window", "sub": "Real dimensions, so you see the walkway that’s left." },
-    { "t": 140.6, "title": "Green in the corner", "sub": "Fill the empty spots the way you would at home." },
-    { "t": 158.4, "title": "Storage by the door", "sub": "A chest of drawers with real joints, sized to the wall." },
-    { "t": 185.9, "title": "Restyle the whole room", "sub": "Japandi. Industrial. Cyberpunk. One pinch each." }
+  "rooms": [
+    {
+      "name": "Japandi studio",
+      "line": "An empty apartment, ready for a living room.",
+      "img": "pano.jpg",
+      "start": 14.0,
+      "end": 123.4,
+      "steps": [
+        { "t": 14.5, "title": "Lay down a rug" },
+        { "t": 31.4, "title": "Sofa against the wall, turned to the TV" },
+        { "t": 61.8, "title": "Coffee table on the rug" },
+        { "t": 78.4, "title": "An armchair by the window" },
+        { "t": 95.2, "title": "A plant for the corner" },
+        { "t": 112.8, "title": "Restyle the room: Japandi" },
+        { "t": 118.1, "title": "Restyle the room: Industrial" }
+      ]
+    },
+    {
+      "name": "Industrial loft",
+      "line": "Brick walls, steel windows, a city view.",
+      "img": "loft.jpg",
+      "start": 123.4,
+      "end": 207.4,
+      "steps": [
+        { "t": 129.4, "title": "A rug by the big windows" },
+        { "t": 146.3, "title": "A reading armchair" },
+        { "t": 163.4, "title": "A floor lamp beside it" },
+        { "t": 180.2, "title": "A chest of drawers" },
+        { "t": 197.2, "title": "Open the drawers" },
+        { "t": 202.2, "title": "Restyle the room: Cyberpunk" }
+      ]
+    },
+    {
+      "name": "Coastal bedroom",
+      "line": "White walls and the sea outside.",
+      "img": "bedroom.jpg",
+      "start": 207.4,
+      "end": 273.6,
+      "steps": [
+        { "t": 212.7, "title": "A wardrobe against the wall" },
+        { "t": 229.5, "title": "Open its doors" },
+        { "t": 234.4, "title": "A plant by the window" },
+        { "t": 251.3, "title": "A chair to sit and look at the sea" },
+        { "t": 268.3, "title": "Restyle the room: Japandi" }
+      ]
+    }
   ]
 }

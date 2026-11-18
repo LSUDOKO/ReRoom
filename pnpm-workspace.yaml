@@ -1,4 +1,7 @@
 allowBuilds:
   esbuild: true
+  workerd: false
   sharp: false
   unrs-resolver: false
+overrides:
+  three: 0.187.0

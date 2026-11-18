@@ -40,6 +40,52 @@ Buying furniture is a guess. You measure, imagine, and hope it fits, and opens, 
 
 Every 3D object on the website, from the hero armchair to the icons, was generated with Aholo too.
 
+## Step inside: ReRoom in VR
+
+<p align="center">
+  <a href=".github/readme/ReRoom-VR.mp4"><img src=".github/readme/vr-tour.gif" alt="In VR, a hand pinches furniture from a tray into an Aholo-generated living room: a sofa against the wall, a coffee table, an armchair by the window" width="100%" /></a>
+</p>
+
+Put on a VR headset, open **`/xr`** and tap **Enter VR**: you are standing inside a room generated with **Aholo World**. A tray of real-size furniture floats at your lap. Everything is done with your hands:
+
+| Pinch | What happens |
+|---|---|
+| A card on the tray | That piece stands on the room's floor at its true size |
+| A piece, then drag | It slides along the floor, following your hand |
+| ⟲ / ⟳ | Turns it, so the sofa faces the TV |
+| Open / Close | Doors swing and drawers slide on their real Lux3D joints |
+| A style | Japandi, Industrial or Cyberpunk re-finishes every piece at once |
+| A room | Switch between the **Japandi studio**, **Industrial loft** and **Coastal bedroom** |
+
+<table>
+<tr>
+<td width="50%"><img src=".github/readme/vr-japandi.jpg" alt="Japandi studio: a sofa against the wall facing the TV, a coffee table, an armchair and a plant, placed with a pinch" /></td>
+<td width="50%"><img src=".github/readme/vr-japandi-industrial.jpg" alt="The same Japandi studio after one pinch on Industrial: the sofa turns rust red" /></td>
+</tr>
+<tr>
+<td align="center"><sub>Japandi studio, furnished piece by piece</sub></td>
+<td align="center"><sub>One pinch: the whole room restyled Industrial</sub></td>
+</tr>
+<tr>
+<td><img src=".github/readme/vr-loft.jpg" alt="Industrial loft with brick walls and a city view: a reading armchair, floor lamp and chest of drawers" /></td>
+<td><img src=".github/readme/vr-loft-cyberpunk.jpg" alt="The loft restyled Cyberpunk: the armchair turns magenta" /></td>
+</tr>
+<tr>
+<td align="center"><sub>Industrial loft: a reading corner by the big windows</sub></td>
+<td align="center"><sub>Restyled Cyberpunk</sub></td>
+</tr>
+<tr>
+<td colspan="2"><img src=".github/readme/vr-bedroom.jpg" alt="Coastal bedroom with a sea view: a wardrobe with its doors open, a plant by the window" /></td>
+</tr>
+<tr>
+<td colspan="2" align="center"><sub>Coastal bedroom: the wardrobe's doors swing open on their real Lux3D joints</sub></td>
+</tr>
+</table>
+
+**[Watch the VR film](.github/readme/ReRoom-VR.mp4)**: three Aholo rooms furnished piece by piece. In mixed reality, the same tray places the furniture in the room you are actually standing in.
+
+Built with WebXR, `@react-three/xr` and three.js (`src/components/xr/VRRoom.tsx`, maths in `src/lib/xr.ts`). The rooms are Aholo World panoramas projected onto a floor at y = 0, so furniture stands on them. Tested without a headset in the IWER emulator with emulated hands: `node scripts/xr-demo.mjs http://localhost:3000 tmp/tour --vr --tour`. The film's source is in [`video/`](video/README.md).
+
 ## See it
 
 <table>
