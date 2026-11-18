@@ -18,6 +18,7 @@ const GROUPS: Record<string, string> = {
   remix: "Remix furniture",
   alive: "Furniture that opens",
   styles: "Styles",
+  icons: "3D icons",
   dream: "Dream rooms",
 };
 
