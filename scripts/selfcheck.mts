@@ -46,4 +46,17 @@ assert.deepEqual(d.items[0].variants, { japandi: "/v.glb" });
 assert.equal(d.items[0].open, false);
 assert.equal(decodeDesign("garbage"), null);
 
+// hero keyframes: every section (or its -stop marker) and anchor still exists on the landing page,
+// so the 3D chair never loses its path after a redesign
+{
+  const { HERO_KEYFRAMES } = await import("../src/landing/heroKeyframes.ts");
+  const { readFileSync } = await import("node:fs");
+  const page = readFileSync("src/app/page.tsx", "utf8");
+  for (const k of HERO_KEYFRAMES) {
+    assert.ok(page.includes(`id="${k.section}"`) || page.includes(`id="${k.section}-stop"`), `missing section #${k.section}`);
+    if (k.anchor) assert.ok(page.includes(`id="${k.anchor.slice(1)}"`), `missing anchor ${k.anchor}`);
+  }
+  assert.equal(new Set(HERO_KEYFRAMES.map((k) => k.section)).size, HERO_KEYFRAMES.length, "duplicate keyframe section");
+}
+
 console.log("selfcheck: all passed");
