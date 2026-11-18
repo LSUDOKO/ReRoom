@@ -36,9 +36,7 @@ export function MaterialChips() {
           aria-checked={active === i}
           disabled={i >= available}
           onClick={() => pick(i)}
-          className={`inline-flex h-11 items-center gap-2 rounded-full border-2 px-4 text-sm font-semibold transition-colors disabled:opacity-40 ${
-            active === i ? "border-blue bg-blue text-white" : "border-ink/10 bg-white text-ink hover:border-blue"
-          }`}
+          className={`glass glass--sm !min-h-11 !font-sans !text-sm !tracking-normal disabled:opacity-40 ${active === i ? "glass--blue" : ""}`}
         >
           <span className="size-4 rounded-full ring-1 ring-black/10" style={{ background: SWATCH[i] }} />
           {name}

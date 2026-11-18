@@ -1,26 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Armchair,
-  BedDouble,
-  Box,
-  ChevronDown,
-  DoorOpen,
-  Lamp,
-  Layers,
-  Palette,
-  Ruler,
-  Share2,
-  Smartphone,
-  Sofa,
-  Sparkles,
-  Wand2,
-} from "lucide-react";
+import { ArrowRight, Box, DoorOpen, Layers, Palette, Share2, Smartphone, Sparkles, Wand2 } from "lucide-react";
+import manifest from "../../content/manifest.json";
+import library from "../../content/library.json";
+import { AssetGallery } from "@/components/landing/AssetGallery";
 import { HeroCanvas, MaterialChips } from "@/components/landing/LandingClient";
+import { Motion } from "@/components/landing/Motion";
 import { Shot } from "@/components/landing/Shot";
 import { GITHUB_URL, GithubIcon, SiteFooter, SiteHeader } from "@/components/Site";
+import { LogoMark } from "@/components/ui";
+
+const VARIANTS = Object.values(manifest.variants as Record<string, Record<string, string>>).reduce((n, v) => n + Object.keys(v).length, 0);
 
 const FEATURES = [
   { icon: Smartphone, title: "Phone video in", body: "Walk the room for a minute. Aholo Reality does the rest." },
@@ -32,39 +21,15 @@ const FEATURES = [
 const MARQUEE = ["Sofa", "Wardrobe", "Japandi", "Armchair", "Industrial", "Drawers", "Cyberpunk", "Floor lamp", "Coastal", "Rug", "Luxury", "Sideboard"];
 
 const REMIX = [
-  {
-    icon: Wand2,
-    title: "Describe it",
-    tag: "Lux3D text-to-3D",
-    body: "Type “a mustard velvet armchair with walnut legs”. Lux3D builds a PBR model at its real-world size.",
-    time: "About a minute",
-    shot: { name: "ui-describe", widths: [960, 1600, 2400] },
-    href: "/studio?room=industrial-loft",
-  },
-  {
-    icon: Smartphone,
-    title: "Snap a product photo",
-    tag: "Lux3D image-to-3D",
-    body: "Seen a lamp you like? One photo becomes a 3D piece you can drop into your room. Location data is stripped first.",
-    time: "About a minute",
-    shot: { name: "ui-photo", widths: [960, 1600, 2933] },
-    href: "/studio?room=coastal-bedroom",
-  },
-  {
-    icon: Sofa,
-    title: "Pick from the library",
-    tag: "24 Lux3D pieces",
-    body: "Sofas, beds, wardrobes, plants and lamps, generated with Lux3D and sized to real catalog dimensions.",
-    time: "Instant",
-    shot: { name: "ui-library", widths: [960, 1600, 3200] },
-    href: "/studio?room=japandi-studio",
-  },
+  { tag: "Lux3D text-to-3D", title: "Describe it", body: "Type “a mustard velvet armchair with walnut legs”. Lux3D builds a PBR model at its real-world size in about a minute.", shot: { name: "ui-describe", widths: [960, 1600, 2400] } },
+  { tag: "Lux3D image-to-3D", title: "Snap a product photo", body: "Seen a lamp you like? One photo becomes a 3D piece in your room. Location data is stripped in your browser first.", shot: { name: "ui-photo", widths: [960, 1600, 2933] } },
+  { tag: `${library.length} Lux3D pieces`, title: "Pick from the library", body: "Sofas, beds, wardrobes, plants and lamps, generated with Lux3D and sized to real catalog dimensions.", shot: { name: "ui-library", widths: [960, 1600, 3200] } },
 ];
 
 const STEPS = [
-  { n: "01", tag: "60 seconds", title: "Scan your room", body: "Record a slow walk-through on your phone, or describe a dream room.", shot: { name: "before", widths: [1280, 1920, 3840] } },
-  { n: "02", tag: "AI furniture", title: "Remix it", body: "Add pieces, drag them into place, restyle the lot in one tap.", shot: { name: "after", widths: [1280, 1920, 3840] } },
-  { n: "03", tag: "Doors open", title: "Live in it", body: "Walk through at eye height, open the wardrobe, compare before and after.", shot: { name: "step-open", widths: [1200] } },
+  { n: "01", title: "Scan your room", body: "A slow phone walk-through, or a sentence for a dream room.", shot: { name: "before", widths: [1280, 1920, 3840] } },
+  { n: "02", title: "Remix it", body: "Add pieces, drag them into place, restyle the lot in one tap.", shot: { name: "after", widths: [1280, 1920, 3840] } },
+  { n: "03", title: "Live in it", body: "Walk through at eye height, open the wardrobe, compare before and after.", shot: { name: "step-open", widths: [1200] } },
 ];
 
 const STYLES = [
@@ -75,28 +40,21 @@ const STYLES = [
 ];
 
 const PLANS = [
-  { name: "Free", tag: "Beta", price: "0", per: "forever", note: "Everything you need to try your room.", items: ["1 room scan", "5 AI pieces a month", "All 8 styles", "Share links and AR"], cta: "Start free" },
-  { name: "Plus", tag: "Most popular", price: "9", per: "per month", note: "For a full move or a big redesign.", items: ["5 room scans", "100 AI pieces a month", "HD tour videos", "No watermark", "Priority generation"], cta: "Try Plus", featured: true },
-  { name: "Pro", tag: "Designers", price: "29", per: "per month", note: "Show clients their room before they buy.", items: ["Unlimited rooms", "Client share pages", "Branded exports", "STL and 3MF for printing"], cta: "For designers" },
-];
-
-const STATS = [
-  ["24", "Library pieces, all Lux3D"],
-  ["7", "Pieces that really open"],
-  ["8", "One-tap styles"],
-  ["10", "Aholo capabilities used"],
+  { name: "Free", tag: "Beta", price: "0", per: "forever", items: ["1 room scan", "5 AI pieces a month", "All 8 styles", "Share links and AR"], cta: "Start free" },
+  { name: "Plus", tag: "Most popular", price: "9", per: "per month", items: ["5 room scans", "100 AI pieces a month", "HD tour videos", "Priority generation"], cta: "Try Plus", featured: true },
+  { name: "Pro", tag: "Designers", price: "29", per: "per month", items: ["Unlimited rooms", "Client share pages", "Branded exports", "STL and 3MF for printing"], cta: "For designers" },
 ];
 
 const AHOLO = [
   ["World · Reality", "A phone or Insta360 video becomes a 3D Gaussian-splat room."],
-  ["World · SpatialGen", "A sentence becomes a walkable dream room. Our three sample rooms were made this way."],
-  ["Aholo Viewer", "Renders the splat room and every model in one depth buffer, so walls hide furniture."],
+  ["World · SpatialGen", "A sentence becomes a walkable room. All three sample rooms were made this way."],
+  ["Aholo Viewer", "Splat room and every model in one depth buffer, so walls hide furniture."],
   ["Lux3D text-to-3D", "Describe a piece, get a PBR model with AI-predicted real size."],
   ["Lux3D image-to-3D", "A product photo becomes a 3D model."],
-  ["Lux3D articulation", "Finds doors, drawers and lids. ReRoom drives the joints in the browser."],
-  ["Lux3D material transfer", "Re-finishes every piece from one material photo: the eight styles and this page's chair."],
+  ["Lux3D articulation", "Finds doors, drawers and lids; ReRoom drives the joints in the browser."],
+  ["Lux3D material transfer", "Re-finishes a piece from one material photo: the eight styles and this page's chair."],
   ["Lux3D part split", "Takes a model apart into its pieces, like the chair above."],
-  ["Lux3D export", "USDZ for iPhone AR, STL and 3MF for 3D printing, OBJ and FBX for DCC tools."],
+  ["Lux3D export", "USDZ for iPhone AR, STL and 3MF for printing, OBJ and FBX for DCC tools."],
   ["Asset API", "Uploads scans, photos and material references."],
 ];
 
@@ -108,96 +66,86 @@ const FAQ = [
   ["What happens to my photos and videos?", "Photos are resized and stripped of location data in your browser before upload. Scans go to Aholo only to build your 3D room."],
 ];
 
-function Doodles() {
-  const items = [
-    { I: Armchair, c: "left-[4%] top-[18%] size-20 -rotate-12" },
-    { I: Lamp, c: "left-[38%] top-[8%] size-14 rotate-6" },
-    { I: BedDouble, c: "right-[6%] top-[14%] size-20 rotate-12" },
-    { I: Sofa, c: "left-[8%] bottom-[16%] size-24 rotate-6" },
-    { I: Box, c: "right-[30%] bottom-[10%] size-12 -rotate-12" },
-    { I: Ruler, c: "right-[4%] bottom-[30%] size-16 -rotate-45" },
-    { I: Sparkles, c: "left-[46%] bottom-[24%] size-10" },
-  ];
+function Eyebrow({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden text-white/[0.09]">
-      {items.map(({ I, c }, i) => (
-        <I key={i} strokeWidth={1.25} className={`absolute ${c}`} />
-      ))}
-    </div>
+    <p className="mono-label flex items-center gap-3 text-blue">
+      <span className="opacity-60">{n}</span>
+      <span className="h-px w-8 bg-current opacity-40" />
+      {children}
+    </p>
   );
 }
 
-function SpinBadge({ className = "" }: { className?: string }) {
-  const text = "SCAN IT • REMIX IT • LIVE IN IT • ";
-  return (
-    <div aria-hidden className={`relative size-28 ${className}`}>
-      <svg viewBox="0 0 100 100" className="spin-slow absolute inset-0 size-full">
-        <defs>
-          <path id="badge-circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
-        </defs>
-        <text className="fill-current font-display text-[9px] font-semibold tracking-[0.08em]">
-          <textPath href="#badge-circle">{text}</textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-[30%] flex items-center justify-center rounded-full bg-amber text-ink">
-        <ArrowUpRight size={22} strokeWidth={2.5} />
-      </span>
-    </div>
-  );
+function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <h2 className={`display reveal mt-4 text-[clamp(2.4rem,5.2vw,4.4rem)] ${className}`}>{children}</h2>;
 }
 
-function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
-  return <p className={`text-[13px] font-semibold tracking-wide ${light ? "text-amber" : "text-blue"}`}>{children}</p>;
-}
-
-function MadeWith({ children, light }: { children: React.ReactNode; light?: boolean }) {
-  return <p className={`mt-3 text-xs ${light ? "text-white/60" : "text-slate/80"}`}>{children}</p>;
+function TornTop({ ink = false }: { ink?: boolean }) {
+  return <div aria-hidden className={`torn-top ${ink ? "ink" : ""}`} />;
 }
 
 export default function Home() {
   return (
     <>
+      <Motion />
       <HeroCanvas />
-      <SiteHeader />
+      <SiteHeader overlay />
       <main className="flex-1 overflow-x-clip">
-        {/* HERO */}
-        <section id="hero" className="scallop-bottom relative flex min-h-[calc(100svh-80px)] items-center bg-blue text-white [--scallop:var(--color-blue)]">
-          <Doodles />
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-5 pb-24 pt-10 md:grid-cols-[1.05fr_0.95fr] md:pb-28">
-            <div className="max-w-[40rem] pt-[46vh] md:pt-0">
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  {["L_ARMCHAIR", "L_WARDROBE", "L_PLANT_BIG"].map((id) => (
-                    <span key={id} className="relative size-9 overflow-hidden rounded-full bg-cream ring-2 ring-blue">
-                      <Image src={`/library/thumbs/${id}.webp`} alt="" fill sizes="36px" className="object-cover" />
-                    </span>
-                  ))}
-                </div>
-                <p className="text-[13px] leading-tight text-white/80">
-                  Built on <span className="font-semibold text-white">Aholo</span>
-                  <br />
-                  Lux3D · World · Viewer
-                </p>
-              </div>
-              <h1 className="mt-6 font-display text-[clamp(3.2rem,7.4vw,6.4rem)] font-bold leading-[0.92]">
-                Redesign Your Real Room <span className="squiggle whitespace-nowrap">In One Tap</span>
+        {/* HERO ---------------------------------------------------------------------------------------- */}
+        <section id="hero" className="band relative flex min-h-[100svh] items-center overflow-hidden">
+          <div aria-hidden className="field" />
+          <div aria-hidden className="tear tear-a">
+            <div className="fringe" />
+            <div className="paper">
+              <Shot name="after" widths={[1280, 1920, 3840]} sizes="100vw" alt="" priority />
+            </div>
+          </div>
+          <div aria-hidden className="tear tear-b">
+            <div className="fringe" />
+            <div className="paper">
+              <Shot name="style-japandi" widths={[720, 1440, 2160]} sizes="100vw" alt="" />
+            </div>
+          </div>
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <i className="absolute inset-y-0 left-[25%] border-l border-dashed border-white/20" />
+            <i className="absolute inset-y-0 left-[75%] border-l border-dashed border-white/20" />
+            <i className="absolute inset-x-0 top-[42%] border-t border-dashed border-white/20" />
+          </div>
+          {[
+            ["left-[27%] top-[10%]", "Text to 3D\nLux3D"],
+            ["right-[4%] top-[10%] text-right", "Doors that\nopen"],
+            ["left-[77%] top-[20%]", "One-tap\nstyles"],
+            ["left-[27%] bottom-[9%]", "AR and\nexport"],
+            ["left-[77%] bottom-[9%]", "Built on\nAholo"],
+          ].map(([pos, text]) => (
+            <p key={text} className={`hero-dim mono-label pointer-events-none absolute z-10 hidden whitespace-pre-line text-white/80 mix-blend-difference md:block ${pos}`}>
+              {text}
+            </p>
+          ))}
+
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-16 pt-[52vh] md:pt-24">
+            <div className="hero-band hatch dash-x relative max-w-[44rem] px-6 py-8 md:px-10 md:py-10">
+              <p className="mono-label absolute -top-7 left-6 text-white/60 md:left-10">Scan it · Remix it · Live in it</p>
+              <h1 className="flex items-center gap-[0.22em] text-[clamp(3.6rem,10vw,8.6rem)]">
+                <LogoMark className="hero-mark h-[0.78em] w-auto shrink-0 text-[#d9dce6]" />
+                <span className="hero-word chrome display bg-[length:100%_260%]">ReRoom</span>
               </h1>
-              <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-white/80">
-                Scan your room with your phone, add furniture you describe or photograph, open its doors and drawers, and restyle everything. All in
-                the browser.
+            </div>
+            <div className="hero-copy mt-8 max-w-[34rem]">
+              <p className="text-[clamp(1.1rem,2vw,1.35rem)] font-light leading-relaxed text-white">
+                Scan your room with your phone, add furniture you describe or photograph, open its doors and drawers, and restyle everything. In 3D, in the
+                browser.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/scan" className="inline-flex h-13 items-center gap-2 rounded-btn bg-cream px-6 text-[15px] font-semibold text-blue hover:bg-white">
-                  Scan my room <ArrowRight size={17} />
+                <Link href="/scan" className="glass glass--light" data-magnetic>
+                  Scan my room <ArrowRight size={16} />
                 </Link>
-                <Link href="/studio?room=industrial-loft" className="inline-flex h-13 items-center gap-2 rounded-btn bg-amber px-6 text-[15px] font-semibold text-ink hover:brightness-95">
+                <Link href="/studio?room=industrial-loft" className="glass" data-magnetic>
                   Try a sample room
                 </Link>
               </div>
-              <MadeWith light>The chair: Aholo Lux3D text-to-3D (velvet), three more finishes by Lux3D material transfer, parts by Lux3D part split.</MadeWith>
-            </div>
-            <div className="relative hidden md:block">
-              <SpinBadge className="absolute -left-6 bottom-6 text-white" />
+              <p className="mono-label mt-6 text-white/55">Chair: Lux3D text-to-3D · finishes: material transfer · parts: part split</p>
             </div>
           </div>
           {/* static poster: carries first paint until the 3D chair takes over */}
@@ -205,30 +153,38 @@ export default function Home() {
           <img
             src="/site/hero/chair-poster.webp"
             alt="A mustard velvet armchair generated with Aholo Lux3D"
-            width={1600}
-            height={1600}
+            width={1036}
+            height={1036}
             fetchPriority="high"
-            className="hero-poster pointer-events-none absolute left-1/2 top-[8%] z-[4] w-[min(78vw,420px)] -translate-x-1/2 transition-opacity duration-700 md:left-auto md:right-[10%] md:top-1/2 md:w-[min(36vw,560px)] md:-translate-y-1/2 md:translate-x-0"
+            className="hero-poster pointer-events-none absolute left-1/2 top-[10%] z-[4] w-[min(78vw,420px)] -translate-x-1/2 transition-opacity duration-700 md:left-auto md:right-[10%] md:top-1/2 md:w-[min(36vw,560px)] md:-translate-y-1/2 md:translate-x-0"
           />
+          <a href="#scan" aria-label="Scroll to the story" className="absolute bottom-6 right-6 z-10 hidden h-11 w-7 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,.4)] md:block">
+            <span className="cue absolute left-1/2 top-2.5 h-2 w-[3px] -translate-x-1/2 rounded bg-white" />
+          </a>
         </section>
 
-        {/* SCAN */}
-        <section id="scan" className="relative flex min-h-screen items-center bg-cream pb-16 pt-28">
+        {/* SCAN ---------------------------------------------------------------------------------------- */}
+        <section id="scan" className="sheet flex min-h-screen items-center pb-20 pt-32">
+          <TornTop />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="rails" />
           <div className="relative z-10 mx-auto w-full max-w-7xl px-5">
             <div className="mx-auto max-w-2xl text-center">
-              <Eyebrow>Scan</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95] text-ink">
-                Your real room, in 3D, <span className="squiggle">in a minute.</span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-lg text-slate">Point your phone at the walls, walk slowly, and Aholo Reality turns the video into a room you can step inside.</p>
+              <div className="flex justify-center">
+                <Eyebrow n="01">Scan</Eyebrow>
+              </div>
+              <H2>Your real room, in 3D, in a minute.</H2>
+              <p className="reveal mx-auto mt-4 max-w-lg text-lg font-light text-slate">Point your phone at the walls, walk slowly, and Aholo Reality turns the video into a room you can step inside.</p>
             </div>
             <div className="mt-14 grid items-center gap-8 md:grid-cols-[1fr_minmax(260px,1.1fr)_1fr]">
               {[FEATURES.slice(0, 2), FEATURES.slice(2)].map((col, ci) => (
                 <ul key={ci} className={`space-y-10 ${ci === 1 ? "md:order-3" : ""}`}>
                   {col.map(({ icon: I, title, body }) => (
-                    <li key={title} className="text-center">
-                      <I className="mx-auto size-11 text-blue" strokeWidth={1.4} />
-                      <h3 className="mt-3 font-display text-2xl font-bold">{title}</h3>
+                    <li key={title} className="reveal text-center">
+                      <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-white text-blue shadow-[0_12px_30px_-14px_rgba(27,104,252,.5),inset_0_0_0_1px_rgba(5,7,18,.06)]">
+                        <I size={24} strokeWidth={1.5} />
+                      </span>
+                      <h3 className="mt-4 text-xl font-semibold tracking-tight">{title}</h3>
                       <p className="mx-auto mt-1 max-w-[16rem] text-sm text-slate">{body}</p>
                     </li>
                   ))}
@@ -239,51 +195,50 @@ export default function Home() {
           </div>
         </section>
 
-        {/* MARQUEE */}
-        <div className="relative z-10 -rotate-1 overflow-hidden bg-blue py-4 text-white">
-          <div className="marquee flex w-max gap-8 whitespace-nowrap font-display text-2xl font-semibold uppercase">
-            {[...MARQUEE, ...MARQUEE].map((w, i) => (
-              <span key={i} className="flex items-center gap-8">
-                {w} <span className="text-amber">✦</span>
-              </span>
-            ))}
+        {/* MARQUEE ------------------------------------------------------------------------------------- */}
+        <div className="band overflow-hidden border-y border-dashed border-white/15 py-5">
+          <div data-drift="-12" className="flex">
+            <div className="marquee flex w-max gap-10 whitespace-nowrap text-[clamp(1.6rem,3vw,2.4rem)] font-medium tracking-tight">
+              {[...MARQUEE, ...MARQUEE].map((w, i) => (
+                <span key={i} className="flex items-center gap-10">
+                  <span className={i % 3 === 1 ? "chrome" : "text-white/85"}>{w}</span>
+                  <span className="text-blue">✳</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* REMIX */}
-        <section id="remix" className="relative bg-cream py-28">
+        {/* REMIX --------------------------------------------------------------------------------------- */}
+        <section id="remix" className="band py-28">
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="glow -left-40 top-20 w-[640px]" />
           <div className="relative z-10 mx-auto max-w-7xl px-5">
             <div id="remix-stop" className="grid min-h-[70vh] items-center md:grid-cols-2">
               <div className="max-w-xl">
-                <Eyebrow>Remix</Eyebrow>
-                <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                  Describe it. Snap it. <span className="squiggle">Place it.</span>
-                </h2>
-                <p className="mt-4 max-w-md text-slate">
+                <Eyebrow n="02">Remix</Eyebrow>
+                <H2>
+                  Describe it. Snap it. <span className="chrome">Place it.</span>
+                </H2>
+                <p className="reveal mt-4 max-w-md text-lg font-light text-mist">
                   Every piece is real 3D with real materials and a real size, so it sits on your floor the way it would at home.
                 </p>
               </div>
               <div aria-hidden className="order-first h-[42vh] md:order-none md:h-auto" />
             </div>
-            <div className="mt-10 space-y-10">
+            <div className="mt-6 space-y-8">
               {REMIX.map((r, i) => (
-                <article key={r.title} className={`grid items-center gap-6 md:grid-cols-2 md:gap-14 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-cream-deep">
+                <article key={r.title} className={`grid items-center gap-6 md:grid-cols-2 md:gap-12 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
+                  <div data-cut className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-navy shadow-[0_40px_80px_-30px_rgba(0,0,0,.8)]">
                     <Shot name={r.shot.name} widths={r.shot.widths} sizes="(min-width: 768px) 600px, 100vw" alt={`${r.title} in the ReRoom studio`} className="object-left-top" />
                   </div>
-                  <div className="rounded-card bg-white p-7 md:p-9">
-                    <r.icon className="size-12 text-blue" strokeWidth={1.3} />
-                    <div className="mt-4 flex flex-wrap items-center gap-3">
-                      <h3 className="font-display text-3xl font-bold">{r.title}</h3>
-                      <span className="rounded-full bg-amber px-2.5 py-1 text-[11px] font-bold text-ink">{r.tag}</span>
-                    </div>
-                    <p className="mt-3 text-slate">{r.body}</p>
-                    <div className="mt-6 flex items-center justify-between border-t border-line pt-5">
-                      <span className="font-display text-xl font-semibold">{r.time}</span>
-                      <Link href={r.href} aria-label={`${r.title} in the studio`} className="flex size-10 items-center justify-center rounded-full bg-blue text-white hover:bg-blue-deep">
-                        <ArrowUpRight size={18} />
-                      </Link>
-                    </div>
+                  <div className="glass-panel reveal p-8 md:p-10">
+                    <span className="mono-label text-ultra-soft">{r.tag}</span>
+                    <h3 className="mt-3 text-3xl font-semibold tracking-tight">{r.title}</h3>
+                    <p className="mt-3 font-light text-mist">{r.body}</p>
+                    <Link href="/studio?room=industrial-loft" className="glass glass--sm mt-6">
+                      Open in the studio <ArrowRight size={14} />
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -291,119 +246,158 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ALIVE */}
-        <section id="alive" className="scallop-top scallop-bottom relative bg-blue py-24 text-white [--scallop:var(--color-blue)]">
+        {/* ALIVE --------------------------------------------------------------------------------------- */}
+        <section id="alive" className="sheet pb-28 pt-32">
+          <TornTop />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="rails" />
           <div className="relative z-10 mx-auto max-w-7xl px-5">
             <div id="alive-stop" className="grid min-h-[70vh] items-center md:grid-cols-2">
               <div className="max-w-xl">
-                <Eyebrow light>How it works</Eyebrow>
-                <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                  Furniture that <span className="squiggle">comes alive.</span>
-                </h2>
-                <p className="mt-4 max-w-md text-white/80">
+                <Eyebrow n="03">Alive</Eyebrow>
+                <H2>Furniture that comes alive.</H2>
+                <p className="reveal mt-4 max-w-md text-lg font-light text-slate">
                   Lux3D articulation finds every hinge and slide, so wardrobes swing open and drawers glide out right in the browser. Part split takes a
                   piece apart, like the chair you see here.
                 </p>
-                <ul className="mt-6 space-y-2 text-white/85">
-                  {["Double-click any piece to open it", "Seven library pieces open today", "Add moving parts to anything you generate"].map((t) => (
-                    <li key={t} className="flex items-center gap-2">
-                      <DoorOpen size={17} className="text-amber" /> {t}
+                <ul className="reveal mt-6 space-y-2 text-slate">
+                  {["Double-click any piece to open it", `${manifest.urdf.length} library pieces open today`, "Add moving parts to anything you generate"].map((t) => (
+                    <li key={t} className="flex items-center gap-3">
+                      <DoorOpen size={17} className="text-blue" /> {t}
                     </li>
                   ))}
                 </ul>
               </div>
               <div aria-hidden className="order-first h-[42vh] md:order-none md:h-auto" />
             </div>
-            <ol className="mt-12 grid gap-6 md:grid-cols-3">
-              {STEPS.map((s, i) => (
-                <li key={s.n} className={i === 1 ? "md:mt-10" : i === 2 ? "md:-mt-6" : "md:mt-16"}>
-                  <div className="flex items-center gap-3">
-                    <span className="font-display text-6xl font-bold italic text-amber">{s.n}</span>
-                    <span className="rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-bold">{s.tag}</span>
-                  </div>
-                  <div className="mt-3 overflow-hidden rounded-card bg-cream text-ink">
-                    <div className="p-6">
-                      <h3 className="font-display text-2xl font-bold">{s.title}</h3>
-                      <p className="mt-2 text-sm text-slate">{s.body}</p>
-                    </div>
-                    <div className="relative mx-3 mb-3 aspect-[16/10] overflow-hidden rounded-[20px] bg-blue">
+            <div className="relative mt-16">
+              <div aria-hidden className="absolute left-0 right-0 top-5 hidden h-px bg-blue/60 md:block" data-line />
+              <ol className="grid gap-10 md:grid-cols-3">
+                {STEPS.map((s) => (
+                  <li key={s.n} className="reveal">
+                    <span className="mono-label relative z-10 flex size-10 items-center justify-center rounded-full bg-paper text-blue shadow-[inset_0_0_0_1.5px_var(--color-blue)]">{s.n}</span>
+                    <h3 className="mt-5 text-2xl font-semibold tracking-tight">{s.title}</h3>
+                    <p className="mt-1 text-sm text-slate">{s.body}</p>
+                    <div data-cut className="cut relative mt-5 aspect-[16/10] overflow-hidden bg-navy">
                       <Shot name={s.shot.name} widths={s.shot.widths} sizes="(min-width: 768px) 400px, 100vw" alt={s.title} />
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ol>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </section>
 
-        {/* STYLES */}
-        <section id="styles" className="relative bg-cream pb-24 pt-36">
+        {/* STYLES -------------------------------------------------------------------------------------- */}
+        <section id="styles" className="band pb-28 pt-36">
+          <TornTop ink />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="glow -right-40 top-40 w-[700px]" />
           <div className="relative z-10 mx-auto max-w-7xl px-5">
             <div id="styles-stop" className="grid min-h-[75vh] items-center md:grid-cols-2">
               <div aria-hidden className="h-[40vh] md:h-auto" />
               <div className="max-w-xl">
-                <Eyebrow>Restyle</Eyebrow>
-                <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                  One room. <span className="squiggle">Eight moods.</span>
-                </h2>
-                <p className="mt-4 max-w-md text-slate">
-                  Lux3D material transfer re-finishes every piece from a single photo of a material. Try it on the chair, then scroll on to see whole
-                  rooms change.
+                <Eyebrow n="04">Restyle</Eyebrow>
+                <H2>
+                  One room. <span className="chrome">Eight moods.</span>
+                </H2>
+                <p className="reveal mt-4 max-w-md text-lg font-light text-mist">
+                  Lux3D material transfer re-finishes every piece from a single photo of a material. Try it on the chair, then scroll on to see whole rooms
+                  change.
                 </p>
-                <div className="mt-6">
+                <div className="reveal mt-7">
                   <MaterialChips />
                 </div>
-                <MadeWith>Velvet is the chair as generated; leather, linen and bouclé are Lux3D material transfers of it.</MadeWith>
+                <p className="mono-label mt-4 text-mist/70">Velvet as generated · leather, linen, bouclé by material transfer</p>
               </div>
             </div>
-            <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
-              {STYLES.map((s) => (
-                <figure key={s.id}>
-                  <div className="relative aspect-square overflow-hidden rounded-card bg-cream-deep">
+            <div className="mt-14 grid grid-cols-2 gap-5 md:grid-cols-4">
+              {STYLES.map((s, i) => (
+                <figure key={s.id} className={i % 2 ? "md:mt-10" : ""}>
+                  <div data-cut className="cut relative aspect-[4/5] overflow-hidden bg-navy">
                     <Shot name={`style-${s.id}`} widths={[720, 1440, 2160]} sizes="(min-width: 768px) 300px, 50vw" alt={`The loft in ${s.name} style`} />
                   </div>
-                  <figcaption className="mt-2 font-display text-xl font-semibold">{s.name}</figcaption>
+                  <figcaption className="mono-label mt-3 text-mist">{s.name}</figcaption>
                 </figure>
               ))}
             </div>
           </div>
         </section>
 
-        {/* PRICING */}
-        <section id="pricing" className="relative bg-cream pb-28">
+        {/* ASSETS -------------------------------------------------------------------------------------- */}
+        <section id="assets" className="sheet pb-28 pt-32">
+          <TornTop />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="rails" />
+          <div className="relative z-10 mx-auto max-w-7xl px-5">
+            <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-end">
+              <div>
+                <Eyebrow n="05">Made with Aholo</Eyebrow>
+                <H2>Every object here was generated, not bought.</H2>
+              </div>
+              <p className="reveal text-lg font-light text-slate">
+                {library.length} Lux3D models, {VARIANTS} restyled finishes, {manifest.urdf.length} articulated pieces, three SpatialGen rooms and the hero
+                chair set. Tap any piece to spin it in 3D.
+              </p>
+            </div>
+            <dl className="reveal mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-[20px] bg-line md:grid-cols-5">
+              {[
+                [library.length, "Lux3D models"],
+                [VARIANTS, "Restyled finishes"],
+                [manifest.urdf.length, "Pieces that open"],
+                [3, "SpatialGen rooms"],
+                [10, "Aholo capabilities"],
+              ].map(([n, label]) => (
+                <div key={label} className="bg-white p-6">
+                  <dt className="display text-5xl text-blue" data-count={n}>
+                    {n}
+                  </dt>
+                  <dd className="mono-label mt-2 text-slate">{label}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-12">
+              <AssetGallery />
+            </div>
+          </div>
+        </section>
+
+        {/* PRICING ------------------------------------------------------------------------------------- */}
+        <section id="pricing" className="band pb-28 pt-32">
+          <TornTop ink />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="glow left-1/2 top-1/3 w-[800px] -translate-x-1/2" />
           <div className="relative z-10 mx-auto max-w-6xl px-5">
             <div className="text-center">
-              <Eyebrow>Plans</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                <span className="squiggle">Free</span> while we&apos;re in beta.
-              </h2>
-              <p className="mt-3 text-slate">Paid plans arrive at launch. No card needed today.</p>
+              <div className="flex justify-center">
+                <Eyebrow n="06">Plans</Eyebrow>
+              </div>
+              <H2>
+                <span className="chrome">Free</span> while we&apos;re in beta.
+              </H2>
+              <p className="reveal mt-3 font-light text-mist">Paid plans arrive at launch. No card needed today.</p>
             </div>
-            <div className="mt-12 grid items-center gap-5 md:grid-cols-3">
+            <div className="mt-14 grid items-center gap-5 md:grid-cols-3">
               {PLANS.map((p) => (
-                <div key={p.name} className={`rounded-card p-7 ${p.featured ? "bg-blue py-10 text-white shadow-[0_24px_60px_-24px_rgb(66_25_250/0.7)]" : "bg-white"}`}>
-                  <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${p.featured ? "bg-white text-blue" : "bg-amber text-ink"}`}>{p.tag}</span>
-                  <div className="mt-5 flex items-baseline gap-1 font-display">
-                    <span className="text-2xl font-semibold">$</span>
-                    <span className="text-6xl font-bold">{p.price}</span>
+                <div key={p.name} className={`reveal glass-panel p-8 ${p.featured ? "py-11 shadow-[inset_0_1px_0_rgba(255,255,255,.25),inset_0_0_0_1px_rgba(27,104,252,.6),0_40px_90px_-30px_rgba(27,104,252,.6)]" : ""}`}>
+                  <span className={`mono-label ${p.featured ? "text-ultra-soft" : "text-mist"}`}>{p.tag}</span>
+                  <div className="mt-5 flex items-baseline gap-1">
+                    <span className="text-2xl font-light text-mist">$</span>
+                    <span className="display text-7xl">{p.price}</span>
                   </div>
-                  <p className={`text-sm ${p.featured ? "text-white/70" : "text-slate"}`}>
+                  <p className="text-sm text-mist">
                     {p.name} · {p.per}
                   </p>
-                  <p className={`mt-3 text-sm ${p.featured ? "text-white/85" : "text-slate"}`}>{p.note}</p>
-                  <ul className="mt-5 space-y-2.5 text-sm">
+                  <ul className="mt-6 space-y-3 text-sm font-light">
                     {p.items.map((i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className={`flex size-5 items-center justify-center rounded-full text-[11px] ${p.featured ? "bg-white text-blue" : "bg-blue text-white"}`}>✓</span>
+                      <li key={i} className="flex items-center gap-3">
+                        <span className="size-1.5 rounded-full bg-blue" />
                         {i}
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href="/scan"
-                    className={`mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-btn text-sm font-semibold ${p.featured ? "bg-white text-blue hover:bg-cream" : "bg-blue text-white hover:bg-blue-deep"}`}
-                  >
-                    {p.cta} <ArrowRight size={16} />
+                  <Link href="/scan" className={`glass mt-8 w-full ${p.featured ? "glass--blue" : ""}`} data-magnetic>
+                    {p.cta}
                   </Link>
                 </div>
               ))}
@@ -411,27 +405,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* STATS */}
-        <section className="scallop-top scallop-bottom relative bg-blue py-14 text-white [--scallop:var(--color-blue)]">
-          <dl className="relative z-10 mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 md:grid-cols-4">
-            {STATS.map(([n, label]) => (
-              <div key={label} className="text-center">
-                <dt className="font-display text-7xl font-bold italic">{n}</dt>
-                <dd className="mt-1 text-sm text-white/75">{label}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        {/* AR */}
-        <section id="ar" className="relative bg-cream pb-24 pt-36">
+        {/* AR ------------------------------------------------------------------------------------------ */}
+        <section id="ar" className="sheet pb-28 pt-36">
+          <TornTop />
+          <div aria-hidden className="grain" />
+          <div aria-hidden className="rails" />
           <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 md:grid-cols-2">
             <div className="relative z-10 max-w-xl">
-              <Eyebrow>Take it with you</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                See it in your room, <span className="squiggle">for real.</span>
-              </h2>
-              <p className="mt-4 max-w-md text-slate">Scan the code and the piece stands on your floor at the size you chose, through your phone camera.</p>
+              <Eyebrow n="07">Take it with you</Eyebrow>
+              <H2>See it in your room, for real.</H2>
+              <p className="reveal mt-4 max-w-md text-lg font-light text-slate">Scan the code and the piece stands on your floor at the size you chose, through your phone camera.</p>
               <ul className="mt-8 space-y-5">
                 {[
                   [Smartphone, "Phone AR", "AR Quick Look on iPhone, Scene Viewer on Android, from a QR code."],
@@ -441,12 +424,12 @@ export default function Home() {
                 ].map(([I, t, b]) => {
                   const Icon = I as typeof Box;
                   return (
-                    <li key={t as string} className="flex gap-4">
-                      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blue-soft text-blue">
-                        <Icon size={20} />
+                    <li key={t as string} className="reveal flex gap-4">
+                      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-blue shadow-[inset_0_0_0_1px_rgba(5,7,18,.06)]">
+                        <Icon size={19} />
                       </span>
                       <span>
-                        <span className="block font-display text-xl font-bold">{t as string}</span>
+                        <span className="block text-lg font-semibold tracking-tight">{t as string}</span>
                         <span className="text-sm text-slate">{b as string}</span>
                       </span>
                     </li>
@@ -455,86 +438,94 @@ export default function Home() {
               </ul>
             </div>
             <div id="ar-stop" className="relative z-[4] flex justify-center">
-              <div className="relative h-[560px] w-[280px] rounded-[48px] bg-ink p-3 shadow-[0_40px_80px_-30px_rgb(33_11_125/0.6)]">
+              <div className="relative h-[560px] w-[280px] rounded-[48px] bg-ink p-3 shadow-[0_50px_90px_-30px_rgba(5,7,18,.7),inset_0_0_0_1px_rgba(255,255,255,.08)]">
                 <div className="absolute left-1/2 top-5 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-ink" />
-                <div id="ar-phone-screen" className="relative h-full w-full overflow-hidden rounded-[38px] bg-cream-deep">
+                <div id="ar-phone-screen" className="relative h-full w-full overflow-hidden rounded-[38px] bg-navy">
                   <Shot name="before" widths={[1280, 1920]} sizes="280px" alt="A room seen through the phone camera" className="object-[38%_50%]" />
-                  <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-ink">AR · 95 cm tall</span>
+                  <span className="mono-label absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-ink/70 px-3 py-1.5 text-white backdrop-blur">AR · 95 cm tall</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* BUILT ON AHOLO */}
-        <section id="aholo" className="relative bg-cream pb-24">
+        {/* BUILT ON AHOLO ------------------------------------------------------------------------------ */}
+        <section id="aholo" className="band pb-28 pt-32">
+          <TornTop ink />
+          <div aria-hidden className="grain" />
           <div className="relative z-10 mx-auto max-w-7xl px-5">
-            <div className="text-center">
-              <Eyebrow>Built on Aholo</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                Ten Aholo tools, <span className="squiggle">one product.</span>
-              </h2>
-              <p className="mx-auto mt-3 max-w-xl text-slate">The API key stays on our server, and every 3D object on this page was generated with Aholo.</p>
+            <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+              <div>
+                <Eyebrow n="08">Built on Aholo</Eyebrow>
+                <H2 className="max-w-3xl">
+                  Ten Aholo tools, <span className="chrome">one product.</span>
+                </H2>
+              </div>
+              <div className="reveal flex items-center gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/aholo.svg" alt="Aholo" className="h-9 w-auto" />
+                <span className="mono-label text-mist">by Manycore</span>
+              </div>
             </div>
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {AHOLO.map(([t, b]) => (
-                <div key={t} className="rounded-[22px] bg-navy p-5 text-white">
-                  <span className="text-amber">✦</span>
-                  <h3 className="mt-2 font-display text-xl font-bold">{t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/75">{b}</p>
+              {AHOLO.map(([t, b], i) => (
+                <div key={t} className="reveal glass-panel p-6">
+                  <span className="mono-label text-ultra-soft">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-3 text-lg font-semibold tracking-tight">{t}</h3>
+                  <p className="mt-2 text-sm font-light leading-relaxed text-mist">{b}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-center text-sm">
-              <Link href="/made-with-aholo" className="font-semibold text-blue underline-offset-4 hover:underline">
-                How this page was made
+            <p className="reveal mt-8 text-center">
+              <Link href="/made-with-aholo" className="glass glass--sm">
+                How this page was made <ArrowRight size={14} />
               </Link>
             </p>
           </div>
         </section>
 
-        {/* FAQ */}
-        <section id="faq" className="relative bg-cream pb-32">
+        {/* FAQ ----------------------------------------------------------------------------------------- */}
+        <section id="faq" className="sheet pb-32 pt-32">
+          <TornTop />
+          <div aria-hidden className="grain" />
           <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <Eyebrow>FAQ</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-[0.95]">
-                The practical <span className="squiggle">questions, answered.</span>
-              </h2>
-              <p className="mt-4 max-w-sm text-slate">Still unsure? Open a sample room. No account, no download.</p>
+              <Eyebrow n="09">FAQ</Eyebrow>
+              <H2>The practical questions, answered.</H2>
+              <p className="reveal mt-4 max-w-sm font-light text-slate">Still unsure? Open a sample room. No account, no download.</p>
             </div>
             <div className="space-y-3">
               {FAQ.map(([q, a]) => (
-                <details key={q} className="group rounded-[20px] bg-white p-5 open:shadow-[0_12px_30px_-18px_rgb(33_11_125/0.35)]">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold">
+                <details key={q} className="paper-panel reveal group p-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold tracking-tight">
                     {q}
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-blue text-white transition-transform group-open:rotate-180">
-                      <ChevronDown size={17} />
-                    </span>
+                    <span className="mono-label flex size-8 shrink-0 items-center justify-center rounded-full bg-blue text-white transition-transform duration-500 group-open:rotate-45">+</span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate">{a}</p>
+                  <p className="mt-3 text-sm font-light leading-relaxed text-slate">{a}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="cta" className="scallop-top relative flex min-h-[90vh] items-center bg-blue py-24 text-white [--scallop:var(--color-blue)]">
-          <Doodles />
+        {/* CTA ----------------------------------------------------------------------------------------- */}
+        <section id="cta" className="band flex min-h-[92vh] items-center overflow-hidden py-24">
+          <TornTop ink />
+          <div aria-hidden className="field opacity-80" />
+          <div aria-hidden className="grain" />
           <div className="relative z-10 mx-auto grid w-full max-w-7xl px-5 md:grid-cols-2">
             <div className="max-w-xl pt-[44vh] md:pt-0">
-              <Eyebrow light>Your turn</Eyebrow>
-              <h2 className="mt-2 font-display text-[clamp(3rem,6vw,5.4rem)] font-bold leading-[0.92]">
-                Your room is one <span className="squiggle">video away.</span>
+              <Eyebrow n="10">Your turn</Eyebrow>
+              <h2 className="display reveal mt-4 text-[clamp(3rem,6.4vw,5.6rem)]">
+                Your room is one <span className="chrome">video away.</span>
               </h2>
-              <p className="mt-4 max-w-md text-white/80">Scan it tonight, furnish it tomorrow, buy only what fits.</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/scan" className="inline-flex h-13 items-center gap-2 rounded-btn bg-cream px-6 text-[15px] font-semibold text-blue hover:bg-white">
-                  Scan my room <ArrowRight size={17} />
+              <p className="reveal mt-4 max-w-md text-lg font-light text-white/80">Scan it tonight, furnish it tomorrow, buy only what fits.</p>
+              <div className="reveal mt-8 flex flex-wrap gap-3">
+                <Link href="/scan" className="glass glass--light" data-magnetic>
+                  Scan my room <ArrowRight size={16} />
                 </Link>
-                <a href={GITHUB_URL} className="inline-flex h-13 items-center gap-2 rounded-btn bg-amber px-6 text-[15px] font-semibold text-ink hover:brightness-95">
-                  <GithubIcon size={17} /> View the source
+                <a href={GITHUB_URL} className="glass" data-magnetic>
+                  <GithubIcon size={16} /> View the source
                 </a>
               </div>
             </div>

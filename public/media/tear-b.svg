@@ -2,4 +2,4 @@
 <defs><filter id="t" x="-10%" y="-10%" width="120%" height="120%">
 <feTurbulence type="fractalNoise" baseFrequency="0.035 0.06" numOctaves="5" seed="11" result="n"/>
 <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
-<polygon points="-80,380 -80,980 900,980" fill="#fff" filter="url(#t)"/></svg>
+<polygon points="-80,720 -80,980 520,980" fill="#fff" filter="url(#t)"/></svg>
