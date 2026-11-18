@@ -1,6 +1,6 @@
 Adobe Stock images, licensed to the ReRoom project under the Adobe Stock Standard License.
 They are NOT covered by this repository's MIT license and may not be reused or redistributed.
-Used only as Lux3D material transfer references for the website's hero chair.
+Used only as Lux3D material transfer references for the website hero chair (scripts/gen-site-assets.mts). Not served by the site.
 
 leather_cognac.jpg  AdobeStock_271794225
 linen_oatmeal.jpg   AdobeStock_297791574

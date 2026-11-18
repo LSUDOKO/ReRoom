@@ -194,7 +194,7 @@ export default function Home() {
                   Try a sample room
                 </Link>
               </div>
-              <MadeWith light>The chair: Aholo Lux3D text-to-3D, four finishes by Lux3D material transfer, parts by Lux3D part split.</MadeWith>
+              <MadeWith light>The chair: Aholo Lux3D text-to-3D (velvet), three more finishes by Lux3D material transfer, parts by Lux3D part split.</MadeWith>
             </div>
             <div className="relative hidden md:block">
               <SpinBadge className="absolute -left-6 bottom-6 text-white" />
@@ -353,7 +353,7 @@ export default function Home() {
                 <div className="mt-6">
                   <MaterialChips />
                 </div>
-                <MadeWith>Each finish is a separate Lux3D material transfer of the same chair.</MadeWith>
+                <MadeWith>Velvet is the chair as generated; leather, linen and bouclé are Lux3D material transfers of it.</MadeWith>
               </div>
             </div>
             <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">

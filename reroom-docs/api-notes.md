@@ -8,16 +8,17 @@ All `create` calls return a numeric `taskId`. Poll with `lux3d.tasks.retrieve(id
 
 | Capability | SDK call | Key params | Output | Measured cost / time |
 |---|---|---|---|---|
-| Text to 3D | `textTo3d.create` | `prompt`, `style: 'photorealistic'`, `version: 'G1-Turbo'`, `faceCount` 10k–300k, `outputFormat: ['glb']`, `enablePbr`, `aiPredictSize` | `.glb` (PBR, 2048² PNG textures) | 13 credits · ~60 s |
+| Text to 3D | `textTo3d.create` | `prompt`, `style: 'photorealistic'`, `version: 'G1-Turbo'`, `faceCount` 10k–300k, `outputFormat: ['glb']`, `enablePbr`, `aiPredictSize` | `.glb` (PBR, 2048² PNG textures) | G1-Turbo 13 credits · ~60 s; G1 (`faceCount` 100k) 20 credits · ~5 min. G1 reports `null` output slots while running |
 | Image to 3D | `imgTo3d.create` | `img` (URL or data URL) or `imgs[]`; same options | `.glb` | — |
 | Material transfer | `materialTransfer.create` | `img`, `meshUrl`, `version: 'v3.0-standard'`, `outputFormat`, `aiPredictSize` / `customSize` (target height **mm**) | `.glb` | 7 credits · ~2 min |
 | Articulation | `articulationAnimation.create` | `glbUrl`, `prompt` | **`.zip` with `urdf/robot.urdf` + `urdf/meshes/*.glb`** (not a glTF animation) | 28 credits · ~90 s |
-| Part split | `partSplit.create` | `glbUrl` | parts model | — |
-| Multi-format export | `multiFormatExport.create` | `modelUrl` (.glb or Lux3D .zip), `outputFormat: usdz \| obj_zip \| fbx_zip \| stl \| 3mf` | order: zip, glb, usdz, obj, fbx, stl, 3mf | — |
+| Part split | `partSplit.create` | `glbUrl` | one `.glb`, one mesh per part, normalized to a 2-unit cube | 30 credits · ~2 min. Not deterministic: a fused G1 chair gave 1 part, then 2 on a retry; a G1-Turbo chair gave 4 |
+| Multi-format export | `multiFormatExport.create` | `modelUrl` (.glb or Lux3D .zip), `outputFormat: usdz \| obj_zip \| fbx_zip \| stl \| 3mf` | order: zip, glb, usdz, obj, fbx, stl, 3mf | 1 credit |
 | Four-view / image | `imageToFourView`, `multimodalToImage` | `img` and/or `prompt` | images | 12 credits |
 | Humanoid rig / retarget | `humanoidAutoRig`, `humanoidAnimationRetarget` | not used (no humans in ReRoom) | | |
 
 Notes:
+- `tasks.list({ page, pageSize })` returns `consumedCredits` per task: the reliable way to tally spend.
 - **There is no separate retopology endpoint** in SDK 1.10. We set the mesh budget at generation time (`faceCount: 40_000`) and shrink textures offline (`gltf-transform resize 1024 + jpeg`), which takes about 7 MB down to about 1 MB per model.
 - `aiPredictSize: true` sometimes overshoots (the wardrobe came out 3.2 m tall). The studio rescales uniformly to the catalog height. Rugs scale by their longest side and are laid flat if generated upright.
 - Concurrency-limit errors create no task and cost nothing, so both the client (`createTask`) and the seed scripts back off and retry.

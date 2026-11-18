@@ -122,7 +122,11 @@ async function run(a: Asset) {
       aiPredictSize: true,
     });
   else if (a.op === "split") taskId = await partSplit(await inputUrl(a.input!));
-  else if (a.op === "transfer") taskId = await materialTransfer(await inputUrl(a.input!), await toAholoUrl(a.ref!));
+  else if (a.op === "transfer") {
+    // licensed references live outside /public (not served by the site); upload them directly
+    const ref = a.ref!.startsWith("content/") ? await uploadBuffer(readFileSync(a.ref!), a.ref!.split("/").pop()!) : await toAholoUrl(a.ref!);
+    taskId = await materialTransfer(await inputUrl(a.input!), ref);
+  }
   else taskId = await multiExport(await inputUrl(a.input!), [a.format!]);
   console.log(`→ ${a.id}: task ${taskId} (${a.capability})`);
   lock[a.id] = { status: "running", taskId, prompt, at: new Date().toISOString() };

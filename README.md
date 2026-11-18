@@ -61,7 +61,7 @@ Honest state of the hackathon build (18 Nov 2026):
 | ✅ | Cloudflare deploy | Live on Workers (OpenNext). A live restyle, the proxy and a 55 MB upload were run against the deployed site |
 | ⚠️ | Scan upload size | Uploads are buffered by the Worker (128 MB memory), so the deployed site accepts videos up to 60 MB. Locally the cap is 500 MB. |
 | ⚠️ | Live results | Aholo result URLs expire after about 2 h. Generated pieces in a saved design or share link stop loading after that; the seed library is stored in the repo. |
-| ✅ | Landing page 3D hero | R3F scroll-driven chair (Lux3D G1, 4 material-transfer finishes, 2-part split, USDZ) checked with Playwright at every section, desktop 1440 px and phone 390 px |
+| ✅ | Landing page 3D hero | R3F scroll-driven chair (Lux3D G1, 3 material-transfer finishes, 2-part split, USDZ) checked with Playwright at every section, desktop 1440 px and phone 390 px |
 | ⏳ | Part split editing UI | API route only (the landing page uses part split for its exploded chair) |
 
 ## Built on Aholo
@@ -86,7 +86,7 @@ Verified method names, parameters, output formats and measured credit costs are 
 
 ## The website
 
-The landing page is a scroll story: one fixed, transparent React Three Fiber canvas sits behind the page text, and an armchair generated with Lux3D travels between sections on a Catmull-Rom curve, trailing the scroll with inertia. Each section has its own effect: dust in the hero, a surface-sampled particle dissolve for **Scan**, a wireframe room for **Remix**, the Lux3D part split flying apart for **Alive**, four Lux3D material-transfer finishes synced with the chips in **Styles**, a landing on the phone screen for **AR**, and a room corner with a lamp that switches on at the end.
+The landing page is a scroll story: one fixed, transparent React Three Fiber canvas sits behind the page text, and an armchair generated with Lux3D travels between sections on a Catmull-Rom curve, trailing the scroll with inertia. Each section has its own effect: dust in the hero, a surface-sampled particle dissolve for **Scan**, a wireframe room for **Remix**, the Lux3D part split flying apart for **Alive**, the generated velvet plus three Lux3D material-transfer finishes synced with the chips in **Styles**, a landing on the phone screen for **AR**, and a room corner with a lamp that switches on at the end.
 
 - Tune positions per section in [`src/landing/heroKeyframes.ts`](src/landing/heroKeyframes.ts). Values are viewport-relative, and phones get their own overrides.
 - The canvas loads after first paint, behind a static poster rendered from the same chair. Pixel ratio is capped at 1.75, rendering pauses while the tab is hidden, and `prefers-reduced-motion` switches to fades between still poses.
@@ -186,7 +186,7 @@ reroom-docs/           product brief, specs, UX, architecture, plan, submission 
 
 - [Aholo Spatial SDK](https://github.com/manycoretech/aholo-spatial-sdk) and [Aholo Viewer](https://github.com/manycoretech/aholo-viewer) (MIT). `src/lib/viewer/camera-control.ts` is adapted from the Aholo Viewer website.
 - Material reference swatches from [ambientCG](https://ambientcg.com) (CC0), listed in `public/materials/CREDITS.txt`.
-- Three material reference photos in `public/materials/stock/` are licensed from Adobe Stock. They are **not** covered by the MIT license; see `public/materials/stock/LICENSE.txt`. They are used only as Lux3D inputs.
+- Three material reference photos in `content/stock-refs/` are licensed from Adobe Stock. They are **not** covered by the MIT license (see `content/stock-refs/LICENSE.txt`), are not served by the site, and are used only as Lux3D inputs by the asset script.
 - AR via [`<model-viewer>`](https://modelviewer.dev) (Apache-2.0).
 - Every furniture model and room in this repo was generated with Aholo Lux3D and Aholo World.
 

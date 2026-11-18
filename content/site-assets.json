@@ -27,7 +27,7 @@
       "capability": "Lux3D material transfer",
       "op": "transfer",
       "input": "H_CHAIR",
-      "ref": "/materials/stock/leather_cognac.jpg",
+      "ref": "content/stock-refs/leather_cognac.jpg",
       "out": "site/hero/chair-leather.glb",
       "web": { "tris": 15000, "texture": 2048 }
     },
@@ -37,7 +37,7 @@
       "capability": "Lux3D material transfer",
       "op": "transfer",
       "input": "H_CHAIR",
-      "ref": "/materials/stock/linen_oatmeal.jpg",
+      "ref": "content/stock-refs/linen_oatmeal.jpg",
       "out": "site/hero/chair-linen.glb",
       "web": { "tris": 15000, "texture": 2048 }
     },
@@ -47,7 +47,7 @@
       "capability": "Lux3D material transfer",
       "op": "transfer",
       "input": "H_CHAIR",
-      "ref": "/materials/stock/boucle_white.jpg",
+      "ref": "content/stock-refs/boucle_white.jpg",
       "out": "site/hero/chair-boucle.glb",
       "web": { "tris": 15000, "texture": 2048 }
     },
