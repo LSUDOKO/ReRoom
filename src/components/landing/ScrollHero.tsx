@@ -351,7 +351,7 @@ function Chair({ models, mobile, reduced }: { models: Models; mobile: boolean; r
     // material crossfade (scroll in the styles section, or a chip)
     const inStyles = Math.abs(pose.segment - HERO_KEYFRAMES.findIndex((f) => f.section === "styles")) < 0.6;
     const want = inStyles ? activeMaterial() : 0;
-    mat.current = THREE.MathUtils.lerp(mat.current, want, 0.08);
+    mat.current = Math.abs(want - mat.current) < 0.02 ? want : THREE.MathUtils.lerp(mat.current, want, 0.08);
 
     const fade = reduced ? reducedFade.current.t : 1;
     const showParts = parts && ex.x > 0.015;
