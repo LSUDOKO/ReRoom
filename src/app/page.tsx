@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Box, DoorOpen, Layers, Palette, Share2, Smartphone, Sparkles, Wand2 } from "lucide-react";
+import { ArrowRight, DoorOpen } from "lucide-react";
 import manifest from "../../content/manifest.json";
 import library from "../../content/library.json";
 import { AssetGallery } from "@/components/landing/AssetGallery";
@@ -11,12 +11,18 @@ import { LogoMark } from "@/components/ui";
 
 const VARIANTS = Object.values(manifest.variants as Record<string, Record<string, string>>).reduce((n, v) => n + Object.keys(v).length, 0);
 
+// feature icons are clay 3D objects generated with Lux3D (content/site-assets.json, group "icons")
 const FEATURES = [
-  { icon: Smartphone, title: "Phone video in", body: "Walk the room for a minute. Aholo Reality does the rest." },
-  { icon: Sparkles, title: "Photoreal 3D", body: "A Gaussian-splat copy of your room, light and all." },
-  { icon: Layers, title: "Walls hide furniture", body: "Room and pieces share one depth buffer in the Aholo Viewer." },
-  { icon: Wand2, title: "No room? Dream one", body: "Describe a room and SpatialGen builds it." },
+  { icon: "i_scan", title: "Phone video in", body: "Walk the room for a minute. Aholo Reality does the rest." },
+  { icon: "i_style", title: "Photoreal 3D", body: "A Gaussian-splat copy of your room, light and all." },
+  { icon: "i_size", title: "Real sizes", body: "Room and pieces share one depth buffer and real-world scale." },
+  { icon: "i_remix", title: "No room? Dream one", body: "Describe a room and SpatialGen builds it." },
 ];
+
+function ClayIcon({ name, className = "size-20" }: { name: string; className?: string }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={`/site/icons/${name}.webp`} alt="" loading="lazy" className={`${className} object-contain drop-shadow-[0_14px_18px_rgba(27,104,252,.28)] transition-transform duration-700 ease-out hover:-translate-y-1 hover:rotate-[-4deg]`} />;
+}
 
 const MARQUEE = ["Sofa", "Wardrobe", "Japandi", "Armchair", "Industrial", "Drawers", "Cyberpunk", "Floor lamp", "Coastal", "Rug", "Luxury", "Sideboard"];
 
@@ -179,12 +185,10 @@ export default function Home() {
             <div className="mt-14 grid items-center gap-8 md:grid-cols-[1fr_minmax(260px,1.1fr)_1fr]">
               {[FEATURES.slice(0, 2), FEATURES.slice(2)].map((col, ci) => (
                 <ul key={ci} className={`space-y-10 ${ci === 1 ? "md:order-3" : ""}`}>
-                  {col.map(({ icon: I, title, body }) => (
+                  {col.map(({ icon, title, body }) => (
                     <li key={title} className="reveal text-center">
-                      <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-white text-blue shadow-[0_12px_30px_-14px_rgba(27,104,252,.5),inset_0_0_0_1px_rgba(5,7,18,.06)]">
-                        <I size={24} strokeWidth={1.5} />
-                      </span>
-                      <h3 className="mt-4 text-xl font-semibold tracking-tight">{title}</h3>
+                      <ClayIcon name={icon} className="mx-auto size-24" />
+                      <h3 className="mt-2 text-xl font-semibold tracking-tight">{title}</h3>
                       <p className="mx-auto mt-1 max-w-[16rem] text-sm text-slate">{body}</p>
                     </li>
                   ))}
@@ -417,24 +421,19 @@ export default function Home() {
               <p className="reveal mt-4 max-w-md text-lg font-light text-slate">Scan the code and the piece stands on your floor at the size you chose, through your phone camera.</p>
               <ul className="mt-8 space-y-5">
                 {[
-                  [Smartphone, "Phone AR", "AR Quick Look on iPhone, Scene Viewer on Android, from a QR code."],
-                  [Share2, "Share a link", "The whole design lives inside the link. Nothing is stored."],
-                  [Box, "Export anything", "GLB, USDZ, STL, 3MF, OBJ and FBX, from Lux3D multi-format export."],
-                  [Palette, "Before and after", "Same camera, saved as an image to send to anyone."],
-                ].map(([I, t, b]) => {
-                  const Icon = I as typeof Box;
-                  return (
-                    <li key={t as string} className="reveal flex gap-4">
-                      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-blue shadow-[inset_0_0_0_1px_rgba(5,7,18,.06)]">
-                        <Icon size={19} />
-                      </span>
-                      <span>
-                        <span className="block text-lg font-semibold tracking-tight">{t as string}</span>
-                        <span className="text-sm text-slate">{b as string}</span>
-                      </span>
-                    </li>
-                  );
-                })}
+                  ["i_scan", "Phone AR", "AR Quick Look on iPhone, Scene Viewer on Android, from a QR code."],
+                  ["i_private", "Share a link", "The whole design lives inside the link. Nothing is stored."],
+                  ["i_export", "Export anything", "GLB, USDZ, STL, 3MF, OBJ and FBX, from Lux3D multi-format export."],
+                  ["i_style", "Before and after", "Same camera, saved as an image to send to anyone."],
+                ].map(([icon, t, b]) => (
+                  <li key={t} className="reveal flex items-center gap-4">
+                    <ClayIcon name={icon} className="size-14 shrink-0" />
+                    <span>
+                      <span className="block text-lg font-semibold tracking-tight">{t}</span>
+                      <span className="text-sm text-slate">{b}</span>
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
             <div id="ar-stop" className="relative z-[4] flex justify-center">
