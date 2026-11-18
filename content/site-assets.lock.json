@@ -1,0 +1,56 @@
+{
+  "H_CHAIR": {
+    "status": "done",
+    "taskId": 8274521,
+    "raw": "assets-raw/H_CHAIR.glb",
+    "out": "/site/hero/chair.glb",
+    "prompt": "a mid-century armchair in mustard yellow velvet with tapered walnut legs, rounded back, realistic furniture product model, real-world proportions, clean geometry, single object, centered, no background",
+    "tris": 14998,
+    "bytes": 310004,
+    "at": "2026-11-18T05:14:50.664Z"
+  },
+  "H_CHAIR_LEATHER": {
+    "status": "done",
+    "taskId": 8274840,
+    "raw": "assets-raw/H_CHAIR_LEATHER.glb",
+    "out": "/site/hero/chair-leather.glb",
+    "tris": 14998,
+    "bytes": 366772,
+    "at": "2026-11-18T05:19:22.122Z"
+  },
+  "H_CHAIR_LINEN": {
+    "status": "done",
+    "taskId": 8274979,
+    "raw": "assets-raw/H_CHAIR_LINEN.glb",
+    "out": "/site/hero/chair-linen.glb",
+    "tris": 14998,
+    "bytes": 366916,
+    "at": "2026-11-18T05:21:20.320Z"
+  },
+  "H_CHAIR_BOUCLE": {
+    "status": "done",
+    "taskId": 8275143,
+    "raw": "assets-raw/H_CHAIR_BOUCLE.glb",
+    "out": "/site/hero/chair-boucle.glb",
+    "tris": 14998,
+    "bytes": 416500,
+    "at": "2026-11-18T06:07:10.016Z"
+  },
+  "H_CHAIR_USDZ": {
+    "status": "done",
+    "taskId": 8275273,
+    "raw": "assets-raw/H_CHAIR_USDZ.usdz",
+    "out": "/site/ar/chair.usdz",
+    "bytes": 6654364,
+    "at": "2026-11-18T05:21:54.043Z"
+  },
+  "H_CHAIR_PARTS": {
+    "status": "done",
+    "taskId": 8278725,
+    "raw": "assets-raw/H_CHAIR_PARTS.glb",
+    "out": "/site/hero/chair-parts.glb",
+    "tris": 14998,
+    "bytes": 326132,
+    "at": "2026-11-18T06:12:17.761Z"
+  }
+}

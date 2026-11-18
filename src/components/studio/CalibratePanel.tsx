@@ -25,9 +25,9 @@ export default function CalibratePanel({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     const e = getEngine();
     if (!e) return;
-    const cube = e.box(0x2f6bff, 1, 1, 1);
+    const cube = e.box(0x4219fa, 1, 1, 1);
     cube.position.set(-0.8, 0, -1.2);
-    const person = e.box(0xffb020, 0.45, 1.7, 0.25);
+    const person = e.box(0xffc531, 0.45, 1.7, 0.25);
     person.position.set(0.6, 0, -1.2);
     e.helpers.add([cube, person]);
     e.invalidate();

@@ -49,7 +49,7 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
       setEngine(e);
       const grid = e.grid(12, 0.5);
       e.helpers.add(grid);
-      selBox.current = e.box(0x2f6bff);
+      selBox.current = e.box(0x4219fa);
       selBox.current.visible = false;
       e.helpers.add(selBox.current);
       setReady(true);
@@ -127,7 +127,7 @@ export default function Viewport({ readOnly = false }: { readOnly?: boolean }) {
           if (prevModel) e.removeItem(prevModel), (en.model = undefined);
           if (!en.ghost) {
             const d = CATEGORY_DIMS[it.category];
-            en.ghost = e.box(key === "failed" ? 0xd93a2b : 0xffb020, d.w, d.h, d.d, 0.18);
+            en.ghost = e.box(key === "failed" ? 0xd93a2b : 0xffc531, d.w, d.h, d.d, 0.18);
             e.helpers.add(en.ghost);
           }
         } else {

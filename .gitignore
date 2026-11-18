@@ -52,3 +52,4 @@ refs/
 /.open-next/
 /.wrangler/
 .dev.vars*
+/assets-raw/
