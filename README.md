@@ -8,6 +8,7 @@
 </p>
 
 <p align="center">
+  <a href="https://reroom.adoranto737.workers.dev"><b>Live demo</b></a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#built-on-aholo">Built on Aholo</a> ·
   <a href="#how-it-works">How it works</a> ·
@@ -57,7 +58,8 @@ Honest state of the hackathon build (18 Nov 2026):
 | ✅ | Editor: drag, rotate, duplicate, delete, undo, double-click open, walk, top, before/after, calibrate, roulette, share → `/view` | Driven with real pointer and keyboard events in Playwright |
 | ✅ | Production build, typecheck, lint, `pnpm test` | Pass |
 | ⚠️ | Reality reconstruction from a phone video | Wired end to end through `/scan` (upload → `reconstructions.create` → status). A 24 s synthetic test video was accepted, then marked `FAILED` after about 9 s. A real 30–60 s phone walkthrough is still needed. |
-| ⚠️ | Scan upload size | Uploads go through our server, so on Vercel-style serverless hosts the request-body limit (a few MB) applies. Run locally or self-host for real videos. |
+| ✅ | Cloudflare deploy | Live on Workers (OpenNext). A live restyle, the proxy and a 55 MB upload were run against the deployed site |
+| ⚠️ | Scan upload size | Uploads are buffered by the Worker (128 MB memory), so the deployed site accepts videos up to 60 MB. Locally the cap is 500 MB. |
 | ⚠️ | Live results | Aholo result URLs expire after about 2 h. Generated pieces in a saved design or share link stop loading after that; the seed library is stored in the repo. |
 | ⏳ | Part split editing UI | API route only |
 
@@ -114,6 +116,18 @@ pnpm dev                     # http://localhost:3000
 
 Open `/studio?room=industrial-loft`, or `/studio?demo=1` for demo mode with no live Aholo calls. Everything in the library still works.
 
+### Deploy to Cloudflare Workers
+
+```bash
+npx wrangler login
+npx wrangler kv namespace create REROOM_BUDGET   # put the id in wrangler.jsonc
+pnpm cf:deploy                                   # OpenNext build + wrangler deploy
+npx wrangler secret put AHOLO_API_KEY            # once, and again whenever you rotate the key
+```
+
+`pnpm cf:preview` runs the same build locally in workerd. The build strips `.env.local` values from the Worker bundle (`scripts/cf-strip-env.mjs`); the key only lives in the Worker secret.
+Credit protection on the deployed site: per-IP and site-wide Workers rate-limit bindings (best effort, eventually consistent), a per-isolate window, and a daily task budget in KV.
+
 ### Scripts
 
 | Command | What it does |
@@ -131,7 +145,9 @@ Open `/studio?room=industrial-loft`, or `/studio?demo=1` for demo mode with no l
 |---|---|---|
 | `AHOLO_API_KEY` | server | Aholo Global key |
 | `AHOLO_REGION` | server | `com` (Global) or `cn` |
-| `SITE_URL` | server | Public origin. When set, Lux3D fetches local assets from it instead of re-uploading. |
+| `SITE_URL` | build | Public origin, used for OpenGraph URLs |
+| `DAILY_TASK_BUDGET` | server (Workers) | Lux3D + World tasks allowed per UTC day on the deployed site (default 300) |
+| `NEXT_PUBLIC_UPLOAD_MAX_MB` | build | Scan upload cap (500 locally, 60 on Workers) |
 | `REROOM_DEMO_ONLY` | server | `1` disables live generation |
 
 ## Project structure

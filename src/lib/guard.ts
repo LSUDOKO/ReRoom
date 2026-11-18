@@ -35,33 +35,53 @@ export function checkPrompt(raw: unknown): { ok: true; prompt: string; note?: st
 }
 
 type Limiter = { limit(o: { key: string }): Promise<{ success: boolean }> };
+type Kv = { get(k: string): Promise<string | null>; put(k: string, v: string, o?: { expirationTtl: number }): Promise<void> };
 export type Bucket = "lux3d" | "worlds" | "upload";
 const LOCAL_LIMITS: Record<Bucket, number> = { lux3d: 12, worlds: 3, upload: 6 };
 
-// On Cloudflare, Workers rate-limit bindings (wrangler.jsonc: RL_<BUCKET> per IP, RL_GLOBAL for
-// the whole site) protect the Aholo credits. Locally (next dev) it falls back to an in-memory window.
+// Per-isolate sliding window. Always applied: on Workers it backs up the rate-limit bindings,
+// which are eventually consistent and let a short burst through before they catch up.
 const hits = new Map<string, number[]>();
-export async function rateLimit(req: Request, bucket: Bucket) {
-  const ip =
-    req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  try {
-    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
-    const env = getCloudflareContext().env as unknown as Record<string, Limiter | undefined>;
-    const own = env[`RL_${bucket.toUpperCase()}`];
-    if (own) {
-      const [a, b] = await Promise.all([own.limit({ key: ip }), env.RL_GLOBAL?.limit({ key: bucket })]);
-      return a.success && (b?.success ?? true);
-    }
-  } catch {
-    // not running on Workers
-  }
-  const key = `${bucket}:${ip}`;
+function localWindow(key: string, max: number) {
   const now = Date.now();
   const list = (hits.get(key) ?? []).filter((t) => now - t < 60_000);
-  if (list.length >= LOCAL_LIMITS[bucket]) return false;
+  if (list.length >= max) return false;
   list.push(now);
   hits.set(key, list);
   return true;
+}
+
+/**
+ * Protects the Aholo credits. Returns null when the request may go ahead, otherwise the 429 body.
+ * On Cloudflare: RL_<BUCKET> per IP, RL_GLOBAL per route, and a daily task budget in KV
+ * (DAILY_TASK_BUDGET, default 300 Lux3D/World tasks per UTC day).
+ */
+export async function rateLimit(req: Request, bucket: Bucket): Promise<{ error: string; retry?: boolean } | null> {
+  const ip =
+    req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  const slow = { error: "Too many requests. Retrying shortly.", retry: bucket === "lux3d" };
+  if (!localWindow(`${bucket}:${ip}`, LOCAL_LIMITS[bucket])) return slow;
+  let env: Record<string, unknown> | undefined;
+  try {
+    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
+    env = getCloudflareContext().env as unknown as Record<string, unknown>;
+  } catch {
+    return null; // not running on Workers
+  }
+  const own = env[`RL_${bucket.toUpperCase()}`] as Limiter | undefined;
+  const global = env.RL_GLOBAL as Limiter | undefined;
+  const [a, b] = await Promise.all([own?.limit({ key: ip }), global?.limit({ key: bucket })]);
+  if (a?.success === false || b?.success === false) return slow;
+
+  const kv = env.REROOM_BUDGET as Kv | undefined;
+  if (kv && bucket !== "upload") {
+    const key = `tasks:${new Date().toISOString().slice(0, 10)}`;
+    const used = Number((await kv.get(key)) ?? 0);
+    if (used >= Number(env.DAILY_TASK_BUDGET ?? 300))
+      return { error: "Today's free generation budget for this demo is used up. Try the library and demo mode, or come back tomorrow." };
+    await kv.put(key, String(used + 1), { expirationTtl: 3 * 86_400 }); // ponytail: approximate count, KV has no atomic increment
+  }
+  return null;
 }
 
 /** Hosts we fetch on behalf of the browser (Aholo result CDNs + asset storage). */

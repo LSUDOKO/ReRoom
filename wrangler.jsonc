@@ -11,13 +11,16 @@
   "vars": {
     "AHOLO_REGION": "com",
     "AHOLO_MAX_CONCURRENCY": "2",
-    "SITE_URL": "https://reroom.adoranto737.workers.dev"
+    "SITE_URL": "https://reroom.adoranto737.workers.dev",
+    "DAILY_TASK_BUDGET": "300"
   },
+  // Daily Lux3D/World task budget (approximate counter).
+  "kv_namespaces": [{ "binding": "REROOM_BUDGET", "id": "d3e409ce6b434d7eaf6511bd77f6b38f" }],
   // Credit protection for the Aholo-backed routes (see src/lib/guard.ts). Limits are per 60 s.
   "ratelimits": [
     { "name": "RL_LUX3D", "namespace_id": "1001", "simple": { "limit": 12, "period": 60 } },
     { "name": "RL_WORLDS", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } },
     { "name": "RL_UPLOAD", "namespace_id": "1003", "simple": { "limit": 6, "period": 60 } },
-    { "name": "RL_GLOBAL", "namespace_id": "1004", "simple": { "limit": 60, "period": 60 } }
+    { "name": "RL_GLOBAL", "namespace_id": "1004", "simple": { "limit": 30, "period": 60 } }
   ]
 }

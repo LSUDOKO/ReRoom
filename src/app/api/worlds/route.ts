@@ -5,7 +5,8 @@ export const runtime = "nodejs";
 
 /** Start a World job: reconstruct a scan (video / photos / insv) or generate a dream room. */
 export async function POST(req: Request) {
-  if (!(await rateLimit(req, "worlds"))) return json({ error: "Too many requests. Wait a minute and try again." }, 429);
+  const limited = await rateLimit(req, "worlds");
+  if (limited) return json(limited, 429);
   const body = await req.json().catch(() => ({}));
   try {
     if (body.mode === "generate") {

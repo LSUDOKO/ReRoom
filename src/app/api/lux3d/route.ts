@@ -21,7 +21,8 @@ const isImage = (s: unknown): s is string =>
  * ops: text | image | transfer | articulate | split | export
  */
 export async function POST(req: Request) {
-  if (!(await rateLimit(req, "lux3d"))) return json({ error: "Too many requests. Retrying shortly.", retry: true }, 429);
+  const limited = await rateLimit(req, "lux3d");
+  if (limited) return json(limited, 429);
   const body = await req.json().catch(() => ({}));
   try {
     switch (body.op) {

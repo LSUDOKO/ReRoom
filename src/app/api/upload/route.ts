@@ -10,7 +10,8 @@ const OK = /\.(mp4|mov|insv|jpe?g|png|webp|glb)$/i;
 
 /** Server-side upload of a raw body (?name=file.mp4) to Aholo asset storage. Returns its URL. */
 export async function POST(req: Request) {
-  if (!(await rateLimit(req, "upload"))) return json({ error: "Too many uploads. Wait a minute." }, 429);
+  const limited = await rateLimit(req, "upload");
+  if (limited) return json(limited, 429);
   const name = new URL(req.url).searchParams.get("name") ?? "";
   if (!OK.test(name)) return json({ error: "Use an MP4, MOV, INSV, JPG, PNG or WebP file." }, 400);
   const len = Number(req.headers.get("content-length") ?? 0);
