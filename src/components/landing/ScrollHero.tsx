@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/immutability, react-hooks/purity -- three.js objects are mutated in useFrame by design (React Three Fiber), and particle seeds use Math.random inside useMemo */
 // Scroll-driven 3D hero: one fixed, transparent canvas behind the page text. The Lux3D armchair
 // travels between sections along a Catmull-Rom curve through the keyframes in
 // src/landing/heroKeyframes.ts, trailing the scroll with inertia, and runs one effect per section.
@@ -334,7 +335,7 @@ function Chair({ models, mobile, reduced }: { models: Models; mobile: boolean; r
     mix.current = reduced ? 0 : pose.particles;
     dust.current = reduced ? 0 : Math.max(0, 1 - pose.segment);
     wire.current = pose.wire;
-    room.current = pose.room;
+    room.current = Math.pow(pose.room, 5); // only in the last stretch before the closing section
     shadow.current = (1 - mix.current) * THREE.MathUtils.smoothstep(pose.scale, 0.45, 0.8) * (reduced ? reducedFade.current.t : 1);
     lamp.current = THREE.MathUtils.lerp(lamp.current, pose.lamp > 0.85 ? 1 : 0, 0.06);
 
