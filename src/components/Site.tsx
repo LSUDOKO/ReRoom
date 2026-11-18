@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MobileNav } from "./MobileNav";
 import { Logo, LogoMark } from "./ui";
 
 export const GITHUB_URL = "https://github.com/LSUDOKO/ReRoom";
@@ -22,7 +23,7 @@ const NAV = [
 /** Floating dark-glass pill. `overlay` floats it over the landing hero; elsewhere it sits on an ink strip. */
 export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const bar = (
-    <div className="mx-auto flex w-[min(1180px,calc(100%-24px))] items-center gap-6 rounded-full bg-ink/80 py-1.5 pl-5 pr-1.5 text-paper shadow-[inset_0_1px_0_rgba(255,255,255,.14),inset_0_0_0_1px_rgba(255,255,255,.08),0_18px_40px_-20px_rgba(5,7,18,.8)] backdrop-blur-xl">
+    <div className="relative mx-auto flex w-[min(1180px,calc(100%-24px))] items-center gap-3 md:gap-6 rounded-full bg-ink/80 py-1.5 pl-5 pr-1.5 text-paper shadow-[inset_0_1px_0_rgba(255,255,255,.14),inset_0_0_0_1px_rgba(255,255,255,.08),0_18px_40px_-20px_rgba(5,7,18,.8)] backdrop-blur-xl">
       <Link href="/" aria-label="ReRoom home" className="shrink-0">
         <Logo className="text-[18px] text-paper [&>svg]:size-6" />
       </Link>
@@ -40,9 +41,11 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
       <a href={GITHUB_URL} aria-label="Source on GitHub" className="ml-auto hidden size-10 items-center justify-center rounded-full text-mist transition-colors hover:bg-white/[.07] hover:text-white sm:flex md:ml-0">
         <GithubIcon />
       </a>
-      <Link href="/studio" className="glass glass--blue glass--sm !min-h-10 !px-5 !font-sans !text-sm !tracking-normal" data-magnetic>
-        Open the studio
+      <Link href="/studio" className="glass glass--blue glass--sm ml-auto !min-h-10 !px-5 !font-sans !text-sm !tracking-normal sm:ml-0" data-magnetic>
+        <span className="sm:hidden">Studio</span>
+        <span className="hidden sm:inline">Open the studio</span>
       </Link>
+      <MobileNav links={NAV} />
     </div>
   );
   if (overlay) return <header className="fixed inset-x-0 top-3 z-50">{bar}</header>;
