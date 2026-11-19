@@ -5,7 +5,16 @@
 <h1 align="center">ReRoom</h1>
 
 <p align="center"><b>Scan it. Remix it. Live in it.</b><br/>
-Redesign your real room in 3D: scan it with your phone, add AI furniture whose doors and drawers really open, and restyle everything in one tap.</p>
+For anyone furnishing a room: see real furniture at its real size in your own room, open its doors, restyle it, and walk through it in the browser or in VR, before you buy. Every room and every 3D object is generated with Aholo.</p>
+
+<p align="center">
+  <b><a href="https://reroom.adoranto737.workers.dev">▶ Live site</a></b> ·
+  <b><a href="https://reroom.adoranto737.workers.dev/studio?room=industrial-loft">Open the studio</a></b> ·
+  <b><a href="https://reroom.adoranto737.workers.dev/xr">Step inside (VR)</a></b> ·
+  <b><a href=".github/readme/ReRoom-VR.mp4">🎥 VR film</a></b> ·
+  <b><a href=".github/readme/ReRoom-Project-Report.pdf">📄 Project report (PDF)</a></b> ·
+  <b><a href="https://reroom.adoranto737.workers.dev/made-with-aholo">Every Aholo asset</a></b>
+</p>
 
 <p align="center">
   <a href="https://reroom.adoranto737.workers.dev"><img alt="Live site" src="https://img.shields.io/badge/live%20site-open-1b68fc?style=flat-square&logo=cloudflare&logoColor=white"></a>
@@ -26,9 +35,31 @@ Redesign your real room in 3D: scan it with your phone, add AI furniture whose d
   <img src=".github/readme/landing-scroll.gif" alt="Scrolling the ReRoom landing page: the Lux3D armchair travels from section to section, dissolves into particles, draws a wireframe room, flies apart into its parts, changes finish and lands in a phone" width="100%" />
 </p>
 
-## In one minute
+<p align="center"><a href=".github/readme/ReRoom-Project-Report.pdf"><img src=".github/readme/report-cover.jpg" alt="ReRoom project report, 14 slides: problem, Aholo pipeline, generated assets, comparisons and results" width="100%" /></a><br/><sub>Click for the 14-slide project report (PDF): process, key Aholo assets, before / after comparisons and results.</sub></p>
 
-Buying furniture is a guess. You measure, imagine, and hope it fits, and opens, and matches.
+## What works today (verifiable)
+
+No account, no install, no sign-up wall. Every link opens straight into the product.
+
+| What | Try it | Aholo behind it |
+|---|---|---|
+| A photoreal 3D room you can orbit and walk through | [Industrial loft](https://reroom.adoranto737.workers.dev/studio?room=industrial-loft) · [Coastal bedroom](https://reroom.adoranto737.workers.dev/studio?room=coastal-bedroom) · [Japandi studio](https://reroom.adoranto737.workers.dev/studio?room=japandi-studio) | World · SpatialGen, Aholo Viewer |
+| 24 real-size furniture models, dragged onto the floor | Studio → **Library** | Lux3D text-to-3D |
+| Doors and drawers that open (7 pieces) | Studio → add the wardrobe → **Open it** | Lux3D articulation (URDF) |
+| Eight one-tap styles and Style Roulette | Studio → style bar under the room | Lux3D material transfer |
+| Before / after, walk mode, AR, share links, 6 export formats | Studio top bar and inspector | Lux3D multi-format export |
+| Hands-only VR in three Aholo rooms | [reroom.adoranto737.workers.dev/xr](https://reroom.adoranto737.workers.dev/xr) in a headset browser | World panoramas + Lux3D models |
+| A list of every generated asset with its prompt | [/made-with-aholo](https://reroom.adoranto737.workers.dev/made-with-aholo) | All of the above |
+
+## Why it matters
+
+Furniture is bought on a guess. You measure an alcove, scroll a catalogue, try to picture a 228 cm sofa against a 212 cm wall, and find out on delivery day.
+
+- US shoppers returned an estimated **$890 billion** of goods in 2024, **16.9%** of retail sales ([NRF and Happy Returns, Dec 2024](https://nrf.com/media-center/press-releases/nrf-and-happy-returns-report-2024-retail-returns-total-890-billion)).
+- **Seven in ten** Londoners who bought furniture online in the last two years had to rearrange their homes because items did not fit ([ChannelLife, Jan 2026](https://channellife.co.uk/story/londoners-battle-furniture-fit-gap-in-tiny-homes)).
+- Returning a sofa can cost **$150–300** in reverse shipping alone ([Claimlane, 2026](https://www.claimlane.com/resources/blog/furniture-returns-management)).
+
+Photos can't show scale and phone AR is a small window. **Why now:** Aholo makes the hard parts cheap enough to do per shopper. A room comes from a phone video or one sentence (World), a piece of furniture from a prompt or photo (Lux3D), and its joints and finishes from the same model (articulation, material transfer).
 
 **ReRoom** turns the guess into a preview, built end to end on the **Aholo** platform by Manycore:
 
@@ -140,18 +171,20 @@ Built with WebXR, `@react-three/xr` and three.js (`src/components/xr/VRRoom.tsx`
 
 Ten Aholo capabilities, all called from the server with the key kept off the client.
 
-| Aholo capability | SDK call | Where you see it in ReRoom |
+Aholo is load-bearing: without it ReRoom has no rooms, no furniture, no joints and no finishes. Every call goes through one server module, [`src/lib/aholo/server.ts`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts), and every Viewer call through [`src/lib/viewer/engine.ts`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/viewer/engine.ts).
+
+| Aholo capability | SDK call (code) | Where you see it in ReRoom |
 |---|---|---|
-| **World · Reality** | `world.reconstructions.create` | Phone or Insta360 video becomes a 3DGS room (`/scan`) |
-| **World · SpatialGen** | `world.generations.create` | A sentence becomes a walkable room; all three sample rooms were made this way |
-| **Aholo Viewer** | `@manycore/aholo-viewer` | The studio renderer: splat room and every GLB share one depth buffer, so walls hide furniture |
-| **Lux3D text-to-3D** | `lux3d.textTo3d.create` | "Describe a piece", the 24-model library, the website's hero chair (G1) and clay icons |
-| **Lux3D image-to-3D** | `lux3d.imgTo3d.create` | "Snap a photo" |
-| **Lux3D articulation** | `lux3d.articulationAnimation.create` | Doors and drawers that open; returns a URDF that `Engine.loadUrdf` animates |
-| **Lux3D material transfer** | `lux3d.materialTransfer.create` | Eight room styles, "material from a photo", the hero chair's leather, linen and bouclé |
-| **Lux3D part split** | `lux3d.partSplit.create` | The hero chair flying apart on the landing page (server API for the studio) |
-| **Lux3D multi-format export** | `lux3d.multiFormatExport.create` | USDZ for AR, STL and 3MF for 3D printing, OBJ and FBX for DCC tools |
-| **Asset API** | `asset.uploadBuffer` | Uploads scans, photos, library models and material references |
+| **World · Reality** | [`world.reconstructions.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L97) | Phone or Insta360 video becomes a 3DGS room (`/scan`) |
+| **World · SpatialGen** | [`world.generations.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L107) | A sentence becomes a walkable room; all three sample rooms were made this way |
+| **Aholo Viewer** | [`@manycore/aholo-viewer`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/viewer/engine.ts#L29) | The studio renderer: splat room and every GLB share one depth buffer, so walls hide furniture |
+| **Lux3D text-to-3D** | [`lux3d.textTo3d.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L29) | "Describe a piece", the 24-model library, the website's hero chair (G1) and clay icons |
+| **Lux3D image-to-3D** | [`lux3d.imgTo3d.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L42) | "Snap a photo" |
+| **Lux3D articulation** | [`lux3d.articulationAnimation.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L62) | Doors and drawers that open; returns a URDF that [`Engine.loadUrdf`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/viewer/engine.ts#L263) animates |
+| **Lux3D material transfer** | [`lux3d.materialTransfer.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L53) | Eight room styles, "material from a photo", the hero chair's leather, linen and bouclé |
+| **Lux3D part split** | [`lux3d.partSplit.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L64) | The hero chair flying apart on the landing page |
+| **Lux3D multi-format export** | [`lux3d.multiFormatExport.create`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L68) | USDZ for AR, STL and 3MF for 3D printing, OBJ and FBX for DCC tools |
+| **Asset API** | [`asset.uploadBuffer`](https://github.com/LSUDOKO/ReRoom/blob/main/src/lib/aholo/server.ts#L90) | Uploads scans, photos, library models and material references |
 
 **Measured usage** during development, from `lux3d.tasks.list` (`consumedCredits` per task):
 
@@ -166,7 +199,15 @@ Ten Aholo capabilities, all called from the server with the key kept off the cli
 | API exploration (multimodal-to-image, four-view, multi-image-to-3D) | 15 | 15 | 200 |
 | **Total** | **138** | **136** | **1,588** |
 
-Plus Aholo World: three SpatialGen rooms and one Reality reconstruction attempt. Verified method names, parameters, outputs and per-call costs are in [`reroom-docs/api-notes.md`](reroom-docs/api-notes.md).
+```mermaid
+xychart-beta
+  title "Lux3D credits by task (measured, 1,588 total)"
+  x-axis ["text-to-3D", "material transfer", "articulation", "part split", "API exploration", "export + image-to-3D"]
+  y-axis "Credits" 0 --> 600
+  bar [540, 441, 224, 180, 200, 3]
+```
+
+Plus Aholo World: three SpatialGen rooms and one Reality reconstruction run. Verified method names, parameters, outputs and per-call costs are in [`reroom-docs/api-notes.md`](reroom-docs/api-notes.md).
 
 ```mermaid
 flowchart LR
@@ -191,6 +232,17 @@ All of it lives in this repo, is browsable on the landing page's **Made with Aho
 <img src=".github/readme/board-icons.webp" alt="Six clay 3D icons generated with Lux3D in cartoon style" width="100%" />
 <img src=".github/readme/board-rooms.webp" alt="Three dream rooms generated with Aholo World SpatialGen" width="100%" />
 
+```mermaid
+pie showData
+  title "What ships in this repo, by Aholo capability (77 output files)"
+  "Lux3D text-to-3D: 24 furniture + hero chair + 6 icons" : 31
+  "Lux3D material transfer: 33 + 3 hero finishes" : 36
+  "Lux3D articulation: URDF pieces" : 7
+  "World SpatialGen: rooms" : 3
+```
+
+<sub>Articulated pieces are also counted in the library, so the slices overlap by design: the chart shows which capability produced each output file.</sub>
+
 | Asset set | Count | Aholo capability | Where |
 |---|---:|---|---|
 | Furniture library | 24 | Lux3D text-to-3D | `public/library/*.glb` |
@@ -211,7 +263,7 @@ The landing page is a scroll story in an **ink, paper and ultramarine** system: 
 
 ## Status
 
-Honest state of the hackathon build (18 November 2026):
+What has been built and verified (19 November 2026):
 
 | | Feature | How it was verified |
 |---|---|---|
@@ -225,11 +277,15 @@ Honest state of the hackathon build (18 November 2026):
 | ✅ | Landing page 3D hero | Playwright walk of every section at 1440 px and 390 px |
 | ✅ | Cloudflare deploy | Live on Workers (OpenNext); live restyle, proxy and a 55 MB upload tested on the deployed site |
 | ✅ | Demo mode spends nothing | A file set on a hidden input in demo mode makes 0 `/api/lux3d` requests (tested live) |
-| ⚠️ | Reality reconstruction from a phone video | Wired end to end; a synthetic test video was rejected. A real 30–60 s walkthrough is still needed |
-| ⚠️ | Scan upload size | 60 MB on Workers (memory-bound), 500 MB locally |
-| ⚠️ | Live results | Aholo result URLs expire after about 2 h; the seed library is stored in the repo |
-| ⚠️ | Real-GPU frame rate | Measured only in headless Chromium |
-| ⏳ | Part split editing UI | API route only |
+
+## Team
+
+**Arpit Singh** · solo builder: product, design, 3D pipeline, full stack and VR. GitHub [@LSUDOKO](https://github.com/LSUDOKO). Built with AI coding assistance (Claude Code); every claim in this README links to code, a deployed page or a recording.
+
+## Roadmap
+
+- **Next 30 days:** a real 30–60 s phone walkthrough through Aholo Reality, end to end on the deployed site; part-split editing in the studio; ReRoom on a physical VR headset.
+- **Next 90 days:** a retailer mode where a store's catalogue is generated with Lux3D and dropped into a shopper's scanned room at true size; shared rooms that two people can furnish together.
 
 ## Quick start
 
